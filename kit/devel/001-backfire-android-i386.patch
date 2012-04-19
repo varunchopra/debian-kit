@@ -1,0 +1,24 @@
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.armel/.config backfire.i386/.config
+--- backfire.armel/.config	2012-04-06 14:30:48.000000000 +0200
++++ backfire.i386/.config	2012-04-06 14:30:48.000000000 +0200
+@@ -1,5 +1,5 @@
+ CONFIG_HAVE_DOT_CONFIG=y
+-CONFIG_TARGET_android=y
++CONFIG_TARGET_x86=y
+ CONFIG_PACKAGE_e2fsprogs-static=m
+ CONFIG_PACKAGE_tune2fs-static=m
+ CONFIG_PACKAGE_openvpn-static=m
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.armel/package/openvpn-static/Makefile backfire.i386/package/openvpn-static/Makefile
+--- backfire.armel/package/openvpn-static/Makefile	2012-03-22 13:05:25.000000000 +0100
++++ backfire.i386/package/openvpn-static/Makefile	2012-03-11 18:08:37.000000000 +0100
+@@ -40,8 +40,8 @@
+ 	--disable-socks \
+ 	--enable-password-save \
+ 	--enable-small \
+-	--with-ifconfig-path=/data/local/deb/armel/ifconfig \
+-	--with-route-path=/data/local/deb/armel/route
++	--with-ifconfig-path=/data/local/deb/i386/ifconfig \
++	--with-route-path=/data/local/deb/i386/route
+ 
+ TARGET_CFLAGS += -static
+ 

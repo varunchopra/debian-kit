@@ -1,0 +1,2019 @@
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/.config backfire.armel/.config
+--- backfire.orig/.config	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/.config	2012-04-06 14:30:48.000000000 +0200
+@@ -0,0 +1,623 @@
++CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_TARGET_android=y
++CONFIG_PACKAGE_e2fsprogs-static=m
++CONFIG_PACKAGE_tune2fs-static=m
++CONFIG_PACKAGE_openvpn-static=m
++CONFIG_PACKAGE_pkgdetails-static=m
++
++#
++# Configuration
++#
++# CONFIG_BUSYBOX_CONFIG_FEATURE_DEVFS is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_2_4_MODULES is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_2_6_MODULES=y
++# CONFIG_BUSYBOX_CONFIG_NOMMU is not set
++# CONFIG_CONFIG_BUSYBOX_CONFIG_FEATURE_SH_IS_HUSH is not set
++# CONFIG_BUSYBOX_CONFIG_HUSH is not set
++CONFIG_BUSYBOX_CONFIG_HAVE_DOT_CONFIG=y
++
++#
++# Busybox Settings
++#
++
++#
++# General Configuration
++#
++# CONFIG_BUSYBOX_CONFIG_DESKTOP is not set
++# CONFIG_BUSYBOX_CONFIG_EXTRA_COMPAT is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_BUFFERS_USE_MALLOC is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_BUFFERS_GO_ON_STACK=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_BUFFERS_GO_IN_BSS is not set
++CONFIG_BUSYBOX_CONFIG_SHOW_USAGE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_VERBOSE_USAGE is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_COMPRESS_USAGE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_INSTALLER is not set
++# CONFIG_BUSYBOX_CONFIG_LOCALE_SUPPORT is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_ASSUME_UNICODE is not set
++CONFIG_BUSYBOX_CONFIG_LONG_OPTS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_DEVPTS=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_CLEAN_UP is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_PIDFILE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_SUID=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SUID_CONFIG is not set
++# CONFIG_BUSYBOX_CONFIG_SELINUX is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_PREFER_APPLETS=y
++CONFIG_BUSYBOX_CONFIG_BUSYBOX_EXEC_PATH="/proc/self/exe"
++CONFIG_BUSYBOX_CONFIG_FEATURE_SYSLOG=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_HAVE_RPC=y
++
++#
++# Build Options
++#
++CONFIG_BUSYBOX_CONFIG_STATIC=y
++CONFIG_BUSYBOX_CONFIG_LFS=y
++CONFIG_BUSYBOX_CONFIG_CROSS_COMPILER_PREFIX=""
++CONFIG_BUSYBOX_CONFIG_EXTRA_CFLAGS=""
++
++#
++# Debugging Options
++#
++# CONFIG_BUSYBOX_CONFIG_DEBUG is not set
++# CONFIG_BUSYBOX_CONFIG_WERROR is not set
++CONFIG_BUSYBOX_CONFIG_NO_DEBUG_LIB=y
++# CONFIG_BUSYBOX_CONFIG_DMALLOC is not set
++# CONFIG_BUSYBOX_CONFIG_EFENCE is not set
++# CONFIG_BUSYBOX_CONFIG_INCLUDE_SUSv2 is not set
++
++#
++# Installation Options
++#
++# CONFIG_BUSYBOX_CONFIG_INSTALL_NO_USR is not set
++CONFIG_BUSYBOX_CONFIG_INSTALL_APPLET_SYMLINKS=y
++# CONFIG_BUSYBOX_CONFIG_INSTALL_APPLET_HARDLINKS is not set
++# CONFIG_BUSYBOX_CONFIG_INSTALL_APPLET_SCRIPT_WRAPPERS is not set
++# CONFIG_BUSYBOX_CONFIG_INSTALL_APPLET_DONT is not set
++CONFIG_BUSYBOX_CONFIG_PREFIX="./_install"
++
++#
++# Busybox Library Tuning
++#
++CONFIG_BUSYBOX_CONFIG_PASSWORD_MINLEN=6
++CONFIG_BUSYBOX_CONFIG_MD5_SIZE_VS_SPEED=2
++CONFIG_BUSYBOX_CONFIG_FEATURE_FAST_TOP=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_ETC_NETWORKS is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING_MAX_LEN=512
++# CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING_VI is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING_HISTORY=256
++# CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING_SAVEHISTORY is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAB_COMPLETION=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_USERNAME_COMPLETION is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING_FANCY_PROMPT=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_EDITING_ASK_TERMINAL is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_NON_POSIX_CP=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_VERBOSE_CP_MESSAGE is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_COPYBUF_KB=4
++# CONFIG_BUSYBOX_CONFIG_MONOTONIC_SYSCALL is not set
++CONFIG_BUSYBOX_CONFIG_IOCTL_HEX2STR_ERROR=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_HWIB is not set
++
++#
++# Applets
++#
++
++#
++# Archival Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_LZMA is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_BZ2 is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_GZ=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_Z is not set
++CONFIG_BUSYBOX_CONFIG_AR=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_AR_LONG_FILENAMES is not set
++CONFIG_BUSYBOX_CONFIG_BUNZIP2=y
++CONFIG_BUSYBOX_CONFIG_BZIP2=y
++# CONFIG_BUSYBOX_CONFIG_CPIO is not set
++# CONFIG_BUSYBOX_CONFIG_DPKG is not set
++# CONFIG_BUSYBOX_CONFIG_DPKG_DEB is not set
++CONFIG_BUSYBOX_CONFIG_GUNZIP=y
++CONFIG_BUSYBOX_CONFIG_GZIP=y
++# CONFIG_BUSYBOX_CONFIG_LZOP is not set
++# CONFIG_BUSYBOX_CONFIG_RPM2CPIO is not set
++# CONFIG_BUSYBOX_CONFIG_RPM is not set
++CONFIG_BUSYBOX_CONFIG_TAR=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_CREATE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_AUTODETECT is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_FROM=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_OLDGNU_COMPATIBILITY=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_OLDSUN_COMPATIBILITY is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_GNU_EXTENSIONS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_LONG_OPTIONS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_TAR_UNAME_GNAME=y
++# CONFIG_BUSYBOX_CONFIG_UNCOMPRESS is not set
++# CONFIG_BUSYBOX_CONFIG_UNLZMA is not set
++# CONFIG_BUSYBOX_CONFIG_UNZIP is not set
++
++#
++# Coreutils
++#
++# CONFIG_BUSYBOX_CONFIG_BASENAME is not set
++# CONFIG_BUSYBOX_CONFIG_CAL is not set
++CONFIG_BUSYBOX_CONFIG_CAT=y
++# CONFIG_BUSYBOX_CONFIG_CATV is not set
++# CONFIG_BUSYBOX_CONFIG_CHGRP is not set
++CONFIG_BUSYBOX_CONFIG_CHMOD=y
++CONFIG_BUSYBOX_CONFIG_CHOWN=y
++CONFIG_BUSYBOX_CONFIG_CHROOT=y
++# CONFIG_BUSYBOX_CONFIG_CKSUM is not set
++# CONFIG_BUSYBOX_CONFIG_COMM is not set
++CONFIG_BUSYBOX_CONFIG_CP=y
++CONFIG_BUSYBOX_CONFIG_CUT=y
++# CONFIG_BUSYBOX_CONFIG_DATE is not set
++CONFIG_BUSYBOX_CONFIG_DD=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_DD_SIGNAL_HANDLING=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_DD_IBS_OBS=y
++CONFIG_BUSYBOX_CONFIG_DF=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_DF_FANCY=y
++# CONFIG_BUSYBOX_CONFIG_DIRNAME is not set
++# CONFIG_BUSYBOX_CONFIG_DOS2UNIX is not set
++# CONFIG_BUSYBOX_CONFIG_DU is not set
++# CONFIG_BUSYBOX_CONFIG_ECHO is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_FANCY_ECHO=y
++# CONFIG_BUSYBOX_CONFIG_ENV is not set
++# CONFIG_BUSYBOX_CONFIG_EXPAND is not set
++# CONFIG_BUSYBOX_CONFIG_EXPR is not set
++# CONFIG_BUSYBOX_CONFIG_FALSE is not set
++# CONFIG_BUSYBOX_CONFIG_FOLD is not set
++# CONFIG_BUSYBOX_CONFIG_FSYNC is not set
++CONFIG_BUSYBOX_CONFIG_HEAD=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FANCY_HEAD=y
++# CONFIG_BUSYBOX_CONFIG_HOSTID is not set
++CONFIG_BUSYBOX_CONFIG_ID=y
++# CONFIG_BUSYBOX_CONFIG_INSTALL is not set
++# CONFIG_BUSYBOX_CONFIG_LENGTH is not set
++CONFIG_BUSYBOX_CONFIG_LN=y
++# CONFIG_BUSYBOX_CONFIG_LOGNAME is not set
++CONFIG_BUSYBOX_CONFIG_LS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_FILETYPES=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_FOLLOWLINKS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_RECURSIVE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_SORTFILES=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_TIMESTAMPS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_USERNAME=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_LS_COLOR=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_LS_COLOR_IS_DEFAULT is not set
++CONFIG_BUSYBOX_CONFIG_MD5SUM=y
++CONFIG_BUSYBOX_CONFIG_MKDIR=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_MKDIR_LONG_OPTIONS=y
++# CONFIG_BUSYBOX_CONFIG_MKFIFO is not set
++CONFIG_BUSYBOX_CONFIG_MKNOD=y
++CONFIG_BUSYBOX_CONFIG_MV=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_MV_LONG_OPTIONS=y
++# CONFIG_BUSYBOX_CONFIG_NICE is not set
++# CONFIG_BUSYBOX_CONFIG_NOHUP is not set
++# CONFIG_BUSYBOX_CONFIG_OD is not set
++# CONFIG_BUSYBOX_CONFIG_PRINTENV is not set
++# CONFIG_BUSYBOX_CONFIG_PRINTF is not set
++# CONFIG_BUSYBOX_CONFIG_PWD is not set
++# CONFIG_BUSYBOX_CONFIG_READLINK is not set
++# CONFIG_BUSYBOX_CONFIG_REALPATH is not set
++CONFIG_BUSYBOX_CONFIG_RM=y
++CONFIG_BUSYBOX_CONFIG_RMDIR=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_RMDIR_LONG_OPTIONS=y
++# CONFIG_BUSYBOX_CONFIG_SEQ is not set
++CONFIG_BUSYBOX_CONFIG_SHA1SUM=y
++# CONFIG_BUSYBOX_CONFIG_SHA256SUM is not set
++# CONFIG_BUSYBOX_CONFIG_SHA512SUM is not set
++CONFIG_BUSYBOX_CONFIG_SLEEP=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FANCY_SLEEP=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FLOAT_SLEEP=y
++CONFIG_BUSYBOX_CONFIG_SORT=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_SORT_BIG=y
++# CONFIG_BUSYBOX_CONFIG_SPLIT is not set
++CONFIG_BUSYBOX_CONFIG_STAT=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_STAT_FORMAT=y
++# CONFIG_BUSYBOX_CONFIG_STTY is not set
++# CONFIG_BUSYBOX_CONFIG_SUM is not set
++# CONFIG_BUSYBOX_CONFIG_SYNC is not set
++# CONFIG_BUSYBOX_CONFIG_TAC is not set
++# CONFIG_BUSYBOX_CONFIG_TAIL is not set
++# CONFIG_BUSYBOX_CONFIG_TEE is not set
++# CONFIG_BUSYBOX_CONFIG_TEST is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_TEST_64 is not set
++CONFIG_BUSYBOX_CONFIG_TOUCH=y
++CONFIG_BUSYBOX_CONFIG_TR=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_TR_CLASSES=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_TR_EQUIV=y
++# CONFIG_BUSYBOX_CONFIG_TRUE is not set
++# CONFIG_BUSYBOX_CONFIG_TTY is not set
++CONFIG_BUSYBOX_CONFIG_UNAME=y
++# CONFIG_BUSYBOX_CONFIG_UNEXPAND is not set
++CONFIG_BUSYBOX_CONFIG_UNIQ=y
++# CONFIG_BUSYBOX_CONFIG_USLEEP is not set
++# CONFIG_BUSYBOX_CONFIG_UUDECODE is not set
++# CONFIG_BUSYBOX_CONFIG_UUENCODE is not set
++CONFIG_BUSYBOX_CONFIG_WC=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_WC_LARGE=y
++# CONFIG_BUSYBOX_CONFIG_WHO is not set
++# CONFIG_BUSYBOX_CONFIG_WHOAMI is not set
++# CONFIG_BUSYBOX_CONFIG_YES is not set
++
++#
++# Common options for cp and mv
++#
++# CONFIG_BUSYBOX_CONFIG_FEATURE_PRESERVE_HARDLINKS is not set
++
++#
++# Common options for ls, more and telnet
++#
++CONFIG_BUSYBOX_CONFIG_FEATURE_AUTOWIDTH=y
++
++#
++# Common options for df, du, ls
++#
++# CONFIG_BUSYBOX_CONFIG_FEATURE_HUMAN_READABLE is not set
++
++#
++# Common options for md5sum, sha1sum
++#
++CONFIG_BUSYBOX_CONFIG_FEATURE_MD5_SHA1_SUM_CHECK=y
++
++#
++# Console Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_CHVT is not set
++# CONFIG_BUSYBOX_CONFIG_CLEAR is not set
++# CONFIG_BUSYBOX_CONFIG_DEALLOCVT is not set
++# CONFIG_BUSYBOX_CONFIG_DUMPKMAP is not set
++# CONFIG_BUSYBOX_CONFIG_KBD_MODE is not set
++# CONFIG_BUSYBOX_CONFIG_LOADFONT is not set
++# CONFIG_BUSYBOX_CONFIG_LOADKMAP is not set
++# CONFIG_BUSYBOX_CONFIG_OPENVT is not set
++# CONFIG_BUSYBOX_CONFIG_RESET is not set
++# CONFIG_BUSYBOX_CONFIG_RESIZE is not set
++# CONFIG_BUSYBOX_CONFIG_SETCONSOLE is not set
++# CONFIG_BUSYBOX_CONFIG_SETFONT is not set
++# CONFIG_BUSYBOX_CONFIG_SETKEYCODES is not set
++# CONFIG_BUSYBOX_CONFIG_SETLOGCONS is not set
++# CONFIG_BUSYBOX_CONFIG_SHOWKEY is not set
++
++#
++# Debian Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_MKTEMP is not set
++# CONFIG_BUSYBOX_CONFIG_PIPE_PROGRESS is not set
++# CONFIG_BUSYBOX_CONFIG_RUN_PARTS is not set
++# CONFIG_BUSYBOX_CONFIG_START_STOP_DAEMON is not set
++CONFIG_BUSYBOX_CONFIG_WHICH=y
++
++#
++# Editors
++#
++# CONFIG_BUSYBOX_CONFIG_AWK is not set
++# CONFIG_BUSYBOX_CONFIG_CMP is not set
++# CONFIG_BUSYBOX_CONFIG_DIFF is not set
++# CONFIG_BUSYBOX_CONFIG_ED is not set
++# CONFIG_BUSYBOX_CONFIG_PATCH is not set
++CONFIG_BUSYBOX_CONFIG_SED=y
++CONFIG_BUSYBOX_CONFIG_VI=y
++
++#
++# Finding Utilities
++#
++CONFIG_BUSYBOX_CONFIG_FIND=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_PRINT0=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_MTIME is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_MMIN is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_PERM=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_TYPE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_XDEV=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_MAXDEPTH=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_NEWER=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_INUM is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_EXEC=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_USER=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_GROUP=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_NOT=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_DEPTH=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_PAREN=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_SIZE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_PRUNE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_DELETE is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_PATH=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FIND_REGEX=y
++CONFIG_BUSYBOX_CONFIG_GREP=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_GREP_EGREP_ALIAS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_GREP_FGREP_ALIAS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_GREP_CONTEXT=y
++# CONFIG_BUSYBOX_CONFIG_XARGS is not set
++
++#
++# Init Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_INIT is not set
++# CONFIG_BUSYBOX_CONFIG_HALT is not set
++# CONFIG_BUSYBOX_CONFIG_MESG is not set
++
++#
++# Login/Password Management Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SHADOWPASSWDS is not set
++# CONFIG_BUSYBOX_CONFIG_USE_BB_PWD_GRP is not set
++CONFIG_BUSYBOX_CONFIG_USE_BB_CRYPT=y
++CONFIG_BUSYBOX_CONFIG_USE_BB_CRYPT_SHA=y
++# CONFIG_BUSYBOX_CONFIG_ADDGROUP is not set
++# CONFIG_BUSYBOX_CONFIG_DELGROUP is not set
++# CONFIG_BUSYBOX_CONFIG_ADDUSER is not set
++# CONFIG_BUSYBOX_CONFIG_DELUSER is not set
++# CONFIG_BUSYBOX_CONFIG_GETTY is not set
++# CONFIG_BUSYBOX_CONFIG_LOGIN is not set
++# CONFIG_BUSYBOX_CONFIG_PASSWD is not set
++# CONFIG_BUSYBOX_CONFIG_CRYPTPW is not set
++# CONFIG_BUSYBOX_CONFIG_CHPASSWD is not set
++# CONFIG_BUSYBOX_CONFIG_SU is not set
++# CONFIG_BUSYBOX_CONFIG_SULOGIN is not set
++# CONFIG_BUSYBOX_CONFIG_VLOCK is not set
++
++#
++# Linux Ext2 FS Progs
++#
++# CONFIG_BUSYBOX_CONFIG_CHATTR is not set
++# CONFIG_BUSYBOX_CONFIG_FSCK is not set
++# CONFIG_BUSYBOX_CONFIG_LSATTR is not set
++
++#
++# Linux Module Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_MODPROBE_SMALL is not set
++CONFIG_BUSYBOX_CONFIG_INSMOD=y
++CONFIG_BUSYBOX_CONFIG_RMMOD=y
++# CONFIG_BUSYBOX_CONFIG_LSMOD is not set
++# CONFIG_BUSYBOX_CONFIG_MODPROBE is not set
++# CONFIG_BUSYBOX_CONFIG_DEPMOD is not set
++
++#
++# Options common to multiple modutils
++#
++CONFIG_BUSYBOX_CONFIG_DEFAULT_MODULES_DIR="/lib/modules"
++
++#
++# Linux System Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_ACPID is not set
++# CONFIG_BUSYBOX_CONFIG_BLKID is not set
++# CONFIG_BUSYBOX_CONFIG_DMESG is not set
++# CONFIG_BUSYBOX_CONFIG_FBSET is not set
++# CONFIG_BUSYBOX_CONFIG_FDFLUSH is not set
++# CONFIG_BUSYBOX_CONFIG_FDFORMAT is not set
++CONFIG_BUSYBOX_CONFIG_FDISK=y
++CONFIG_BUSYBOX_CONFIG_FDISK_SUPPORT_LARGE_DISKS=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FDISK_WRITABLE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_AIX_LABEL is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SGI_LABEL is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SUN_LABEL is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_OSF_LABEL is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_FDISK_ADVANCED is not set
++# CONFIG_BUSYBOX_CONFIG_FINDFS is not set
++# CONFIG_BUSYBOX_CONFIG_FREERAMDISK is not set
++# CONFIG_BUSYBOX_CONFIG_FSCK_MINIX is not set
++# CONFIG_BUSYBOX_CONFIG_MKFS_MINIX is not set
++# CONFIG_BUSYBOX_CONFIG_MKFS_VFAT is not set
++# CONFIG_BUSYBOX_CONFIG_GETOPT is not set
++# CONFIG_BUSYBOX_CONFIG_HEXDUMP is not set
++# CONFIG_BUSYBOX_CONFIG_HD is not set
++# CONFIG_BUSYBOX_CONFIG_HWCLOCK is not set
++# CONFIG_BUSYBOX_CONFIG_IPCRM is not set
++# CONFIG_BUSYBOX_CONFIG_IPCS is not set
++CONFIG_BUSYBOX_CONFIG_LOSETUP=y
++# CONFIG_BUSYBOX_CONFIG_MDEV is not set
++# CONFIG_BUSYBOX_CONFIG_MKSWAP is not set
++# CONFIG_BUSYBOX_CONFIG_MORE is not set
++# CONFIG_BUSYBOX_CONFIG_VOLUMEID is not set
++CONFIG_BUSYBOX_CONFIG_MOUNT=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_FAKE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_VERBOSE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_HELPERS is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_LABEL is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_NFS is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_CIFS is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_FLAGS=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_FSTAB is not set
++CONFIG_BUSYBOX_CONFIG_PIVOT_ROOT=y
++# CONFIG_BUSYBOX_CONFIG_RDATE is not set
++# CONFIG_BUSYBOX_CONFIG_RDEV is not set
++# CONFIG_BUSYBOX_CONFIG_READPROFILE is not set
++# CONFIG_BUSYBOX_CONFIG_RTCWAKE is not set
++# CONFIG_BUSYBOX_CONFIG_SCRIPT is not set
++# CONFIG_BUSYBOX_CONFIG_SCRIPTREPLAY is not set
++# CONFIG_BUSYBOX_CONFIG_SETARCH is not set
++# CONFIG_BUSYBOX_CONFIG_SWAPONOFF is not set
++# CONFIG_BUSYBOX_CONFIG_SWITCH_ROOT is not set
++CONFIG_BUSYBOX_CONFIG_UMOUNT=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_UMOUNT_ALL is not set
++
++#
++# Common options for mount/umount
++#
++CONFIG_BUSYBOX_CONFIG_FEATURE_MOUNT_LOOP=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_MTAB_SUPPORT is not set
++
++#
++# Miscellaneous Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_ADJTIMEX is not set
++# CONFIG_BUSYBOX_CONFIG_BBCONFIG is not set
++# CONFIG_BUSYBOX_CONFIG_BEEP is not set
++# CONFIG_BUSYBOX_CONFIG_CHAT is not set
++# CONFIG_BUSYBOX_CONFIG_CHRT is not set
++# CONFIG_BUSYBOX_CONFIG_CROND is not set
++# CONFIG_BUSYBOX_CONFIG_CRONTAB is not set
++# CONFIG_BUSYBOX_CONFIG_DC is not set
++# CONFIG_BUSYBOX_CONFIG_DEVFSD is not set
++# CONFIG_BUSYBOX_CONFIG_DEVMEM is not set
++# CONFIG_BUSYBOX_CONFIG_EJECT is not set
++# CONFIG_BUSYBOX_CONFIG_FBSPLASH is not set
++# CONFIG_BUSYBOX_CONFIG_FLASH_LOCK is not set
++# CONFIG_BUSYBOX_CONFIG_FLASH_UNLOCK is not set
++# CONFIG_BUSYBOX_CONFIG_FLASH_ERASEALL is not set
++# CONFIG_BUSYBOX_CONFIG_IONICE is not set
++# CONFIG_BUSYBOX_CONFIG_INOTIFYD is not set
++# CONFIG_BUSYBOX_CONFIG_LAST is not set
++# CONFIG_BUSYBOX_CONFIG_LESS is not set
++# CONFIG_BUSYBOX_CONFIG_HDPARM is not set
++# CONFIG_BUSYBOX_CONFIG_LOCK is not set
++# CONFIG_BUSYBOX_CONFIG_MAKEDEVS is not set
++# CONFIG_BUSYBOX_CONFIG_MAN is not set
++# CONFIG_BUSYBOX_CONFIG_MICROCOM is not set
++# CONFIG_BUSYBOX_CONFIG_MOUNTPOINT is not set
++# CONFIG_BUSYBOX_CONFIG_MT is not set
++# CONFIG_BUSYBOX_CONFIG_RAIDAUTORUN is not set
++# CONFIG_BUSYBOX_CONFIG_READAHEAD is not set
++# CONFIG_BUSYBOX_CONFIG_RUNLEVEL is not set
++# CONFIG_BUSYBOX_CONFIG_RX is not set
++# CONFIG_BUSYBOX_CONFIG_SETSID is not set
++# CONFIG_BUSYBOX_CONFIG_STRINGS is not set
++# CONFIG_BUSYBOX_CONFIG_TASKSET is not set
++# CONFIG_BUSYBOX_CONFIG_TIME is not set
++# CONFIG_BUSYBOX_CONFIG_TIMEOUT is not set
++# CONFIG_BUSYBOX_CONFIG_TTYSIZE is not set
++# CONFIG_BUSYBOX_CONFIG_VOLNAME is not set
++# CONFIG_BUSYBOX_CONFIG_WATCHDOG is not set
++
++#
++# Networking Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_FEATURE_IPV6 is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_UNIX_LOCAL is not set
++# CONFIG_BUSYBOX_CONFIG_VERBOSE_RESOLUTION_ERRORS is not set
++# CONFIG_BUSYBOX_CONFIG_ARP is not set
++# CONFIG_BUSYBOX_CONFIG_ARPING is not set
++# CONFIG_BUSYBOX_CONFIG_BRCTL is not set
++# CONFIG_BUSYBOX_CONFIG_DNSD is not set
++# CONFIG_BUSYBOX_CONFIG_ETHER_WAKE is not set
++# CONFIG_BUSYBOX_CONFIG_FAKEIDENTD is not set
++# CONFIG_BUSYBOX_CONFIG_FTPD is not set
++# CONFIG_BUSYBOX_CONFIG_FTPGET is not set
++# CONFIG_BUSYBOX_CONFIG_FTPPUT is not set
++CONFIG_BUSYBOX_CONFIG_HOSTNAME=y
++# CONFIG_BUSYBOX_CONFIG_HTTPD is not set
++CONFIG_BUSYBOX_CONFIG_IFCONFIG=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_IFCONFIG_STATUS=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_IFCONFIG_SLIP is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_IFCONFIG_MEMSTART_IOADDR_IRQ is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_IFCONFIG_HW=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_IFCONFIG_BROADCAST_PLUS=y
++# CONFIG_BUSYBOX_CONFIG_IFENSLAVE is not set
++# CONFIG_BUSYBOX_CONFIG_IFPLUGD is not set
++# CONFIG_BUSYBOX_CONFIG_IFUPDOWN is not set
++# CONFIG_BUSYBOX_CONFIG_INETD is not set
++# CONFIG_BUSYBOX_CONFIG_IP is not set
++# CONFIG_BUSYBOX_CONFIG_IPCALC is not set
++# CONFIG_BUSYBOX_CONFIG_NAMEIF is not set
++# CONFIG_BUSYBOX_CONFIG_NC is not set
++# CONFIG_BUSYBOX_CONFIG_NETMSG is not set
++# CONFIG_BUSYBOX_CONFIG_NETSTAT is not set
++# CONFIG_BUSYBOX_CONFIG_NSLOOKUP is not set
++# CONFIG_BUSYBOX_CONFIG_NTPD is not set
++# CONFIG_BUSYBOX_CONFIG_PING is not set
++# CONFIG_BUSYBOX_CONFIG_PSCAN is not set
++CONFIG_BUSYBOX_CONFIG_ROUTE=y
++# CONFIG_BUSYBOX_CONFIG_SLATTACH is not set
++# CONFIG_BUSYBOX_CONFIG_TELNET is not set
++# CONFIG_BUSYBOX_CONFIG_TELNETD is not set
++# CONFIG_BUSYBOX_CONFIG_TFTP is not set
++# CONFIG_BUSYBOX_CONFIG_TFTPD is not set
++# CONFIG_BUSYBOX_CONFIG_TRACEROUTE is not set
++# CONFIG_BUSYBOX_CONFIG_APP_UDHCPD is not set
++# CONFIG_BUSYBOX_CONFIG_APP_UDHCPC is not set
++# CONFIG_BUSYBOX_CONFIG_VCONFIG is not set
++CONFIG_BUSYBOX_CONFIG_WGET=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_WGET_STATUSBAR=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_WGET_AUTHENTICATION=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_WGET_LONG_OPTIONS=y
++# CONFIG_BUSYBOX_CONFIG_ZCIP is not set
++# CONFIG_BUSYBOX_CONFIG_TCPSVD is not set
++# CONFIG_BUSYBOX_CONFIG_TUNCTL is not set
++# CONFIG_BUSYBOX_CONFIG_UDPSVD is not set
++
++#
++# Print Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_LPD is not set
++# CONFIG_BUSYBOX_CONFIG_LPR is not set
++# CONFIG_BUSYBOX_CONFIG_LPQ is not set
++
++#
++# Mail Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_MAKEMIME is not set
++# CONFIG_BUSYBOX_CONFIG_POPMAILDIR is not set
++# CONFIG_BUSYBOX_CONFIG_REFORMIME is not set
++# CONFIG_BUSYBOX_CONFIG_SENDMAIL is not set
++
++#
++# Process Utilities
++#
++CONFIG_BUSYBOX_CONFIG_FREE=y
++CONFIG_BUSYBOX_CONFIG_FUSER=y
++CONFIG_BUSYBOX_CONFIG_KILL=y
++CONFIG_BUSYBOX_CONFIG_KILLALL=y
++# CONFIG_BUSYBOX_CONFIG_KILLALL5 is not set
++# CONFIG_BUSYBOX_CONFIG_NMETER is not set
++# CONFIG_BUSYBOX_CONFIG_PGREP is not set
++CONFIG_BUSYBOX_CONFIG_PIDOF=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_PIDOF_SINGLE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_PIDOF_OMIT=y
++# CONFIG_BUSYBOX_CONFIG_PKILL is not set
++CONFIG_BUSYBOX_CONFIG_PS=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_PS_WIDE is not set
++CONFIG_BUSYBOX_CONFIG_RENICE=y
++CONFIG_BUSYBOX_CONFIG_BB_SYSCTL=y
++# CONFIG_BUSYBOX_CONFIG_TOP is not set
++# CONFIG_BUSYBOX_CONFIG_UPTIME is not set
++# CONFIG_BUSYBOX_CONFIG_WATCH is not set
++
++#
++# Runit Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_RUNSV is not set
++# CONFIG_BUSYBOX_CONFIG_RUNSVDIR is not set
++# CONFIG_BUSYBOX_CONFIG_SV is not set
++# CONFIG_BUSYBOX_CONFIG_SVLOGD is not set
++# CONFIG_BUSYBOX_CONFIG_CHPST is not set
++# CONFIG_BUSYBOX_CONFIG_SETUIDGID is not set
++# CONFIG_BUSYBOX_CONFIG_ENVUIDGID is not set
++# CONFIG_BUSYBOX_CONFIG_ENVDIR is not set
++# CONFIG_BUSYBOX_CONFIG_SOFTLIMIT is not set
++
++#
++# Shells
++#
++CONFIG_BUSYBOX_CONFIG_FEATURE_SH_IS_ASH=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SH_IS_HUSH is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SH_IS_NONE is not set
++CONFIG_BUSYBOX_CONFIG_ASH=y
++CONFIG_BUSYBOX_CONFIG_ASH_BASH_COMPAT=y
++CONFIG_BUSYBOX_CONFIG_ASH_JOB_CONTROL=y
++# CONFIG_BUSYBOX_CONFIG_ASH_READ_NCHARS is not set
++# CONFIG_BUSYBOX_CONFIG_ASH_READ_TIMEOUT is not set
++CONFIG_BUSYBOX_CONFIG_ASH_ALIAS=y
++CONFIG_BUSYBOX_CONFIG_ASH_GETOPTS=y
++CONFIG_BUSYBOX_CONFIG_ASH_BUILTIN_ECHO=y
++CONFIG_BUSYBOX_CONFIG_ASH_BUILTIN_PRINTF=y
++CONFIG_BUSYBOX_CONFIG_ASH_BUILTIN_TEST=y
++CONFIG_BUSYBOX_CONFIG_ASH_CMDCMD=y
++# CONFIG_BUSYBOX_CONFIG_ASH_MAIL is not set
++# CONFIG_BUSYBOX_CONFIG_ASH_OPTIMIZE_FOR_SIZE is not set
++# CONFIG_BUSYBOX_CONFIG_ASH_RANDOM_SUPPORT is not set
++# CONFIG_BUSYBOX_CONFIG_ASH_EXPAND_PRMT is not set
++# CONFIG_BUSYBOX_CONFIG_LASH is not set
++# CONFIG_BUSYBOX_CONFIG_MSH is not set
++CONFIG_BUSYBOX_CONFIG_SH_MATH_SUPPORT=y
++# CONFIG_BUSYBOX_CONFIG_SH_MATH_SUPPORT_64 is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SH_EXTRA_QUIET is not set
++CONFIG_BUSYBOX_CONFIG_FEATURE_SH_STANDALONE=y
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SH_NOFORK is not set
++# CONFIG_BUSYBOX_CONFIG_CTTYHACK is not set
++
++#
++# System Logging Utilities
++#
++# CONFIG_BUSYBOX_CONFIG_SYSLOGD is not set
++# CONFIG_BUSYBOX_CONFIG_KLOGD is not set
++# CONFIG_BUSYBOX_CONFIG_LOGGER is not set
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/busybox/patches/990-fix-insmod-kernel3x.patch backfire.armel/package/busybox/patches/990-fix-insmod-kernel3x.patch
+--- backfire.orig/package/busybox/patches/990-fix-insmod-kernel3x.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/busybox/patches/990-fix-insmod-kernel3x.patch	2012-03-26 09:51:05.000000000 +0200
+@@ -0,0 +1,18 @@
++diff -Nur busybox-1.15.3.orig/modutils/insmod.c busybox-1.15.3/modutils/insmod.c
++--- busybox-1.15.3.orig/modutils/insmod.c	2012-03-26 08:43:27.000000000 +0200
+++++ busybox-1.15.3/modutils/insmod.c	2012-03-26 09:50:26.000000000 +0200
++@@ -46,12 +46,12 @@
++ 	struct stat st;
++ 
++ 	/* check the kernel version */
++-	if ((uname(&myuname) != 0) || (myuname.release[0] != '2'))
+++	if ((uname(&myuname) != 0) || (myuname.release[0] < '2') || (myuname.release[0] > '9'))
++ 		return EINVAL;
++ 
++ 	k_version = myuname.release[2] - '0';
++ #if ENABLE_FEATURE_2_4_MODULES
++-	if (k_version <= 4)
+++	if (myuname.release[0] == '2' && k_version <= 4)
++ 		suffix = ".o";
++ 	else
++ #endif
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/busybox/patches/991-android-shell-and-blockdev.patch backfire.armel/package/busybox/patches/991-android-shell-and-blockdev.patch
+--- backfire.orig/package/busybox/patches/991-android-shell-and-blockdev.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/busybox/patches/991-android-shell-and-blockdev.patch	2012-04-05 07:53:59.000000000 +0200
+@@ -0,0 +1,33 @@
++diff -Nur busybox-1.15.3.orig/include/libbb.h busybox-1.15.3/include/libbb.h
++--- busybox-1.15.3.orig/include/libbb.h	2012-03-26 10:42:14.000000000 +0200
+++++ busybox-1.15.3/include/libbb.h	2012-04-05 07:39:05.000000000 +0200
++@@ -1498,7 +1498,7 @@
++  * use bb_default_login_shell and following defines.
++  * If you change LIBBB_DEFAULT_LOGIN_SHELL,
++  * don't forget to change increment constant. */
++-#define LIBBB_DEFAULT_LOGIN_SHELL      "-/bin/sh"
+++#define LIBBB_DEFAULT_LOGIN_SHELL      "-/system/bin/sh"
++ extern const char bb_default_login_shell[];
++ /* "/bin/sh" */
++ #define DEFAULT_SHELL     (bb_default_login_shell+1)
++diff -Nur busybox-1.15.3.orig/util-linux/fdisk.c busybox-1.15.3/util-linux/fdisk.c
++--- busybox-1.15.3.orig/util-linux/fdisk.c	2009-12-12 22:13:29.000000000 +0100
+++++ busybox-1.15.3/util-linux/fdisk.c	2012-04-05 07:53:28.000000000 +0200
++@@ -2687,7 +2687,7 @@
++ 	   the process hangs on the attempt to read a music CD.
++ 	   So try to be careful. This only works since 2.1.73. */
++ 
++-	if (strncmp("/dev/hd", device, 7))
+++	if (strncmp("/dev/block/hd", device, 7))
++ 		return 0;
++ 
++ 	snprintf(buf, sizeof(buf), "/proc/ide/%s/media", device+5);
++@@ -2771,7 +2771,7 @@
++ 			continue;
++ 		if (isdigit(s[-1]))
++ 			continue;
++-		sprintf(devname, "/dev/%s", ptname);
+++		sprintf(devname, "/dev/block/%s", ptname);
++ 		open_list_and_close(devname, 0);
++ 	}
++ #if ENABLE_FEATURE_CLEAN_UP
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/e2fsprogs-static/Makefile backfire.armel/package/e2fsprogs-static/Makefile
+--- backfire.orig/package/e2fsprogs-static/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/e2fsprogs-static/Makefile	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,96 @@
++#
++# Copyright (C) 2006-2008 OpenWrt.org
++# Copyright 2010 Vertical Communications
++# This is free software, licensed under the GNU General Public License v2.
++# See /LICENSE for more information.
++#
++
++include $(TOPDIR)/rules.mk
++
++PKG_NAME:=e2fsprogs-static
++PKG_VERSION:=1.41.11
++PKG_MD5SUM:=fb507a40c2706bc38306f150d069e345
++PKG_RELEASE:=1
++
++PKG_SOURCE:=e2fsprogs-$(PKG_VERSION).tar.gz
++PKG_SOURCE_URL:=@SF/e2fsprogs
++
++include $(INCLUDE_DIR)/package.mk
++
++define Package/e2fsprogs-static/Default
++  URL:=http://e2fsprogs.sourceforge.net/
++  SUBMENU:=Filesystem
++endef
++
++define Package/e2fsprogs-static
++$(call Package/e2fsprogs-static/Default)
++  SECTION:=utils
++  CATEGORY:=Utilities
++  TITLE:=Ext2/3/4 filesystem utilities
++endef
++
++define Package/e2fsprogs-static/description
++ This package contains essential ext2 filesystem utilities which consists of 
++ e2fsck, mke2fs, and tune2fs as static binaries.
++endef
++
++TARGET_CFLAGS += $(FPIC)
++
++CONFIGURE_ARGS += \
++	--disable-rpath \
++	--enable-elf-shlibs \
++	--disable-tls
++
++define Build/Prepare
++	rm -rf $(PKG_BUILD_DIR)
++	mkdir -p $(PKG_BUILD_DIR)
++	tar --strip-components=1 -xzvf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR)/
++	$(Build/Patch)
++	$(CP) $(SCRIPT_DIR)/config.{guess,sub} $(PKG_BUILD_DIR)/config/
++endef
++
++define Build/Compile
++	$(MAKE) -C $(PKG_BUILD_DIR)/util \
++		BUILDCC="$(HOSTCC)" \
++		CFLAGS="" \
++		CPPFLAGS="" \
++		LDFLAGS="" \
++		subst
++	$(MAKE) -C $(PKG_BUILD_DIR) \
++		BUILDCC="$(HOSTCC)" \
++		DESTDIR="$(PKG_INSTALL_DIR)" \
++		all
++	$(MAKE) -C $(PKG_BUILD_DIR)/misc \
++		BUILDCC="$(HOSTCC)" \
++		DESTDIR="$(PKG_INSTALL_DIR)" \
++		tune2fs.static
++	$(MAKE) -C $(PKG_BUILD_DIR)/misc \
++		BUILDCC="$(HOSTCC)" \
++		DESTDIR="$(PKG_INSTALL_DIR)" \
++		mke2fs.static
++	$(MAKE) -C $(PKG_BUILD_DIR)/e2fsck \
++		BUILDCC="$(HOSTCC)" \
++		DESTDIR="$(PKG_INSTALL_DIR)" \
++		e2fsck.static
++endef
++
++define Build/InstallDev
++	$(MAKE) -C $(PKG_BUILD_DIR) \
++		BUILDCC="$(HOSTCC)" \
++		DESTDIR="$(1)" \
++		install-libs
++	$(MAKE) -C $(PKG_BUILD_DIR)/lib/ext2fs \
++		BUILDCC="$(HOSTCC)" \
++		DESTDIR="$(1)" \
++		install
++endef
++
++define Package/e2fsprogs-static/install
++	$(INSTALL_DIR) $(1)/usr/sbin
++	$(INSTALL_BIN) $(PKG_BUILD_DIR)/misc/mke2fs.static $(1)/usr/sbin/mke2fs
++	$(INSTALL_BIN) $(PKG_BUILD_DIR)/misc/tune2fs.static $(1)/usr/sbin/tune2fs
++	$(INSTALL_BIN) $(PKG_BUILD_DIR)/e2fsck/e2fsck.static $(1)/usr/sbin/e2fsck
++	$(INSTALL_DIR) $(1)/usr/lib
++endef
++
++$(eval $(call BuildPackage,e2fsprogs-static))
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/e2fsprogs-static/patches/900-mtab-hack.patch backfire.armel/package/e2fsprogs-static/patches/900-mtab-hack.patch
+--- backfire.orig/package/e2fsprogs-static/patches/900-mtab-hack.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/e2fsprogs-static/patches/900-mtab-hack.patch	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,11 @@
++--- e2fsprogs-1.41.11/lib/ext2fs/ismounted.c~	2009-11-16 06:30:35.000000000 +0100
+++++ e2fsprogs-1.41.11/lib/ext2fs/ismounted.c	2011-02-24 15:51:06.335653791 +0100
++@@ -184,7 +184,7 @@
++ #ifndef MOUNTED
++ #define MOUNTED _PATH_MOUNTED
++ #endif /* MOUNTED */
++-	retval = check_mntent_file(MOUNTED, file, mount_flags, mtpt, mtlen);
+++	retval = check_mntent_file("/proc/mounts", file, mount_flags, mtpt, mtlen);
++ 	return retval;
++ #else
++ 	*mount_flags = 0;
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/lzo/Makefile backfire.armel/package/lzo/Makefile
+--- backfire.orig/package/lzo/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/lzo/Makefile	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,60 @@
++#
++# Copyright (C) 2006-2010 OpenWrt.org
++#
++# This is free software, licensed under the GNU General Public License v2.
++# See /LICENSE for more information.
++#
++
++include $(TOPDIR)/rules.mk
++
++PKG_NAME:=lzo
++PKG_VERSION:=2.05
++PKG_RELEASE:=1
++
++PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
++PKG_SOURCE_URL:=http://www.oberhumer.com/opensource/lzo/download/
++PKG_MD5SUM:=c67cda5fa191bab761c7cb06fe091e36
++
++PKG_FIXUP:=libtool
++
++PKG_INSTALL:=1
++
++include $(INCLUDE_DIR)/package.mk
++
++define Package/liblzo
++  SECTION:=libs
++  CATEGORY:=Libraries
++  TITLE:=A real-time data compression library
++  URL:=http://www.oberhumer.com/opensource/lzo/
++endef
++
++define Package/liblzo/description
++LZO is a data compression library which is suitable for data de-/compression in
++real-time. This means it favours speed over compression ratio.
++endef
++
++define Build/Configure
++	$(call Build/Configure/Default, \
++		--enable-shared \
++		--enable-static \
++	)
++endef
++
++TARGET_CFLAGS += $(FPIC)
++
++MAKE_FLAGS += CFLAGS_O="$(TARGET_CFLAGS)"
++
++define Build/InstallDev
++	$(INSTALL_DIR) $(1)/usr/include
++	$(CP) $(PKG_INSTALL_DIR)/usr/include/lzo $(1)/usr/include/
++
++	$(INSTALL_DIR) $(1)/usr/lib
++	$(CP) $(PKG_INSTALL_DIR)/usr/lib/liblzo2.{a,so*} $(1)/usr/lib/
++endef
++
++define Package/liblzo/install
++	$(INSTALL_DIR) $(1)/usr/lib
++	$(CP) $(PKG_INSTALL_DIR)/usr/lib/liblzo2.so* $(1)/usr/lib/
++endef
++
++$(eval $(call BuildPackage,liblzo))
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/openssl/Makefile backfire.armel/package/openssl/Makefile
+--- backfire.orig/package/openssl/Makefile	2012-03-01 07:55:48.000000000 +0100
++++ backfire.armel/package/openssl/Makefile	2012-03-02 15:01:27.000000000 +0100
+@@ -74,7 +74,28 @@
+ 
+ OPENSSL_NO_CIPHERS:= no-idea no-md2 no-mdc2 no-rc5 no-sha0 no-smime \
+ 					no-rmd160 no-aes192 no-ripemd no-camellia no-ans1 no-krb5
+-OPENSSL_OPTIONS:= shared no-ec no-err no-hw no-threads zlib-dynamic no-sse2
++OPENSSL_OPTIONS:= shared no-ec no-err no-hw no-threads zlib no-sse2
++
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-cast
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-cms
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-dso
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-ecdh
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-ecdsa
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-engine
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-jpake
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-perlasm
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-rc2
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-rc4
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-seed
++OPENSSL_NO_CIPHERS:=$(OPENSSL_NO_CIPHERS) no-store
++
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-asm
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-chain_verify
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-locking
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-sha256
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-sha512
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-ssl2
++OPENSSL_OPTIONS:=$(OPENSSL_OPTIONS) no-ssl3
+ 
+ ifdef CONFIG_OPENSSL_ENGINE
+   OPENSSL_OPTIONS += --with-cryptodev
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/openvpn-static/Makefile backfire.armel/package/openvpn-static/Makefile
+--- backfire.orig/package/openvpn-static/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/openvpn-static/Makefile	2012-03-22 13:05:25.000000000 +0100
+@@ -0,0 +1,69 @@
++#
++# Copyright (C) 2006-2010 OpenWrt.org
++#
++# This is free software, licensed under the GNU General Public License v2.
++# See /LICENSE for more information.
++#
++
++include $(TOPDIR)/rules.mk
++
++PKG_NAME:=openvpn-static
++PKG_VERSION:=2.1.3
++PKG_RELEASE:=1
++
++PKG_SOURCE:=openvpn-$(PKG_VERSION).tar.gz
++PKG_SOURCE_URL:=http://openvpn.net/release @SF/openvpn
++PKG_MD5SUM:=7486d3e270ba4b033e311d3e022a0ad7
++
++PKG_INSTALL:=1
++
++include $(INCLUDE_DIR)/package.mk
++
++define Package/openvpn-static
++  SECTION:=net
++  CATEGORY:=Network
++  DEPENDS:=+kmod-tun +libopenssl +liblzo
++  TITLE:=Open source VPN solution using SSL (static)
++  URL:=http://openvpn.net
++  SUBMENU:=VPN
++endef
++
++define Package/openvpn-static/description
++	 Open source VPN solution using SSL (statically linked binary)
++endef
++
++CONFIGURE_ARGS+= \
++	--disable-pthread \
++	--disable-debug \
++	--disable-plugins \
++	--enable-management \
++	--disable-socks \
++	--enable-password-save \
++	--enable-small \
++	--with-ifconfig-path=/data/local/deb/armel/ifconfig \
++	--with-route-path=/data/local/deb/armel/route
++
++TARGET_CFLAGS += -static
++
++define Build/Prepare
++	rm -rf $(PKG_BUILD_DIR)
++	mkdir -p $(PKG_BUILD_DIR)
++	tar --strip-components=1 -xzvf $(DL_DIR)/$(PKG_SOURCE) -C $(PKG_BUILD_DIR)/
++	$(Build/Patch)
++endef
++
++define Build/Configure
++	$(call Build/Configure/Default, \
++		$(CONFIGURE_ARGS)  \
++		,\
++		ac_cv_func_epoll_create=no \
++		LIBS=-lz \
++	)
++endef
++
++define Package/openvpn-static/install
++	$(INSTALL_DIR) $(1)/usr/sbin
++	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/openvpn $(1)/usr/sbin/
++endef
++
++$(eval $(call BuildPackage,openvpn-static))
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/openvpn-static/patches/000-dev-tun.patch backfire.armel/package/openvpn-static/patches/000-dev-tun.patch
+--- backfire.orig/package/openvpn-static/patches/000-dev-tun.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/openvpn-static/patches/000-dev-tun.patch	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,12 @@
++diff -Nur openvpn-static-2.1.3.orig/tun.c openvpn-static-2.1.3/tun.c
++--- openvpn-static-2.1.3.orig/tun.c	2010-07-27 23:44:33.000000000 +0200
+++++ openvpn-static-2.1.3/tun.c	2011-03-05 10:41:14.735652241 +0100
++@@ -1096,7 +1096,7 @@
++        */
++       const char *node = dev_node;
++       if (!node)
++-	node = "/dev/net/tun";
+++	node = "/dev/tun";
++ 
++       /*
++        * Open the interface
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/pkgdetails-static/files/pkgdetails.c backfire.armel/package/pkgdetails-static/files/pkgdetails.c
+--- backfire.orig/package/pkgdetails-static/files/pkgdetails.c	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/pkgdetails-static/files/pkgdetails.c	2012-03-04 18:32:47.000000000 +0100
+@@ -0,0 +1,347 @@
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <ctype.h>
++#include <stdarg.h>
++#include <errno.h>
++
++#define MAX_LINE 1000
++#define MAX_PKGS 100
++
++char *checksum_field=NULL;
++
++static void oom_die(void)
++{
++    fprintf(stderr, "Out of memory!\n");
++    exit(1);
++}
++
++static char *xvasprintf(const char *fmt, va_list ap) {
++    char *ret;
++
++    if (vasprintf (&ret, fmt, ap) < 0) {
++        if (errno == ENOMEM)
++            oom_die();
++        return NULL;
++    }
++    return ret;
++}
++
++static char *xasprintf(const char *fmt, ...) {
++    va_list ap;
++    char *ret;
++
++    va_start(ap, fmt);
++    ret = xvasprintf(fmt, ap);
++    va_end(ap);
++    return ret;
++}
++
++static char *fieldcpy(char *dst, char *fld) {
++    while (*fld && *fld != ':') 
++        fld++;
++    if (!*(fld++)) 
++        return NULL;
++    while (isspace(*fld)) fld++;
++    return strcpy(dst, fld);
++}
++
++static void outputdeps(char *deps) {
++    char *pch = deps;
++
++    while (1) {
++        while (isspace(*pch)) pch++;
++        if (!*pch) break;
++
++        while (*pch && *pch != '(' && *pch != '|' && *pch != ','
++               && !isspace(*pch))
++        {
++            fputc(*pch++, stdout);
++        }
++        fputc('\n', stdout);
++        while (*pch && *pch++ != ',') (void)NULL;
++    }
++}
++
++static void dogetdeps(char *pkgsfile, char **in_pkgs, int pkgc) {
++    char buf[MAX_LINE];
++    char cur_pkg[MAX_LINE];
++    char cur_deps[MAX_LINE];
++    char cur_predeps[MAX_LINE];
++    char prev_pkg[MAX_LINE];
++    char *pkgs[MAX_PKGS];
++    int i;
++    int skip;
++    FILE *f;
++    int output_pkg = -1;
++
++    cur_pkg[0] = cur_deps[0] = cur_predeps[0] = prev_pkg[0] = '\0';
++
++    for (i = 0; i < pkgc; i++) pkgs[i] = in_pkgs[i];
++
++    f = fopen(pkgsfile, "r");
++    if (f == NULL) {
++        perror(pkgsfile);
++        exit(1);
++    }
++
++    skip = 1;
++    while (fgets(buf, sizeof(buf), f)) {
++        if (*buf && buf[strlen(buf)-1] == '\n') buf[strlen(buf)-1] = '\0';
++        if (strncasecmp(buf, "Package:", 8) == 0) {
++            int any = 0;
++            skip = 1;
++            fieldcpy(cur_pkg, buf);
++            if (strcmp(cur_pkg, prev_pkg) != 0) {
++                if (output_pkg != -1)
++                    pkgs[output_pkg] = NULL;
++                if (cur_deps[0])
++                    outputdeps(cur_deps);
++                if (cur_predeps[0])
++                    outputdeps(cur_predeps);
++                strcpy(prev_pkg, cur_pkg);
++            }
++            cur_deps[0] = cur_predeps[0] = '\0';
++            output_pkg = -1;
++	    for (i = 0; i < pkgc; i++) {
++		if (!pkgs[i]) continue;
++		any = 1;
++                if (strcmp(cur_pkg, pkgs[i]) == 0) {
++                    skip = 0;
++                    output_pkg = i;
++                    break;
++                }
++            }
++            if (!any) break;
++        } else if (!skip && strncasecmp(buf, "Depends:", 8) == 0)
++            fieldcpy(cur_deps, buf);
++        else if (!skip && strncasecmp(buf, "Pre-Depends:", 12) == 0)
++            fieldcpy(cur_predeps, buf);
++    }
++    if (cur_deps[0])
++        outputdeps(cur_deps);
++    if (cur_predeps[0])
++        outputdeps(cur_predeps);
++    fclose(f);
++}
++
++static void dopkgmirrorpkgs(int uniq, char *mirror, char *pkgsfile, 
++        char *fieldname, char **in_pkgs, int pkgc) 
++{
++    char buf[MAX_LINE];
++    char cur_field[MAX_LINE];
++    char cur_pkg[MAX_LINE];
++    char cur_ver[MAX_LINE];
++    char cur_arch[MAX_LINE];
++    char cur_size[MAX_LINE];
++    char cur_checksum[MAX_LINE];
++    char cur_filename[MAX_LINE];
++    char prev_pkg[MAX_LINE];
++    char *pkgs[MAX_PKGS];
++    int i;
++    FILE *f;
++    char *output = NULL;
++    int output_pkg = -1;
++
++    cur_field[0] = cur_pkg[0] = cur_ver[0] = cur_arch[0] = cur_filename[0] = prev_pkg[0] = '\0';
++
++    for (i = 0; i < pkgc; i++) pkgs[i] = in_pkgs[i];
++
++    f = fopen(pkgsfile, "r");
++    if (f == NULL) {
++        perror(pkgsfile);
++        exit(1);
++    }
++    while (fgets(buf, sizeof(buf), f)) {
++        if (*buf && buf[strlen(buf)-1] == '\n') buf[strlen(buf)-1] = '\0';
++        if (strncasecmp(buf, fieldname, strlen(fieldname)) == 0) {
++            fieldcpy(cur_field, buf);
++	}
++        if (strncasecmp(buf, "Package:", 8) == 0) {
++            fieldcpy(cur_pkg, buf);
++            if (strcmp(cur_pkg, prev_pkg) != 0) {
++                if (output)
++                    fputs(output, stdout);
++                if (uniq && output_pkg != -1)
++                    pkgs[output_pkg] = NULL;
++                strcpy(prev_pkg, cur_pkg);
++            }
++            free(output);
++            output = NULL;
++            output_pkg = -1;
++        } else if (strncasecmp(buf, "Version:", 8) == 0) {
++            fieldcpy(cur_ver, buf);
++        } else if (strncasecmp(buf, "Architecture:", 13) == 0) {
++            fieldcpy(cur_arch, buf);
++        } else if (strncasecmp(buf, "Size:", 5) == 0) {
++            fieldcpy(cur_size, buf);
++        } else if (strncasecmp(buf, checksum_field, strlen(checksum_field)) == 0
++	           && buf[strlen(checksum_field)] == ':') {
++            fieldcpy(cur_checksum, buf);
++        } else if (strncasecmp(buf, "Filename:", 9) == 0) {
++            fieldcpy(cur_filename, buf);
++        } else if (!*buf) {
++	    int any = 0;
++	    for (i = 0; i < pkgc; i++) {
++		if (!pkgs[i]) continue;
++		any = 1;
++                if (strcmp(cur_field, pkgs[i]) == 0) {
++                    free(output);
++                    output = xasprintf("%s %s %s %s %s %s %s\n", cur_pkg, cur_ver, cur_arch, mirror, cur_filename, cur_checksum, cur_size);
++                    output_pkg = i;
++		    break;
++		}
++            }
++	    if (!any) break;
++            cur_field[0] = '\0';
++        }
++    }
++    if (output)
++        fputs(output, stdout);
++    if (uniq && output_pkg != -1)
++        pkgs[output_pkg] = NULL;
++    fclose(f);
++
++    /* any that weren't found are returned as "pkg -" */
++    if (uniq) {
++        for (i = 0; i < pkgc; i++) {
++            if (pkgs[i]) {
++                printf("%s -\n", pkgs[i]);
++            }
++        }
++    }
++}
++
++static void dopkgstanzas(char *pkgsfile, char **pkgs, int pkgc)
++{
++    char buf[MAX_LINE];
++    char *accum;
++    size_t accum_size = 0, accum_alloc = MAX_LINE * 2;
++    char cur_pkg[MAX_LINE];
++    FILE *f;
++
++    accum = malloc(accum_alloc);
++    if (!accum)
++        oom_die();
++
++    f = fopen(pkgsfile, "r");
++    if (f == NULL) {
++        perror(pkgsfile);
++        free(accum);
++        exit(1);
++    }
++    while (fgets(buf, sizeof(buf), f)) {
++        if (*buf) {
++	    size_t len = strlen(buf);
++            if (accum_size + len + 1 > accum_alloc) {
++                accum_alloc = (accum_size + len + 1) * 2;
++                accum = realloc(accum, accum_alloc);
++                if (!accum)
++                    oom_die();
++            }
++            strcpy(accum + accum_size, buf);
++	    accum_size += len;
++        }
++        if (*buf && buf[strlen(buf)-1] == '\n') buf[strlen(buf)-1] = '\0';
++        if (strncasecmp(buf, "Package:", 8) == 0) {
++            fieldcpy(cur_pkg, buf);
++        } else if (!*buf) {
++            int i;
++            for (i = 0; i < pkgc; i++) {
++                if (!pkgs[i]) continue;
++                if (strcmp(cur_pkg, pkgs[i]) == 0) {
++                    fputs(accum, stdout);
++		    if (accum[accum_size - 1] != '\n')
++			fputs("\n\n", stdout);
++		    else if (accum[accum_size - 2] != '\n')
++			fputc('\n', stdout);
++                    break;
++                }
++            }
++            *accum = '\0';
++            accum_size = 0;
++        }
++    }
++    fclose(f);
++
++    free(accum);
++}
++
++static int dotranslatewgetpercent(int low, int high, int end, char *str) {
++    int ch;
++    int val, lastval;
++
++    /* print out anything that looks like a % on its own line, appropriately
++     * scaled */
++
++    lastval = val = 0;
++    while ( (ch = getchar()) != EOF ) {
++        if (isdigit(ch)) {
++	    val *= 10; val += ch - '0';
++	} else if (ch == '%') {
++	    float f = (float) val / 100.0 * (high - low) + low;
++	    if (str) {
++	    	printf("P: %d %d %s\n", (int) f, end, str);
++	    } else {
++	    	printf("P: %d %d\n", (int) f, end);
++	    }
++	    lastval = val;
++	} else {
++	    val = 0;
++	}
++    }
++    return lastval == 100;
++}
++
++int main(int argc, char *argv[]) {
++    checksum_field=getenv("DEBOOTSTRAP_CHECKSUM_FIELD");
++    if (checksum_field == NULL) {
++        checksum_field="MD5sum";
++    }
++
++    if ((argc == 6 || argc == 5) && strcmp(argv[1], "WGET%") == 0) {
++	if (dotranslatewgetpercent(atoi(argv[2]), atoi(argv[3]), 
++	                           atoi(argv[4]), argc == 6 ? argv[5] : NULL))
++	{
++	    exit(0);
++	} else {
++	    exit(1);
++	}
++    } else if (argc >= 4 && strcmp(argv[1], "GETDEPS") == 0) {
++        int i;
++        for (i = 3; argc - i > MAX_PKGS; i += MAX_PKGS) {
++	    dogetdeps(argv[2], argv+i, MAX_PKGS);
++	}
++	dogetdeps(argv[2], argv+i, argc-i);
++	exit(0);
++    } else if (argc >= 5 && strcmp(argv[1], "PKGS") == 0) {
++        int i;
++        for (i = 4; argc - i > MAX_PKGS; i += MAX_PKGS) {
++	    dopkgmirrorpkgs(1, argv[2], argv[3], "Package:", argv+i, MAX_PKGS);
++	}
++	dopkgmirrorpkgs(1, argv[2], argv[3], "Package:", argv+i, argc-i);
++	exit(0);
++    } else if (argc >= 6 && strcmp(argv[1], "FIELD") == 0) {
++        int i;
++        for (i = 5; argc - i > MAX_PKGS; i += MAX_PKGS) {
++	    dopkgmirrorpkgs(0, argv[3], argv[4], argv[2], argv+i, MAX_PKGS);
++	}
++	dopkgmirrorpkgs(0, argv[3], argv[4], argv[2], argv+i, argc-i);
++	exit(0);
++    } else if (argc >= 4 && strcmp(argv[1], "STANZAS") == 0) {
++	int i;
++	for (i = 3; argc - i > MAX_PKGS; i += MAX_PKGS) {
++	    dopkgstanzas(argv[2], argv+i, MAX_PKGS);
++	}
++	dopkgstanzas(argv[2], argv+i, argc-i);
++	exit(0);
++    } else {
++        fprintf(stderr, "usage: %s PKGS mirror packagesfile pkgs..\n", argv[0]);
++        fprintf(stderr, "   or: %s FIELD field mirror packagesfile pkgs..\n", 
++                argv[0]);
++        fprintf(stderr, "   or: %s GETDEPS packagesfile pkgs..\n", argv[0]);
++        fprintf(stderr, "   or: %s STANZAS packagesfile pkgs..\n", argv[0]);
++	fprintf(stderr, "   or: %s WGET%% low high end reason\n", argv[0]);
++        exit(1);
++    }
++}
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/pkgdetails-static/Makefile backfire.armel/package/pkgdetails-static/Makefile
+--- backfire.orig/package/pkgdetails-static/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/pkgdetails-static/Makefile	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,35 @@
++#
++# Copyright (C) 2010 Gianluigi Tiesi <sherpya@netfarm.it>
++#
++# This is free software, licensed under the GNU General Public License v2.
++# See /LICENSE for more information.
++#
++
++include $(TOPDIR)/rules.mk
++
++PKG_NAME:=pkgdetails-static
++PKG_VERSION:=1.0.0
++PKG_RELEASE:=1
++
++include $(INCLUDE_DIR)/package.mk
++
++define Package/pkgdetails-static
++	SECTION:=admin
++	CATEGORY:=Administration
++	TITLE:=Helper program to bootstrap a basic Debian system
++	URL:=http://wiki.debian.org/Debootstrap
++endef
++
++TARGET_CFLAGS += -static
++
++define Build/Compile
++	mkdir -p $(PKG_INSTALL_DIR)/usr/share/debootstrap
++	$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS) ./files/pkgdetails.c -o $(PKG_INSTALL_DIR)/usr/share/debootstrap/pkgdetails
++endef
++
++define Package/pkgdetails-static/install
++	$(INSTALL_DIR) $(1)/usr/share/debootstrap
++	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/share/debootstrap/pkgdetails $(1)/usr/share/debootstrap/
++endef
++
++$(eval $(call BuildPackage,pkgdetails-static))
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/target/linux/android/config-2.6.32 backfire.armel/target/linux/android/config-2.6.32
+--- backfire.orig/target/linux/android/config-2.6.32	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/target/linux/android/config-2.6.32	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,20 @@
++CONFIG_UID16=y
++CONFIG_ARCH_VERSATILE_PB=y
++CONFIG_MACH_VERSATILE_AB=y
++CONFIG_ARM_THUMB=y
++# CONFIG_CPU_ICACHE_DISABLE is not set
++# CONFIG_CPU_DCACHE_WRITETHROUGH is not set
++# CONFIG_CPU_CACHE_ROUND_ROBIN is not set
++CONFIG_AEABI=y
++# CONFIG_LEDS is not set
++CONFIG_ZBOOT_ROM_TEXT=0
++CONFIG_ZBOOT_ROM_BSS=0
++# CONFIG_FPE_NWFPE is not set
++# CONFIG_FPE_FASTFPE is not set
++# CONFIG_VFP is not set
++# CONFIG_DM9000 is not set
++# CONFIG_SERIAL_8250_EXTENDED is not set
++# CONFIG_SERIAL_AMBA_PL011 is not set
++CONFIG_HW_RANDOM=m
++# CONFIG_MFD_T7L66XB is not set
++# CONFIG_DEBUG_USER is not set
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/target/linux/android/image/Makefile backfire.armel/target/linux/android/image/Makefile
+--- backfire.orig/target/linux/android/image/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/target/linux/android/image/Makefile	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,10 @@
++#
++# Copyright (C) 2009-2010 OpenWrt.org
++#
++# This is free software, licensed under the GNU General Public License v2.
++# See /LICENSE for more information.
++#
++include $(TOPDIR)/rules.mk
++include $(INCLUDE_DIR)/image.mk
++
++$(eval $(call BuildImage))
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/target/linux/android/Makefile backfire.armel/target/linux/android/Makefile
+--- backfire.orig/target/linux/android/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/target/linux/android/Makefile	2012-03-02 15:01:27.000000000 +0100
+@@ -0,0 +1,24 @@
++ 
++# Copyright (C) 2011 Sven-Ola
++#
++# This is free software, licensed under the GNU General Public License v2.
++# See /LICENSE for more information.
++#
++include $(TOPDIR)/rules.mk
++
++ARCH:=arm
++BOARD:=android
++BOARDNAME:=android
++FEATURES:=targz
++
++LINUX_VERSION:=2.6.32.27
++
++include $(INCLUDE_DIR)/target.mk
++
++DEFAULT_PACKAGES += kmod-tun
++
++define Target/Description
++	Build ipkg package files for Android phones
++endef
++
++$(eval $(call BuildTarget))
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch backfire.armel/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch
+--- backfire.orig/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch	2012-04-06 13:49:33.000000000 +0200
+@@ -0,0 +1,572 @@
++diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/Makefile.in uClibc-0.9.30.1/libc/inet/Makefile.in
++--- uClibc-0.9.30.1.orig/libc/inet/Makefile.in	2012-04-05 21:19:34.720192288 +0200
+++++ uClibc-0.9.30.1/libc/inet/Makefile.in	2012-03-26 10:40:40.000000000 +0200
++@@ -39,7 +39,7 @@
++ 	res_query.c gethostbyaddr.c read_etc_hosts_r.c get_hosts_byname_r.c \
++ 	get_hosts_byaddr_r.c gethostbyname2.c getnameinfo.c gethostent.c \
++ 	gethostbyname_r.c gethostbyname2_r.c gethostbyaddr_r.c \
++-	res_comp.c ns_name.c ethers.c
+++	res_comp.c ns_name.c ethers.c system_properties.c
++ ifneq ($(UCLIBC_HAS_IPV4)$(UCLIBC_HAS_IPV6),)
++ CSRC += $(resolv_CSRC)
++ 
++diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/resolv.c uClibc-0.9.30.1/libc/inet/resolv.c
++--- uClibc-0.9.30.1.orig/libc/inet/resolv.c	2012-04-05 21:19:34.724192298 +0200
+++++ uClibc-0.9.30.1/libc/inet/resolv.c	2012-03-26 10:40:40.000000000 +0200
++@@ -155,6 +155,10 @@
++ #include <sys/utsname.h>
++ #include <sys/un.h>
++ #include <bits/uClibc_mutex.h>
+++#include "sys/system_properties.h"
+++
+++#define DNS1_PROP "net.dns1"
+++#define DNS2_PROP "net.dns2"
++ 
++ /* poll() is not supported in kernel <= 2.0, therefore if __NR_poll is
++  * not available, we assume an old Linux kernel is in use and we will
++@@ -1116,6 +1120,8 @@
++  *	unix systems, we can have a list of nameservers after the keyword.
++  */
++ 
+++int __system_properties_init(void);
+++
++ void attribute_hidden __open_nameservers(void)
++ {
++ 	FILE *fp;
++@@ -1128,6 +1134,18 @@
++ 	if (__nameservers > 0)
++ 		goto DONE;
++ 
+++	if (0 == __system_properties_init()) {
+++		char dns[PROP_VALUE_MAX];
+++		if (0 < __system_property_get(DNS1_PROP, dns) && __nameservers < MAX_SERVERS) {
+++			__nameserver[__nameservers++] = strdup(dns);
+++		}
+++		if (0 < __system_property_get(DNS2_PROP, dns) && __nameservers < MAX_SERVERS) {
+++			__nameserver[__nameservers++] = strdup(dns);
+++		}
+++		if (__nameservers > 0)
+++			goto DONE;
+++	}
+++
++ 	if ((fp = fopen("/etc/resolv.conf", "r")) ||
++ 		(fp = fopen("/etc/config/resolv.conf", "r")))
++ 	{
++diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/sys/atomics.h uClibc-0.9.30.1/libc/inet/sys/atomics.h
++--- uClibc-0.9.30.1.orig/libc/inet/sys/atomics.h	1970-01-01 01:00:00.000000000 +0100
+++++ uClibc-0.9.30.1/libc/inet/sys/atomics.h	2012-03-26 10:40:40.000000000 +0200
++@@ -0,0 +1,46 @@
+++/*
+++ * Copyright (C) 2008 The Android Open Source Project
+++ * All rights reserved.
+++ *
+++ * Redistribution and use in source and binary forms, with or without
+++ * modification, are permitted provided that the following conditions
+++ * are met:
+++ *  * Redistributions of source code must retain the above copyright
+++ *    notice, this list of conditions and the following disclaimer.
+++ *  * Redistributions in binary form must reproduce the above copyright
+++ *    notice, this list of conditions and the following disclaimer in
+++ *    the documentation and/or other materials provided with the
+++ *    distribution.
+++ *
+++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+++ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+++ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+++ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+++ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+++ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+++ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+++ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+++ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+++ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+++ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+++ * SUCH DAMAGE.
+++ */
+++#ifndef _SYS_ATOMICS_H
+++#define _SYS_ATOMICS_H
+++
+++#include <sys/cdefs.h>
+++#include <sys/time.h>
+++
+++__BEGIN_DECLS
+++
+++extern int __atomic_cmpxchg(int old, int _new, volatile int *ptr);
+++extern int __atomic_swap(int _new, volatile int *ptr);
+++extern int __atomic_dec(volatile int *ptr);
+++extern int __atomic_inc(volatile int *ptr);
+++
+++int __futex_wait(volatile void *ftx, int val, const struct timespec *timeout);
+++int __futex_wake(volatile void *ftx, int count);
+++
+++__END_DECLS
+++
+++#endif /* _SYS_ATOMICS_H */
++diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/sys/system_properties.h uClibc-0.9.30.1/libc/inet/sys/system_properties.h
++--- uClibc-0.9.30.1.orig/libc/inet/sys/system_properties.h	1970-01-01 01:00:00.000000000 +0100
+++++ uClibc-0.9.30.1/libc/inet/sys/system_properties.h	2012-03-26 10:40:40.000000000 +0200
++@@ -0,0 +1,85 @@
+++/*
+++ * Copyright (C) 2008 The Android Open Source Project
+++ * All rights reserved.
+++ *
+++ * Redistribution and use in source and binary forms, with or without
+++ * modification, are permitted provided that the following conditions
+++ * are met:
+++ *  * Redistributions of source code must retain the above copyright
+++ *    notice, this list of conditions and the following disclaimer.
+++ *  * Redistributions in binary form must reproduce the above copyright
+++ *    notice, this list of conditions and the following disclaimer in
+++ *    the documentation and/or other materials provided with the
+++ *    distribution.
+++ *
+++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+++ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+++ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+++ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+++ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+++ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+++ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+++ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+++ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+++ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+++ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+++ * SUCH DAMAGE.
+++ */
+++
+++#ifndef _INCLUDE_SYS_SYSTEM_PROPERTIES_H
+++#define _INCLUDE_SYS_SYSTEM_PROPERTIES_H
+++
+++#include <sys/cdefs.h>
+++
+++__BEGIN_DECLS
+++
+++typedef struct prop_info prop_info;
+++
+++#define PROP_NAME_MAX   32
+++#define PROP_VALUE_MAX  92
+++
+++/* Look up a system property by name, copying its value and a
+++** \0 terminator to the provided pointer.  The total bytes
+++** copied will be no greater than PROP_VALUE_MAX.  Returns
+++** the string length of the value.  A property that is not
+++** defined is identical to a property with a length 0 value.
+++*/
+++int __system_property_get(const char *name, char *value);
+++
+++/* Return a pointer to the system property named name, if it
+++** exists, or NULL if there is no such property.  Use 
+++** __system_property_read() to obtain the string value from
+++** the returned prop_info pointer.
+++**
+++** It is safe to cache the prop_info pointer to avoid future
+++** lookups.  These returned pointers will remain valid for
+++** the lifetime of the system.
+++*/
+++const prop_info *__system_property_find(const char *name);
+++
+++/* Read the value of a system property.  Returns the length
+++** of the value.  Copies the value and \0 terminator into
+++** the provided value pointer.  Total length (including
+++** terminator) will be no greater that PROP_VALUE_MAX.
+++**
+++** If name is nonzero, up to PROP_NAME_MAX bytes will be
+++** copied into the provided name pointer.  The name will
+++** be \0 terminated.
+++*/
+++int __system_property_read(const prop_info *pi, char *name, char *value);
+++
+++/* Return a prop_info for the nth system property, or NULL if 
+++** there is no nth property.  Use __system_property_read() to
+++** read the value of this property.
+++**
+++** This method is for inspecting and debugging the property 
+++** system.  Please use __system_property_find() instead.
+++**
+++** Order of results may change from call to call.  This is
+++** not a bug.
+++*/ 
+++const prop_info *__system_property_find_nth(unsigned n);
+++
+++__END_DECLS
+++
+++#endif
++diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/sys/_system_properties.h uClibc-0.9.30.1/libc/inet/sys/_system_properties.h
++--- uClibc-0.9.30.1.orig/libc/inet/sys/_system_properties.h	1970-01-01 01:00:00.000000000 +0100
+++++ uClibc-0.9.30.1/libc/inet/sys/_system_properties.h	2012-03-26 10:40:40.000000000 +0200
++@@ -0,0 +1,108 @@
+++/*
+++ * Copyright (C) 2008 The Android Open Source Project
+++ * All rights reserved.
+++ *
+++ * Redistribution and use in source and binary forms, with or without
+++ * modification, are permitted provided that the following conditions
+++ * are met:
+++ *  * Redistributions of source code must retain the above copyright
+++ *    notice, this list of conditions and the following disclaimer.
+++ *  * Redistributions in binary form must reproduce the above copyright
+++ *    notice, this list of conditions and the following disclaimer in
+++ *    the documentation and/or other materials provided with the
+++ *    distribution.
+++ *
+++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+++ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+++ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+++ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+++ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+++ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+++ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+++ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+++ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+++ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+++ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+++ * SUCH DAMAGE.
+++ */
+++
+++#ifndef _INCLUDE_SYS__SYSTEM_PROPERTIES_H
+++#define _INCLUDE_SYS__SYSTEM_PROPERTIES_H
+++
+++#ifndef _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+++#error you should #include <sys/system_properties.h> instead
+++#else
+++#include "system_properties.h"
+++
+++typedef struct prop_area prop_area;
+++typedef struct prop_msg prop_msg;
+++
+++#define PROP_AREA_MAGIC   0x504f5250
+++#define PROP_AREA_VERSION 0x45434f76
+++
+++#define PROP_SERVICE_NAME "property_service"
+++
+++/* #define PROP_MAX_ENTRIES 247 */
+++/* 247 -> 32620 bytes (<32768) */
+++
+++#define TOC_NAME_LEN(toc)       ((toc) >> 24)
+++#define TOC_TO_INFO(area, toc)  ((prop_info*) (((char*) area) + ((toc) & 0xFFFFFF)))
+++
+++struct prop_area {
+++    unsigned volatile count;
+++    unsigned volatile serial;
+++    unsigned magic;
+++    unsigned version;
+++    unsigned reserved[4];
+++    unsigned toc[1];
+++};
+++
+++#define SERIAL_VALUE_LEN(serial) ((serial) >> 24)
+++#define SERIAL_DIRTY(serial) ((serial) & 1)
+++
+++struct prop_info {
+++    char name[PROP_NAME_MAX];
+++    unsigned volatile serial;
+++    char value[PROP_VALUE_MAX];
+++};
+++
+++struct prop_msg 
+++{
+++    unsigned cmd;
+++    char name[PROP_NAME_MAX];
+++    char value[PROP_VALUE_MAX];
+++};
+++
+++#define PROP_MSG_SETPROP 1
+++    
+++/*
+++** Rules:
+++**
+++** - there is only one writer, but many readers
+++** - prop_area.count will never decrease in value
+++** - once allocated, a prop_info's name will not change
+++** - once allocated, a prop_info's offset will not change
+++** - reading a value requires the following steps
+++**   1. serial = pi->serial
+++**   2. if SERIAL_DIRTY(serial), wait*, then goto 1
+++**   3. memcpy(local, pi->value, SERIAL_VALUE_LEN(serial) + 1)
+++**   4. if pi->serial != serial, goto 2
+++**
+++** - writing a value requires the following steps
+++**   1. pi->serial = pi->serial | 1
+++**   2. memcpy(pi->value, local_value, value_len)
+++**   3. pi->serial = (value_len << 24) | ((pi->serial + 1) & 0xffffff)
+++**
+++** Improvements:
+++** - maintain the toc sorted by pi->name to allow lookup
+++**   by binary search
+++**
+++*/
+++
+++#define PROP_PATH_RAMDISK_DEFAULT  "/default.prop"
+++#define PROP_PATH_SYSTEM_BUILD     "/system/build.prop"
+++#define PROP_PATH_SYSTEM_DEFAULT   "/system/default.prop"
+++#define PROP_PATH_LOCAL_OVERRIDE   "/data/local.prop"
+++
+++#endif
+++#endif
++diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/system_properties.c uClibc-0.9.30.1/libc/inet/system_properties.c
++--- uClibc-0.9.30.1.orig/libc/inet/system_properties.c	1970-01-01 01:00:00.000000000 +0100
+++++ uClibc-0.9.30.1/libc/inet/system_properties.c	2012-04-06 13:39:46.047063052 +0200
++@@ -0,0 +1,263 @@
+++/*
+++ * Copyright (C) 2008 The Android Open Source Project
+++ * All rights reserved.
+++ *
+++ * Redistribution and use in source and binary forms, with or without
+++ * modification, are permitted provided that the following conditions
+++ * are met:
+++ *  * Redistributions of source code must retain the above copyright
+++ *    notice, this list of conditions and the following disclaimer.
+++ *  * Redistributions in binary form must reproduce the above copyright
+++ *    notice, this list of conditions and the following disclaimer in
+++ *    the documentation and/or other materials provided with the
+++ *    distribution.
+++ *
+++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+++ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+++ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+++ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+++ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+++ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+++ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+++ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+++ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+++ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+++ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+++ * SUCH DAMAGE.
+++ */
+++#include <stdio.h>
+++#include <stdlib.h>
+++#include <unistd.h>
+++#include <stddef.h>
+++#include <errno.h>
+++
+++#include <sys/mman.h>
+++
+++#include <sys/socket.h>
+++#include <sys/un.h>
+++#include <sys/select.h>
+++#include <sys/types.h>
+++#include <netinet/in.h>
+++
+++#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+++#include "sys/_system_properties.h"
+++
+++#include "sys/atomics.h"
+++
+++/* For futex syscall */
+++#include <linux/futex.h>
+++#include <sys/syscall.h>
+++#include <unistd.h>
+++
+++/*
+++ * This syscall is required by Android's properties handling in system_properties.c
+++ */
+++int __futex_wait(volatile void *ftx, int val, const struct timespec *timeout)
+++{
+++    return syscall(SYS_futex, ftx, FUTEX_WAIT, val, (void *)timeout, NULL, NULL);
+++}
+++
+++static const char property_service_name[] = PROP_SERVICE_NAME;
+++
+++static unsigned dummy_props = 0;
+++
+++prop_area *__system_property_area__ = (void*) &dummy_props;
+++
+++/* Detected PROP_NAME_MAX. Note, that android-x86.org uses a changed constant, see
+++ * http://android-x86.git.sourceforge.net/git/gitweb.cgi?p=android-x86/x86_bionic.git;a=commitdiff;h=380a68a2b52f41bfdb0d2662b0e21281505037d5
+++ */
+++#define PROP_NAME_LIMIT 256
+++static int prop_name_max = PROP_NAME_MAX;
+++
+++int __system_properties_init(void)
+++{
+++    prop_area *pa;
+++    int fd;
+++    unsigned sz;
+++    char *env;
+++
+++    if(__system_property_area__ != ((void*) &dummy_props)) {
+++        return 0;
+++    }
+++
+++    env = getenv("ANDROID_PROPERTY_WORKSPACE");
+++    if (!env) {
+++        return -1;
+++    }
+++    fd = atoi(env);
+++    env = strchr(env, ',');
+++    if (!env) {
+++        return -1;
+++    }
+++    sz = atoi(env + 1);
+++    
+++    pa = mmap(0, sz, PROT_READ, MAP_SHARED, fd, 0);
+++    
+++    if(pa == MAP_FAILED) {
+++        return -1;
+++    }
+++
+++    if((pa->magic != PROP_AREA_MAGIC) || (pa->version != PROP_AREA_VERSION)) {
+++        munmap(pa, sz);
+++        return -1;
+++    }
+++
+++    __system_property_area__ = pa;
+++    if (0 < pa->count) {
+++        /*
+++         * Yes - this is C. I like it, but it may have bugs :)
+++         * Search the longest value in the /system/build.prop
+++         * and /system/default.prop files with a name that starts
+++         * with "ro." in order to search this read-only property to
+++         * determine PROP_NAME_MAX later on.
+++         */
+++        int prop;
+++        int minlen = 8;
+++        char name[PROP_NAME_LIMIT];
+++        char value[PROP_VALUE_MAX];
+++        for (prop = 0; prop < 2; prop++) {
+++            FILE* f = fopen(prop ? PROP_PATH_SYSTEM_BUILD : PROP_PATH_SYSTEM_DEFAULT, "r");
+++            if (f)
+++            {
+++                char s[32 + PROP_NAME_LIMIT + PROP_VALUE_MAX];
+++                while (fgets(s, sizeof(s), f))
+++                {
+++                    char* p = s;
+++                    while (sizeof(s) > p - s && (' ' == *p || '\t' == *p)) p++;
+++                    if (sizeof(s) > p - s && 0 == strncmp(p, "ro.", 3))
+++                    {
+++                        char* n = p;
+++                        while (sizeof(s) > p - s && 0 != *p && '=' != *p && ' ' != *p && '\t' != *p) p++;
+++                        if (sizeof(s) > p - s && 0 != *p)
+++                        {
+++                            char* nend = p;
+++                            while (sizeof(s) > p - s && 0 != *p && '=' != *p) p++;
+++                            if (sizeof(s) > p - s && '=' == *p)
+++                            {
+++                                char *v;
+++                                *nend = 0;
+++                                p++;
+++                                while (sizeof(s) > p - s && (' ' == *p || '\t' == *p)) p++;
+++                                v = p;
+++                                while (sizeof(s) > p - s && (' ' <= *p)) p++;
+++                                if (sizeof(s) > p - s)
+++                                {
+++                                    char *vend = p;
+++                                    *vend = 0;
+++                                    if (sizeof(name) > nend - n && sizeof(value) > vend - v && minlen < vend - v)
+++                                    {
+++                                        minlen = vend - v;
+++                                        strcpy(name, n);
+++                                        strcpy(value, v);
+++                                    }
+++                                }
+++                            }
+++                        }
+++                    }
+++                }
+++                fclose(f);
+++            }
+++        }
+++        if (8 < minlen)
+++        {
+++            const prop_info *pi = __system_property_find(name);
+++            if (0 != pi)
+++            {
+++            	int m = PROP_NAME_MAX;
+++            	while(m <= PROP_NAME_LIMIT)
+++            	{
+++            		if (0 == strcmp(pi->value + (m - PROP_NAME_MAX), value))
+++            		{
+++            			prop_name_max = m;
+++            			break;
+++            		}
+++            		m++;
+++            	}
+++            }
+++        }
+++    }
+++    return 0;
+++}
+++
+++const prop_info *__system_property_find_nth(unsigned n)
+++{
+++    prop_area *pa = __system_property_area__;
+++
+++    if(n >= pa->count) {
+++        return 0;
+++    } else {
+++        return TOC_TO_INFO(pa, pa->toc[n]);
+++    }
+++}
+++
+++const prop_info *__system_property_find(const char *name)
+++{
+++    prop_area *pa = __system_property_area__;
+++    unsigned count = pa->count;
+++    unsigned *toc = pa->toc;
+++    unsigned len = strlen(name);
+++    prop_info *pi;
+++
+++    while(count--) {
+++        unsigned entry = *toc++;
+++        if(TOC_NAME_LEN(entry) != len) continue;
+++        
+++        pi = TOC_TO_INFO(pa, entry);
+++        if(memcmp(name, pi->name, len)) continue;
+++
+++        return pi;
+++    }
+++
+++    return 0;
+++}
+++
+++int __system_property_read(const prop_info *pi, char *name, char *value)
+++{
+++    unsigned serial, len;
+++    
+++    for(;;) {
+++        serial = *(unsigned*)((char*)pi + prop_name_max);
+++        while(SERIAL_DIRTY(serial)) {
+++            __futex_wait((volatile void *)((char*)pi + prop_name_max), serial, 0);
+++            serial = *(unsigned*)((char*)pi + prop_name_max);
+++        }
+++        len = SERIAL_VALUE_LEN(serial);
+++        memcpy(value, (char*)pi + prop_name_max + sizeof(pi->serial), len + 1);
+++        if(serial == *(unsigned*)((char*)pi + prop_name_max)) {
+++            if(name != 0) {
+++                strcpy(name, pi->name);
+++            }
+++            return len;
+++        }
+++    }
+++}
+++
+++int __system_property_get(const char *name, char *value)
+++{
+++    const prop_info *pi = __system_property_find(name);
+++
+++    if(pi != 0) {
+++        return __system_property_read(pi, 0, value);
+++    } else {
+++        value[0] = 0;
+++        return 0;
+++    }
+++}
+++
+++int __system_property_wait(const prop_info *pi)
+++{
+++    unsigned n;
+++    if(pi == 0) {
+++        prop_area *pa = __system_property_area__;
+++        n = pa->serial;
+++        do {
+++            __futex_wait(&pa->serial, n, 0);
+++        } while(n == pa->serial);
+++    } else {
+++        n = pi->serial;
+++        do {
+++            __futex_wait((volatile void *)&pi->serial, n, 0);
+++        } while(n == pi->serial);
+++    }
+++    return 0;
+++}

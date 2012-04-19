@@ -1,0 +1,56 @@
+#!/system/bin/sh
+
+# This script removes unused binaries and documentation from the "deb" dir.
+
+case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
+
+# Note: on i386, qemu may execute armel code as well. Reason to query i386 fist here.
+CPU=$(${DIR}/i386/busybox ash -c "echo i386" 2>&- || ${DIR}/armel/busybox ash -c "echo armel" 2>&-)
+case ${CPU} in "") echo "Unsupported CPU or architecture." >&2 && exit 1;;esac
+${DIR}/${CPU}/busybox ash -c "test /proc/$$/exe -ef ${DIR}/${CPU}/busybox" || exec ${DIR}/${CPU}/busybox ash -- "${0}" "$@"
+# Our busybox shell from here on
+
+LIST=$(echo ${DIR}/* ${DIR}/${CPU}/* | sed 's/ /\n/g' | sed "
+\,^${DIR}/${CPU}\$,d
+\,^${DIR}/${CPU}/busybox\$,d
+\,^${DIR}/${CPU}/e2fsck\$,d
+\,^${DIR}/${CPU}/openvpn\$,d
+\,^${DIR}/${CPU}/route\$,d
+\,^${DIR}/${CPU}/ifconfig\$,d
+\,^${DIR}/${CPU}/wpa_supplicant\$,d
+\,^${DIR}/${CPU}/$(uname -r)\$,d
+\,^${DIR}/ash\$,d
+\,^${DIR}/bootdeb\$,d
+\,^${DIR}/busybox\$,d
+\,^${DIR}/deb\$,d
+\,^${DIR}/functions\$,d
+\,^${DIR}/initctl\$,d
+\,^${DIR}/openvpn\$,d
+\,^${DIR}/uninstall\$,d
+")
+
+echo -n "."
+SIZE_ALL=$(( $(tar -c ${DIR} 2>&-|wc -c) / 1024 ))
+echo -n "."
+SIZE_YES=$(( $(tar -c ${LIST} 2>&-|wc -c) / 1024 ))
+echo -n "."
+SIZE_OVPN=$(( $(tar -c ${DIR}/${CPU}/openvpn 2>&-|wc -c) / 1024 ))
+
+echo "these files and directories are not required to run Debian on your machine:" >&2
+echo "${LIST}" >&2
+echo >&2
+n=
+while [ -z "${n}" ];do
+	echo -n "Enter 'yes' to remove them (${SIZE_ALL} -> $(( ${SIZE_ALL} - ${SIZE_YES} )) kB), 'ovpn' to remove extra kit-openvpn also (-> $(( ${SIZE_ALL} - ${SIZE_YES} - ${SIZE_OVPN} )) kB), 'no' or 'q' to abort: " >&2
+	read n
+	case ${n} in yes)
+		rm -r ${LIST}
+	;;ovpn)
+		rm -r ${LIST}
+		rm -f ${DIR}/openvpn ${DIR}/${CPU}/openvpn ${DIR}/${CPU}/route ${DIR}/${CPU}/ifconfig
+	;;no|q)
+		exit 0
+	;;esac
+done
+
+exit 0

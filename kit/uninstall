@@ -1,0 +1,64 @@
+#!/system/bin/sh
+
+# Script for bootstrapping Debian on Android (needs root)
+# Version 1.2, Copyright 2012 by Sven-Ola, License: GPLv3
+
+case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
+
+# Note: on i386, qemu may execute armel code as well. Reason to query i386 fist here.
+CPU=$(${DIR}/i386/busybox ash -c "echo i386" 2>&- || ${DIR}/armel/busybox ash -c "echo armel" 2>&-)
+case ${CPU} in "") echo "Unsupported CPU or architecture." >&2 && exit 1;;esac
+${DIR}/${CPU}/busybox ash -c "test /proc/$$/exe -ef ${DIR}/${CPU}/busybox" || exec ${DIR}/${CPU}/busybox ash -- "${0}" "$@"
+# Our busybox shell from here on
+
+# Read some critical locations from bootdeb script
+eval IMG=$(sed -n 's/^[[:space:]]*IMG[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
+eval MNT=$(sed -n 's/^[[:space:]]*MNT[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
+
+source ${DIR}/functions
+
+case $(id -u) in 0);;*)
+	echo "You need to run this script as root." >&2
+	exit 1
+;;esac
+
+case $(echo /.*.debian-android) in "/.*.debian-android");;*)
+	echo "You currently have a Debian file system mounted. Start 'deb u' to unmount first." >&2
+	exit 1
+;;esac
+
+case ${MNT} in "")
+	echo "MNT= not set in ${DIR}/bootdeb." >&2
+	exit 1
+;;*)
+	if [ ! -d ${MNT%/*} ];then
+		echo "Directory for MNT=${MNT} does not exist." >&2
+		exit 1
+	fi
+;;esac
+
+f="${MNT} ${DIR}"
+if [ -h ${ANDROID_ROOT:-/system}/bin/deb ] || [ -e ${ANDROID_ROOT:-/system}/bin/deb ];then
+		f="${f} ${ANDROID_ROOT:-/system}/bin/deb"
+fi
+for i in ${ANDROID_ROOT:-/system}/bin/ash ${ANDROID_ROOT:-/system}/bin/busybox;do
+	if [ ${i} -ef ${DIR}/${CPU}/busybox ];then
+		f="${f} ${i}"
+	fi
+done
+cat >&2 << EOF
+About to remove the following data:
+
+$(ls -l -d ${f})
+
+EOF
+echo -n "Proceed (y/N)? " >&2
+read n
+
+case ${n} in y|Y)
+	debug_mount -o remount,rw ${ANDROID_ROOT:-/system}
+	rm -f -r ${f}
+	debug_mount -o remount,ro ${ANDROID_ROOT:-/system}
+;;esac
+
+echo Done.

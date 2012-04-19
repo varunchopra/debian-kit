@@ -1,0 +1,60 @@
+# Some functions to be sourced into scripts
+
+get_mount() {
+	# Print device that is mounted to $1
+	# $2=2: Print file system id
+	# $2=3: Print mount options
+	sed -n "s ^\([^[:space:]]\+\)[[:space:]]\+${1// /\\\\\\\\040}[[:space:]]\+\([^[:space:]]\+\)[[:space:]]\+\([^[:space:]]\+\).* \\${2:-1} p" /proc/mounts|sed -n '$p'
+}
+
+get_mount_rw() {
+	# Print rw/ro for device that is mounted to $1
+	get_mount "${1}" 3|sed 's/,.*//'
+}
+
+get_free() {
+	# Print free Mb on device $1
+	echo $(( $(stat -fc '%a / (0x100000 / %s)' "${1}") ))
+}
+
+get_link() {
+	# Print symlink target
+	if [ -h "${1}" ];then
+		local l=$(stat -c %N "${1}")
+		echo ${l#* -> }
+	fi
+}
+
+get_uuid() {
+	# Print device for UUID (ext2/3/4 only)
+	local d
+	local p=/dev/block
+	test -d ${p}/vold && p=${p}/vold
+	for d in /sys/block/*/*/dev;do
+		d=${p}/$(cat $d)
+		case $(${DIR}/${CPU}/tune2fs -l ${d} 2>&-|sed -n 's/.*\bUUID:[[:space:]]*//p') in ${1})
+			echo ${d}
+			return 0
+		;;esac
+	done
+	return 1
+}
+
+get_which() {
+	# Note: which>&- does not work for some reason
+	case $(which "${1}") in "")return 1;;esac
+	return 0
+}
+
+case ${DEB_DEBUG} in true);;*) DEB_DEBUG=false;;esac
+
+debug_mount() {
+	${DEB_DEBUG} && echo mount "$@"
+	mount "$@"
+}
+
+debug_umount() {
+	${DEB_DEBUG} && echo umount "$@"
+	umount "$@"
+}
+

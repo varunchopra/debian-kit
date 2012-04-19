@@ -1,0 +1,330 @@
+#!/bin/sh
+
+case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
+
+# Note: on i386, qemu may execute armel code as well. Reason to query i386 fist here.
+CPU=$(${DIR}/i386/busybox ash -c "echo i386" 2>&- || ${DIR}/armel/busybox ash -c "echo armel" 2>&-)
+case ${CPU} in "") echo "Unsupported CPU or architecture." >&2 && exit 1;;esac
+${DIR}/${CPU}/busybox ash -c "test /proc/$$/exe -ef ${DIR}/${CPU}/busybox" || exec ${DIR}/${CPU}/busybox ash ${0} "$@"
+# Our busybox shell from here on
+
+# Note: Space doesn't function with busybox-remount currently
+MNT="/tmp/deb-ia;n#\"'\$"
+IMG="/media/SD_4GB/debian.img"
+USE_BIND=0
+PIVOT_BIND=1
+DEBUG=true
+
+source ${DIR}/functions
+
+pivot_me() {
+	# Swaps current root with ramdisk mounted to $1
+
+	rw=$(get_mount_rw "/")
+	debug_mount -t tmpfs none "${1%/}" || return 1
+	mkdir "${1%/}/oldroot" || return 1
+
+	local i
+	for i in /*;do
+		if [ "0" = "${PIVOT_BIND}" ] || [ -z $(get_mount "${i}") ];then
+			if [ "lost+found" = "${i#/}" ] || [ 0 = $(ls -A "${i}"|wc -l) ];then
+				# Empty directory under root
+				mkdir "${1%/}/${i#/}" || return 1
+			else
+				if [ "2" = "${PIVOT_BIND}" ] && [ ! -h "${i}" ] && [ -d "${i}" ];then
+					mkdir "${1%/}/${i#/}" || return 1
+					debug_mount --bind "${i}" "${1%/}/${i#/}" || return 1
+				else
+					# Link file or directory under root
+					ln -s "/oldroot/${i#/}" "${1%/}/${i#/}" || return 1
+				fi
+			fi
+		else
+			mkdir "${1%/}/${i#/}" || return 1
+		fi
+	done
+
+	case ${PIVOT_BIND} in 0);;*)
+		for i in $(cut -d' ' -f2 /proc/mounts);do
+			case ${i} in /);;*)
+				# Ignore mounts with no mountdir
+				if [ -d "${1%/}/${i#/}" ];then
+					debug_mount --bind "${i}" "${1%/}/${i#/}" || return 1
+				fi
+			;;esac
+		done
+	;;esac
+
+	pivot_root "${1%/}" "${1%/}/oldroot" || return 1
+	if [ "ro" = "$rw" ] && [ -b $(get_mount "/oldroot") ];then
+		debug_mount / -o remount,ro || return 1
+	fi
+	return 0
+}
+
+unpivot_me() {
+	# Reverts pivot_me. Note that this works reliably only with PIVOT_BIND=0
+
+	pivot_root /oldroot "${1%/}" || return 1
+	if debug_mount "${1%/}" -o remount,rw;then
+		local i
+		for i in $(cut -d' ' -f2 /proc/mounts|sed '1!G;h;$!d');do
+			# Umount done in reverse order
+			case ${i} in "${1%/}"/*)
+				# Ignore errors, last umount will fail anyhow
+				debug_umount "${i}"
+			;;esac
+		done
+		for i in "${1%/}"/*;do
+			if [ -h "${i}" ];then
+				rm "${i}" || return 1
+			elif [ -d "${i}" ];then
+				rmdir "${i}" || return 1
+			fi
+		done
+	fi
+	debug_umount "${1%/}" || return 1
+	return 0
+}
+
+merge_warn () {
+	echo "${2:-Using Debian's} $(echo ${1} | sed 's,/\.\([^/]\+\)\.debian-android,/\1,')" >&2
+}
+
+merge_dir () {
+	# Recursively places backlinks from android dir $1 into debian dir $2
+	if [ -d "${1}" ];then
+		local a
+		for a in "${1}"/* "${1}"/.*;do
+			case ${a##*/} in '*'|'.*'|.|..);;*)
+				local d=${2}/${a##*/}
+				if [ ! "${a}" -ef "${d}" ];then
+					local la=$(get_link "${a}")
+					if [ -d "${d}" ];then
+						# Similar Debian dir or link pointing to dir exists
+						merge_dir "${a}" "${d}" || return 1
+					elif [ -e "${d}" ];then
+						# Similar Debian file/device or link pointing to file/device exists
+						merge_warn "${a}"
+					elif [ ! -x "${a}" ] || ([ "${la##*/}" != "busybox" ] && ! get_which "${a##*/}");then
+						# Always create links to non-exec Android targets
+						# Some custom ROMs (e.g. Chainfire's initrd) contain
+						# additional busybox links. We ignore them completely
+						# Also ignore binaries that also exist in Debian PATH
+						# Note: -f overwrites dead Debian links (! -e, see above)
+						ln -sf "${a}" "${d}" || return 1
+					elif ${DEBUG};then
+						# Warn about ignored links (Busybox or extra
+						# commands normally not avail under Android)
+						merge_warn "${a}" "Ignoring"
+					fi
+				fi
+			;;esac
+		done
+	else
+		merge_warn "${1}"
+	fi
+	return 0
+}
+
+merge_root_work() {
+	# Substitute all from $1 (debian root) to $2 (android root)
+	local d
+	for d in "${1}"/*;do
+		local a=${2%/}/${d##*/}
+		if [ ! "${d}" -ef "${a}" ] && [ ! -e "${2%/}/.${d##*/}.debian-android" ];then
+			case ${d##*/} in dev|mnt|proc|run|sys|lost+found)
+				# Do nothing
+			;;*)
+				if [ -e "${a}" ];then
+					local ad="${2%/}/.${d##*/}.debian-android"
+					mv "${a}" "${ad}" || return 1
+					if [ -d "${d}" ] && ([ ! -h "${ad}" ] ||
+						[ ! "${ad}" -ef "${ANDROID_ROOT:-/system}/${a##*/}" ] ||
+						([ "etc" != "${a##*/}" ] && [ "lib" != "${a##*/}" ]))
+					then
+						merge_dir "${2%/}/.${d##*/}.debian-android" "${d}" || return 1
+					else
+						${DEBUG} && echo "Ignoring root ${d}"
+					fi
+				fi
+				if [ ! -h "${d}" ] && [ -d "${d}" ] && [ "1" = "${USE_BIND}" ];then
+					mkdir "${a}" || return 1
+					debug_mount --bind "${d}" "${a}" || return 1
+				else
+					ln -s "${d}" "${a}" || return 1
+				fi
+			;;esac
+		fi
+	done
+	return 0
+}
+
+merge_root() {
+	# Note: PATH set to determine double-binaries with "which"
+	local path=${PATH}
+	PATH="${2}/usr/local/bin:${2}/usr/local/sbin:${2}/usr/sbin:${2}/usr/bin:${2}/sbin:${2}/bin"
+	if ! merge_root_work "$@";then
+		PATH=${path}
+		return 1
+	fi
+	PATH=${path}
+	return 0
+}
+
+mount_merge() {
+	# Mounts $1 to $2, then merges all from $2 to $3
+	# Optional: $4 = "clean" to clean links from Debian disk
+	case $(get_mount "${2}") in "")
+		local i
+		${DIR}/${CPU}/e2fsck "${1}"
+		test 1 -ge $? || echo return 1
+		if [ ! -d "${2}" ];then
+			mkdir "${2}" || return 1
+		fi
+		if [ -f "${1}" ];then
+			# This is a loop mount
+			for i in 0 1 2 3 4 5 6 7;do
+				if [ ! -b /dev/loop${i} ];then
+					mknod /dev/loop${i} b 7 ${i} || return 1
+				fi
+			done
+		fi
+		case $(sed '/^[^[:space:]]\+[[:space:]]\+\/[^[:space:]]\+/d;/^rootfs\b/d;/^[^[:space:]]\+[[:space:]]\+\/[[:space:]]\+tmpfs\b/d' /proc/mounts) in "");;*)
+			# Root not mounted to RAM disk, use pivot_root to change that
+			echo "Pivoting to ${2}"
+			if ! ${DEBUG};then
+				pivot_me "${2}" || return 1
+			fi
+		;;esac
+		for i in ${DIR}/${CPU}/$(uname -r)/*.ko;do
+			local m=${i##*/}
+			case ${m} in "*.ko");;*)
+				grep -q "^${m%.*} " /proc/modules || insmod ${i}
+			;;esac
+		done
+
+		debug_mount -o noatime "${1}" "${2}" || return 1
+
+		case ${4} in clean)
+			IFS="
+"
+			echo "Searching links on ${MNT}..."
+			for i in $(stat -c %N $(find "${MNT}" -type l));do
+				case ${i#* -> } in *.debian-android*)
+					echo rm -v "${i% -> *}"
+					rm "${i% -> *}"
+				;;esac
+			done
+			unset IFS
+ 			debug_umount "${2}" || return 1
+			return 0
+		;;esac
+
+		for i in "${2}${ANDROID_DATA:-/data}" "${2}${ANDROID_ROOT:-/system}";do
+			if [ -e "${i}" ];then
+				echo "Error: ${i} is required by Android." >&2
+				return 1
+			fi
+		done
+
+		if [ -d "${2}/debootstrap" ];then
+			# Overwrite hostname aquired during PC install
+			HOSTNAME=$(${ANDROID_ROOT:-/system}/bin/getprop net.hostname)
+ 			case ${HOSTNAME} in "");;*)
+				echo ${HOSTNAME} > "${2}/etc/hostname"
+			;;esac
+			# Start second stage of Debian installation
+			PATH=/usr/sbin:/usr/bin:/sbin:/bin chroot "${2}" /debootstrap/debootstrap --second-stage
+			# Add pubkey that verifies /etc/apt/sources.list.d/sven-ola.list
+			cat ${DIR}/sven-ola.gpg | PATH=/usr/sbin:/usr/bin:/sbin:/bin chroot "${2}" /usr/bin/apt-key add -
+		fi
+
+		# We need Android root RW now to change/add symlinks
+		# Note: Mounting readonly triggers a bug in dpkg, that is:
+		# rmdir("//..dpkg-tmp") = -1 EROFS (Read-only file system)
+		debug_mount -o remount,rw "${3}" || return 1
+
+		merge_root "${2}" "${3}" || return 1
+	;;esac
+	return 0
+}
+
+umount_merge() {
+	# Unmounts $1, then revert the merge-links/bind-mounts from $2
+	m=$(get_mount "${1}")
+	case ${m} in "");;*)
+		rm=
+		for a in "${2%/}"/*;do
+			case $(get_mount "${a}") in ${m})
+				debug_umount "${a}" || return 1
+				rmdir "${a}" || return 1
+			;;*)
+				if [ "${a}" -ef "${1%/}/${a##*/}" ];then
+					rm="${rm}
+${a}"
+				fi
+			;;esac
+		done
+		if ! debug_umount "${1}";then
+			# Restore already unmounted bind-mounts
+			merge_root "${1}" "${2}"
+			return 1
+		fi
+		IFS="
+"
+		for a in ${rm};do
+			rm -f "${a}" || return 1
+		done
+		for a in "${2%/}"/.*.debian-android;do
+			d=${a##*/}
+			d=${d%.debian-android}
+			mv "${a}" "${2%/}/${d#.}" || return 1
+		done
+	;;esac
+	return 0
+}
+
+SUBST="/tmp/and-ro;id#\"'\$"
+
+case ${1} in u)
+	if umount_merge "${MNT}" "${SUBST}";then
+		test -d "${MNT}" && rmdir "${MNT}"
+		test -d "${SUBST}" && {
+			umount "${SUBST}/proc"
+			ls -laR "${SUBST}" > /tmp/new.txt
+			umount "${SUBST}"
+			rm -r "${SUBST}"
+		}
+	fi
+;;m)
+	test -d "${SUBST}" || {
+		mkdir -p "${SUBST}"
+		debug_mount -t tmpfs none "${SUBST}"
+		mkdir -p "${SUBST}/proc"
+		mkdir -p "${SUBST}/usr/sub dir"
+		echo "I am a hosts file" > "${SUBST}/usr/hosts"
+		echo "I am a text file" > "${SUBST}/usr/sub dir/file.txt"
+		mkdir -p "${SUBST}/usr/src"
+		echo "I am also a text file" > "${SUBST}/usr/src/file.txt"
+		echo "Stop me" > "${SUBST}/-i"
+		ln -s "${SUBST}/usr" "${SUBST}/etc"
+		ln -s "/bin/busybox" "${SUBST}/usr/src/ls" # Test busybox
+		ln -s "/bin/busybox" "${SUBST}/usr/src/l x" # Test busybox
+		touch "${SUBST}/usr/src/l y"
+		chmod +x "${SUBST}/usr/src/l y"
+		ln -s "/bin/ls" "${SUBST}/usr/src/lsy" # Test !which && !busybox (should create link)
+		ln -s "/bin/busyboz" "${SUBST}/usr/src/ln" # Test which
+		ls -laR "${SUBST}" > /tmp/old.txt
+		mount -t proc proc "${SUBST}/proc"
+	}
+	if ! mount_merge "${IMG}" "${MNT}" "${SUBST}";then
+		test -d "${MNT}" && rmdir "${MNT}"
+		echo "Error" >&2
+	else
+		set -x
+		cat "${SUBST}/usr/sub dir/file.txt" "${SUBST}/usr/src/file.txt"
+		cat "${SUBST}/etc/sub dir/file.txt" "${SUBST}/etc/src/file.txt"
+		set +x
+	fi
+;;esac

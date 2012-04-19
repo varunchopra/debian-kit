@@ -1,0 +1,89 @@
+Situation while downloading debian (loop disk mounted, no pivot yet)
+
+# cat /proc/mounts
+rootfs / rootfs rw 0 0
+/dev/root / cramfs ro 0 0
+tmpfs /dev tmpfs rw,mode=755 0 0
+devpts /dev/pts devpts rw,mode=600 0 0
+proc /proc proc rw 0 0
+sysfs /sys sysfs rw 0 0
+tmpfs /sqlite_stmt_journals tmpfs rw,size=4096k 0 0
+none /proc/bus/usb usbfs rw 0 0
+/dev/block/mtdblock4 /system cramfs ro 0 0
+/dev/block/mtdblock7 /data ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block/mtdblock6 /cache ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block/mtdblock9 /data/data ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block//vold/31:8 /flash vfat rw,dirsync,nosuid,nodev,noexec,uid=1000,gid=1000,fmask=0111,dmask=0000,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8 0 0
+/dev/loop0 /data/local/mnt ext3 rw,noatime,errors=continue,data=ordered 0 0
+none /data/local/mnt/proc proc rw 0 0
+# ls -l -a /
+drwxrwx--- system   cache             2012-02-11 13:19 cache
+drwxrwx--x system   system            2012-02-11 17:01 data
+-rwxrwxrwx root     232           584 1970-01-01 01:00 default.prop
+drwxr-xr-x root     root              2012-04-09 19:52 dev
+lrwxrwxrwx system   232               1970-01-01 01:00 etc -> /system/etc
+drwxrwxrwx system   system            1970-01-01 01:00 flash
+-rwxrwxrwx system   232        107380 1970-01-01 01:00 init
+-rwxrwxrwx system   232          1677 1970-01-01 01:00 init.goldfish.rc
+-rwxrwxrwx system   232         15892 1970-01-01 01:00 init.rk28board.rc
+-rwxrwxrwx system   232        151136 1970-01-01 01:00 initlogo.rle
+dr-xr-xr-x root     root              1970-01-01 01:00 proc
+drwxrwxrwx system   232               1970-01-01 01:00 sbin
+lrwxrwxrwx system   232               1970-01-01 01:00 sdcard -> /flash
+drwxrwxrwx system   232               1970-01-01 01:00 shared_prefs
+drwxrwxrwt root     root              2012-04-09 19:48 sqlite_stmt_journals
+drwxr-xr-x root     root              1970-01-01 01:00 sys
+drwxrwxrwx system   232               1970-01-01 01:00 system
+drwxrwxrwx system   232               1970-01-01 01:00 usb1
+
+Situation during --second-stage
+# cat /proc/mounts
+rootfs / rootfs rw 0 0
+/dev/root /oldroot cramfs ro 0 0
+tmpfs /oldroot/dev tmpfs rw,mode=755 0 0
+devpts /oldroot/dev/pts devpts rw,mode=600 0 0
+proc /oldroot/proc proc rw 0 0
+sysfs /oldroot/sys sysfs rw 0 0
+tmpfs /oldroot/sqlite_stmt_journals tmpfs rw,size=4096k 0 0
+none /oldroot/proc/bus/usb usbfs rw 0 0
+/dev/block/mtdblock4 /oldroot/system cramfs ro 0 0
+/dev/block/mtdblock7 /oldroot/data ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block/mtdblock6 /oldroot/cache ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block/mtdblock9 /oldroot/data/data ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block//vold/31:8 /oldroot/flash vfat rw,dirsync,nosuid,nodev,noexec,uid=1000,gid=1000,fmask=0111,dmask=0000,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8 0 0
+none / tmpfs rw 0 0
+tmpfs /dev tmpfs rw,mode=755 0 0
+devpts /dev/pts devpts rw,mode=600 0 0
+proc /proc proc rw 0 0
+sysfs /sys sysfs rw 0 0
+tmpfs /sqlite_stmt_journals tmpfs rw,size=4096k 0 0
+none /proc/bus/usb usbfs rw 0 0
+/dev/block/mtdblock4 /system cramfs ro 0 0
+/dev/block/mtdblock7 /data ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block/mtdblock6 /cache ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block/mtdblock9 /data/data ext3 rw,nosuid,nodev,errors=continue,data=ordered 0 0
+/dev/block//vold/31:8 /flash vfat rw,dirsync,nosuid,nodev,noexec,uid=1000,gid=1000,fmask=0111,dmask=0000,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8 0 0
+none /data/local/mnt tmpfs rw 0 0
+/dev/loop0 /data/local/mnt ext3 rw,noatime,errors=continue,data=ordered 0 0
+proc /data/local/mnt/proc proc rw 0 0
+sysfs /data/local/mnt/sys sysfs rw 0 0
+# ls -l -a /
+drwxr-xr-x root     root              2012-04-09 20:01 usb1
+drwxrwxrwx system   232               1970-01-01 01:00 system
+drwxr-xr-x root     root              1970-01-01 01:00 sys
+drwxrwxrwt root     root              2012-04-09 19:48 sqlite_stmt_journals
+drwxr-xr-x root     root              2012-04-09 20:01 shared_prefs
+lrwxrwxrwx root     root              2012-04-09 20:01 sdcard -> /oldroot/sdcard
+lrwxrwxrwx root     root              2012-04-09 20:01 sbin -> /oldroot/sbin
+dr-xr-xr-x root     root              1970-01-01 01:00 proc
+lrwxrwxrwx root     root              2012-04-09 20:01 initlogo.rle -> /oldroot/initlogo.rle
+lrwxrwxrwx root     root              2012-04-09 20:01 init.rk28board.rc -> /oldroot/init.rk28board.rc
+lrwxrwxrwx root     root              2012-04-09 20:01 init.goldfish.rc -> /oldroot/init.goldfish.rc
+lrwxrwxrwx root     root              2012-04-09 20:01 init -> /oldroot/init
+drwxrwxrwx system   system            1970-01-01 01:00 flash
+lrwxrwxrwx root     root              2012-04-09 20:01 etc -> /oldroot/etc
+drwxr-xr-x root     root              2012-04-09 19:52 dev
+lrwxrwxrwx root     root              2012-04-09 20:01 default.prop -> /oldroot/default.prop
+drwxrwx--x system   system            2012-02-11 17:01 data
+drwxrwx--- system   cache             2012-02-11 13:19 cache
+drwxrwxrwx system   232               1970-01-01 01:00 oldroot

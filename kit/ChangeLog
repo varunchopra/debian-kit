@@ -1,0 +1,91 @@
+Version 1.3 (2012-04-17):
+
+- Started a new version by peeking what others are doing. Added links
+  to linuxonandroid.blogspot.co.uk and android.galoula.com to the doc.
+
+Version 1.2 (2012-04-12):
+
+- Changed from using symlinks to 'mount --bind', e.g. to run Virtualbox>4.0 that
+  does not like /usr as a symlink. Also fixess quirks with bash tab-completion
+- Changed /data/local/bin -> /data/local/deb because some people already use
+  this directory for other stuff (e.g. other busybox/openvpn binaries)
+- Added i386 architecture to ./i386, moved arm binaries to ./armel
+  Note: if you use my old /data/local/bin/openvpn, you need to
+  change binary and kernel module pathes to /data/local/deb/armel.
+- New device: HTC Desire with Cyanogenmod (successful test)
+- New device: Samsung Nexus w/ ICS (fail, some funny deb* not found msg)
+- Removed "ff" script (Note: You can use arm/wpa_supplicant for AdHoc, works for me)
+- Added md5sum checksums at the end of the self-extracting shell archive
+- Added cleanup script to remove binaries that are not required to run Debian
+- Added "(u)pdate 'deb' symlink" option to mk-debian if image file exists
+- Removed dependency to external 'id' program, changed already-mounted detection
+- Changed '/system/bin/deb' link to small script file with same function
+- Switched from Debian's debootstrap to Ubuntu's, has e.g. sha1sum & precise
+- Reworked sources.list for Debian/Sqeeze, Ubuntu/Lucid, and Ubuntu/Precise
+- Added autorun script to the shell archive for convenience in default case
+- Updated androresolvd*.deb to work with resolvconf (default with Ubuntu/Precise)
+- Updated andromize*.deb to adapt upstart (start|stop) for chrooted environments
+  dpkg-divert --local --rename --add /sbin/initctl;ln -s /bin/true /sbin/initctl
+- Adapted uclibc propget-addon to android-x86.org which uses PROP_NAME_MAX 128
+- Adapted creation of /system/bin/ash link because on ICS emulator this is an executeable
+- Save IMG= and MNT= from existing bootdeb to make updates easier (simply unpack & go)
+- Added LD_LIBRARY_PATH= to bootdeb, prevents custom ROMs from interfering with libs
+- Added warning if gid!=0, in which case bash does not act as login shell (short prompt)
+- The bootdeb script is filenames-with-space agnostic now, also accepts IMG=/dev/xxx
+- Added IMG=/dev/xxx (block device) query to mk-debian as well as fdisk to busybox
+- Added "bootdeb c" switch to remove link that point to Android root necessary e.g.
+  if you flash another custom Android ROM but you want to use the old debian.img
+- Change "mk-debian" for getopts. See "mk-debian -h" for details.
+- Added new "andromize-lxde" package to conveniently install LXDE on xrdp.
+- Added ability to work with devices (also remembers UUID in bootdeb). Use
+  "mk-debian -i /dev/bla" to create, use "fdisk" to change partitions if needed.
+- Added minimal "initctl" script to start/stop upstart jobs (e.g. xrdp, ssh)
+- Bugfix busybox-installer.apk's ash: echo "\0" - octal num interprets 0x10-0x17 chars.
+- Moved "mk-debian -U" to extra "uninstall" script not removed by "clean".
+- Removed Debian-Lenny, because files are removed from Debian servers
+- Changed /etc/init.d/androresolvd to SIG_INT, because on Archos HT7c SIG_TERM
+  is blocked during nanosleep(), a non-standard I found no good explanation for.
+- Added iptables rules for localhost/tcp/3389 for "deb x" (relaxes CyanogenMod 9 FW)
+- Merge in /system/lib/modules directory in case *.ko file are placed there.
+
+- Todo: Testing, testing, testing [...]
+
+Version 1.1:
+
+- Added "vi" editor to busybox applet (e.g. to edit bootdeb IMG=)
+
+Version 1.0:
+
+- Added defaults if $ANDROID_DATA or $EXTERNAL_STORAGE are missing
+- Changed loop device check to examine /proc/devices
+- Always use highest of ext2/3/4 (to cope w/ICS with ext4 only)
+- New device tested: Archos 7c Home Tablet w/ read-only CRAMFS
+- losetup -d /dev/loopN after mk-debian, removed double losetup -d
+- My webserver: mime(*.shar)=image/jpeg, for older Android browser downloads
+
+Version 0.94:
+
+- Corrected missing "which" in Busybox (see openwrt/*.patch)
+- Corrected openwrt build quirk with liblzo (for openvpn)
+- Used newer debootstrap from Debian, corrects gpg error
+
+Version 0.93:
+
+- Added gen /dev/net/tun -> /dev/tun to bootdeb for openvpn
+- Added experimental wpa_supplicant binariy and "ff" script
+- Sorted out existing stuff from custom ROMs (e.g. Chainfire's)
+
+Version 0.92:
+
+- Added images to debian-kit-en.html
+- Added tun.ko and some file grabbed from my old I7500
+- Disassoc loop devs pointing to "debian.img" in "mk-debian"
+- Shifted "mknod loopX" before checking mounts with losetup
+
+Version 0.91:
+
+- Removed image file from uninstall delete list (match readme)
+- Fixed missing mount,rw to remove stuff while uninstalling
+- Removed old readme-*.txt and added debian-kit*.html instead
+- Fixed bug with "id=root" when busybox contains "id" command
+- Cleared this changelog, because it describes old scripts
