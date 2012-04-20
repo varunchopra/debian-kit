@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Debian Kit</string>
-    <string name="welcome_head">Debian Kit App</string>
+    <string name="welcome_head">Debian-Kit App</string>
     <string name="welcome_text">Prüfen der Voraussetzungen mit den Buttons. Im Menü den Befehl  \'Über…\' für RTFM.</string>
     <string name="menu_quit">Beenden</string>
     <string name="menu_about">Über…</string>
-    <string name="button_check">Voraussetzungen prüfen…</string>
-
+    <string name="str_button_cpu">Cpu</string>
+    <string name="str_button_mnt">Mnt</string>
+    <string name="str_button_mem">Mem</string>
+    <string name="str_button_fsys">Fsys</string>
+    <string name="str_button_dev">Dev</string>
+    <string name="str_button_deb">Deb</string>
 </resources>
