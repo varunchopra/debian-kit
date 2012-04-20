@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Debian Kit</string>
+    <string name="welcome_head">Debian Kit App</string>
+    <string name="welcome_text">Click buttons to check prerequisites. Open menu and select \'About…\' to RTFM.</string>
+    <string name="menu_quit">Quit</string>
+    <string name="menu_about">About…</string>
+    
+    <color name="color_white">#ffffff</color>
+    <color name="color_black">#000000</color>
+    <string name="str_button_cpu">Cpu</string><string name="str_button_mnt">Mnt</string><string name="str_button_mem">Mem</string><string name="str_button_fsys">Fsys</string>
+    
+    
+    <string name="str_button_dev">Dev</string><string name="str_button_deb">Deb</string>
+    
+
+</resources>
