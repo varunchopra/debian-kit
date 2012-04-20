@@ -8,6 +8,15 @@ if ! make -s -C shellescape >&2;then
 	exit 1
 fi
 
+for a in armel i386;do
+	for i in ifconfig route;do
+		if [ ! -h ${a}/${i} ];then
+			rm -f ${a}/${i}
+			ln -s busybox ${a}/${i}
+		fi
+	done
+done
+
 TAR_UID=2000
 TAR_GID=2000
 TAR_OPT=z
@@ -16,6 +25,7 @@ TAR="tar --numeric-owner \
 	--owner ${TAR_UID} \
 	--group ${TAR_GID} \
 	--exclude=*~ \
+	--exclude=.git* \
 	--exclude=bla* \
 	--exclude=*.orig \
 	--exclude=Thumbs.db* \
