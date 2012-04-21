@@ -8,7 +8,7 @@
 
     <style type="text/css">
 body {
-  line-height: 1.2em;
+  line-height: 1.3em;
 }
 pre {
   background-color: lightgrey;
@@ -23,6 +23,12 @@ kbd {
 }
 h1, h2 {
   color: darkblue;
+}
+h1 {
+  font-size: 1.2em;
+}
+h2 {
+  font-size: 1.1em;
 }
 dt {
   font-weight: bold;
@@ -62,16 +68,20 @@ dt {
   href="http://sven-ola.dyndns.org/repo/debian-kit.mp4">debian-kit.mp4</a>
   (3 Mb, shows basic installation of Debian Squeeze with openssh-server) or <a
   href="http://sven-ola.dyndns.org/repo/debian-kit-office.mp4">debian-kit-office.mp4</a>
-  (12 Mb, Ubuntu Precise with LXDE, Firefox, and
-  LibreOffice).</p><p><b>Note</b>: There are similar projects out there that
-  may better match your needs, hardware, or taste. Specifically, Gaël's <a
+  (12 Mb, Ubuntu Precise with LXDE, Firefox, and LibreOffice). Also, theres a
+  new <a href="market://details?id=org.dyndns.sven_ola.debian_kit">Debian Kit
+  app</a> that displays this page.</p><p><b>Notes</b>: There are similar
+  projects out there that may better match your needs, hardware, or taste.
+  Specifically, Gaël's <a
   href="http://android.galoula.com/en/LinuxInstall/">Linux Installer</a> and
   Zachary's <a href="http://linuxonandroid.blogspot.co.uk/">Linux on
-  Android</a> projects are visible via Google Play.</p><h2><a
-  name="Prereqisites">Prerequisites</a></h2><p>There are moderate
-  prerequisites your Android device should met. The prerequisites are also
-  checked by the installation script. You simply cannot continue if something
-  is wrong.</p><ul>
+  Android</a> projects are visible via Google Play. Also, the kit's sources
+  are hosted as a <a
+  href="http://sourceforge.net/projects/debian-kit/">SourceForge Project</a>
+  now.</p><h2><a name="Prereqisites">Prerequisites</a></h2><p>There are
+  moderate prerequisites your Android device should met. The prerequisites are
+  also checked by the installation script. You simply cannot continue if
+  something is wrong.</p><ul>
       <li>Root access to your Android device is required. No root, no
       Debian.</li>
 
@@ -82,8 +92,8 @@ dt {
 
       <li>CPU architecture is ARM (little endian) or i386 (ia-32 bit).</li>
 
-      <li>128 Mb of RAM or more, otherwise apps get killed during
-      installation.</li>
+      <li>128 Mb of RAM or more, otherwise the launcher app may be killed
+      during installation.</li>
 
       <li>512 Mb of free space on SD card (either internal or external).</li>
 
@@ -96,10 +106,9 @@ dt {
       must.</li>
     </ul><p><b>WARNING</b>: This stuff is checked on different hardware. The
   kit should run with stock factory firmware, but customized ROMs should work
-  also (e.g. if the standard shell is replaced with a bash / mksh /
-  busybox-ash shell). Nevertheless: root access always includes the chance to
-  do something very fatal to your device. Always watch, read and dig the error
-  messages (if any) and re-think twice before doing something nasty.</p><h2><a
+  also. Nevertheless: root access always includes the chance to do something
+  very fatal to your device. Always watch, read and dig the error messages (if
+  any) and re-think twice before doing something nasty.</p><h2><a
   name="Devices">Devices</a></h2><p>The following devices are tested (kudos to
   <a href="http://twitter.com/#!/Beuthianer">Brian</a> for doing some of
   these):</p><table frame="box" rules="all">
@@ -136,7 +145,7 @@ dt {
 
           <td>Android 1.6 <q>Donut</q> (Galaxo ROM)</td>
 
-          <td>Working, but due to 96Mb RAM no GUI, requires ADB shell to
+          <td>Working, but due to 96Mb RAM no LXDE, requires ADB shell to
           install.</td>
         </tr>
 
@@ -145,8 +154,8 @@ dt {
 
           <td>Android 1.6 <q>Donut</q> (A70CHT original ROM + GApps)</td>
 
-          <td>Working, but due to CRAMFS read-only root it's pivot-rooted to
-          RAM-disk.</td>
+          <td>Working, but because of the CRAMFS read-only rootfs it's
+          pivot-rooted to RAM-disk.</td>
         </tr>
 
         <tr>
@@ -154,7 +163,7 @@ dt {
 
           <td>Android 2.3 <q>Gingerbread</q> (CyanogenMod 7 ROM+Kernel)</td>
 
-          <td>Working as to my knowledge.</td>
+          <td>Working.</td>
         </tr>
 
         <tr>
@@ -162,7 +171,7 @@ dt {
 
           <td>Android 4.0.3 <q>ICS</q> (CyanogenMod 9 ROM+Kernel)</td>
 
-          <td>Working. May require relaxing firewall rules to contact
+          <td>Working. Requires relaxing firewall rules to contact
           127.0.0.1:3389 for RDP (install iptables for this).</td>
         </tr>
 
@@ -171,8 +180,8 @@ dt {
 
           <td>Android 4.0.3 <q>ICS</q> (Open Kang, AOKP Maguro Build-25)</td>
 
-          <td>Working. Some access-denied prevents RDP app from logging in to
-          LXDE. Under investigation.</td>
+          <td>Working. Had some troubles with the pre-installed busybox which
+          is fixed now.</td>
         </tr>
 
         <tr>
@@ -189,8 +198,8 @@ dt {
 
           <td>Unsure: it was dark and late.</td>
 
-          <td>Working (Kit-1.4+fix). Only ext4 kernel module was loaded by
-          default.</td>
+          <td>Working (Kit-1.4+fix). Only ext4 kernel module loaded by
+          default, hence ext4 debian.img.</td>
         </tr>
 
         <tr>
@@ -211,7 +220,7 @@ dt {
       </tbody>
     </table><h2><a name="Installation">Installation</a></h2><p>Depending on
   your Internet connection speed, you are up and running in 30 minutes.
-  <b>Tip</b>: tap on the screen shot images below to enlarge.</p><dl>
+  <b>Tip</b>: tap on the screen shot images below to enlarge / shrink.</p><dl>
       <dt style="clear:both"><img align="right" alt="Screen shot: downloading"
       border="0" height="120" hspace="4"
       onclick="if(0&lt;=this.src.search(new RegExp('\\.jpg'))){this.width=320;this.height=480;this.src=this.src.replace(new RegExp('\\.jpg'),'.png');}else{this.width=80;this.height=120;this.src=this.src.replace(new RegExp('\\.png'),'.jpg');}return false;"
@@ -225,8 +234,8 @@ dt {
       <dd style="padding-left:1em;line-height:2em"><a
       href="http://sven-ola.dyndns.org/repo/debian-kit-1-3-alpha.shar">http://sven-ola.dyndns.org/repo/debian-kit-1-3-alpha.shar</a></dd>
 
-      <dd><b>Tip</b>: if you want to inspect the shell archives contents
-      first, you can unpack on a Linux command line with the following
+      <dd><b>Tip</b>: if you want to inspect the shell archives contents on
+      your PC, you can unpack on a Linux command line with the following
       commands: <kbd>mkdir /tmp/debian-kit</kbd> and <kbd>bash debian-kit-*
       /tmp/debian-kit</kbd>. Note, that not all shell interpreters are
       compatible with this kind of shell archive. Watch for error messages and
@@ -331,11 +340,11 @@ dt {
       confirmation. Enter <kbd>yes</kbd> and confirm with [enter] to remove
       all files that are only required during installation. This saves
       valuable space on your Android's <q>/data</q> partition, thus leaving
-      more space to install apps. If you don't plan to use the static OpenVPN
-      binary that comes with the kit, you can save even more space by entering
-      <kbd>ovpn</kbd> instead. Enter <kbd>q</kbd> to abort cleaning, e.g. if
-      you plan to re-read the docs, contribute to the kit, or create another
-      Debian installation later on.</dd>
+      more space to install apps. If you also don't plan to use the static
+      OpenVpn binary that comes with the kit, you can save even more space by
+      entering <kbd>ovpn</kbd> instead. Enter <kbd>q</kbd> to abort cleaning,
+      e.g. if you plan to re-read the docs, contribute to the kit, or create
+      another Debian installation later on.</dd>
 
       <dt style="clear:both"><img align="right" alt="Screen shot: enter deb"
       border="0" height="120" hspace="4"
@@ -397,36 +406,36 @@ dt {
     </table><p>Retype the desired <kbd>mk-debian</kbd> command and omit the
   <kbd>-h</kbd> switch to execute the installation. This will create the
   destination file system and start the first stage of the Debian installation
-  using the debootstrap command. After this, the Android system partition is
-  mounted RW in order to add a small script (<q>/system/bin/deb</q>).</p><p>If
-  adding the <q>deb</q> symlink succeeds, you can start the second stage of
-  the Debian installation with the <kbd>deb</kbd> shortcut. Otherwise, enter
-  <kbd>/data/local/deb/deb</kbd> and confirm with [enter]. If the second stage
-  completes, a root bash shell is started. Continue as described above and
-  enter <kbd>apt-get update; apt-get upgrade; apt-get install
-  andromize</kbd>.</p><p><b>Note</b>: if the first stage fails, you need to
-  restart with <kbd>mk-debian</kbd>. If the second stage fails, it is
-  sufficient to unmount with <kbd>deb u</kbd> and restart with
-  <kbd>deb</kbd>.</p><p>Installing to a loop disk file is easy and secure,
-  thus recommended as the default. However, due to the disk file size limits
-  of the vfat file system, you cannot create loop disk files larger that
-  2047 Mb. To overcome this limit, you can install to a disk partition also.
-  Most Android devices support external SD cards up to 32 Gb, some even
+  using the included debootstrap scripts. After this, the Android system
+  partition is mounted RW in order to add a shortcut symlink
+  (<q>/system/bin/deb</q>).</p><p>If adding the <q>deb</q> symlink succeeds,
+  you can start the second stage of the Debian installation with the
+  <kbd>deb</kbd> shortcut. Otherwise, enter <kbd>/data/local/deb/deb</kbd> and
+  confirm with [enter]. If the second stage completes, a root bash shell is
+  started. Continue as described above and enter <kbd>apt-get update; apt-get
+  upgrade; apt-get install andromize</kbd>.</p><p><b>Note</b>: if the first
+  stage fails, you need to restart with <kbd>mk-debian</kbd>. If the second
+  stage fails, it is sufficient to unmount with <kbd>deb u</kbd> and restart
+  with <kbd>deb</kbd>.</p><p>Installing to a loop disk file is easy and
+  secure, thus recommended as the default. However, due to the disk file size
+  limits of the vfat file system, you cannot create loop disk files larger
+  that 2047 Mb. To overcome this limit, you can install to a disk partition
+  also. Most Android devices support external SD cards up to 32 Gb, some even
   support USB host mode where you can attach an external hard disk. Add the
-  desired devices file name, e.g. start <kbd>mk-debian -i /dev/XXX</kbd> to
-  install to a disk partition. Note, that in this case, the UUID of the
-  created file system is written as <q>IMG=uuid:xxx</q> line into the
-  <q>bootdeb</q> script in order to find the installation medium later on e.g.
-  if you unplug / eject the USB disk and insert it later to another USB
-  port.</p><p>In difference to Debian, Android block devices are available
-  under the <q>/dev/block</q> directory. Also, on some devices, there may be
-  no standard <q>/dev/block/sdX</q> device file names. You may check, what
-  devices the Android auto-mount daemon has found with <kbd>ls -l
+  desired devices file name, e.g. start <kbd>mk-debian -i /dev/block/XXX</kbd>
+  to install to a disk partition. In this case the UUID of the created file
+  system is written as <q>IMG=uuid:xxx</q> line into the <q>bootdeb</q> script
+  in order to find the installation medium later on e.g. if you unplug / eject
+  the USB disk and insert it later to another USB port.</p><p>In difference to
+  Debian, Android block devices are available under the <q>/dev/block</q>
+  directory. Also, on some devices, there may be no standard
+  <q>/dev/block/sdX</q> device file names. You may check, what devices the
+  Android auto-mount daemon has found with <kbd>ls -l
   /dev/block/devices/vold</kbd> before starting <kbd>mk-debian</kbd>. The
   Android vold auto-mounter works with block device numbers, e.g. 179:9 is the
   first partition and 179:8 is the partition table on the second NAND flash
   device. You can start the busybox fdisk program with
-  <kbd>/data/local/deb/armel/busybox fdisk -l /dev/XXX</kbd> to list
+  <kbd>/data/local/deb/armel/busybox fdisk -l /dev/block/XXX</kbd> to list
   partitions on an external SD card or USB drive. If unsure which device holds
   the partition data, you should transfer the SD card / USB drive to your PC
   and change the partition layout there.</p><p><b>WARNING</b>: Do not try to
@@ -436,7 +445,7 @@ dt {
   Hints</a></h2><p>The rest of the show is Debian / Ubuntu command line magic
   and depends on what you want to do. You may clean downloaded files in
   <q>/var/cache/apt/archives</q> with <kbd>apt-get clean</kbd>. This will
-  remove the packages downloaded during installation. To end the Debian
+  remove the package files downloaded during installation. To end the Debian
   session, type <kbd>exit</kbd> to leave the bash shell and <kbd>deb u</kbd>
   to unmount the Debian disk. If this does not work, type <kbd>deb k</kbd> to
   kill stray Debian processes before unmounting. Type <kbd>deb h</kbd> to show
@@ -520,51 +529,52 @@ dt {
   bash shell enter <kbd>echo "myname" &gt; /etc/hostname &amp;&amp; hostname
   $(cat /etc/hostname)</kbd> for this.</p><p>With Ubuntu (Lynx or Precise), a
   new technique called <q>Upstart</q> is used to start and stop jobs while
-  with Debian scripts below <q>/etc/init.d</q> are used for starting and
-  stopping daemons. For this reason, a small replacement script exists that
-  simulates the <q>initctl</q> command of Ubuntu's upstart which at least
-  works with the ssh daemon. I got permission from Peter to use his <a
+  with Debian, scripts below <q>/etc/init.d</q> are used for starting and
+  stopping daemons. For this reason, a small replacement exists that simulates
+  the <q>initctl</q> command of Ubuntu's upstart which at least works with the
+  ssh daemon. I got permission from Peter to use his <a
   href="http://forum.aokp.co/topic/49-how-can-i-run-aokp-in-emulator/">Python
   initctl replacement</a> that offers more features, but decided against it in
-  order to stay with ash scripts in the kit.</p><p>To start an OpenVPN server,
-  you need a tun.ko kernel module. Most customized ROMs include a working
-  tun.ko module and I have collected a number of tun.ko modules that will be
-  loaded automatically by the <q>bootdeb</q> script if your kernel version
-  matches. Also, a symlink <q>/dev/net/tun</q> -&gt; <q>/dev/tun</q> is
-  created for compatibility. However, the <a
-  href="market://details?id=de.schaeuffelhut.android.openvpn">OpenVPN
-  Settings</a> app is more convenient if you only want to connect to an
-  OpenVPN server. For me, the <q>OpenVPN Installer</q> app does not do the
-  right thing. For this reason, the kit includes a static OpenVPN binary. In
-  OpenVPN settings, change the OpenVPN file name setting to
-  <q>/data/local/deb/openvpn</q> for this. If you are a security-junkie, check
-  out and re-play the OpenWrt build instructions for all binaries in the
-  <q>devel/readme-openwrt.txt</q> file.</p><p>To create you own kernel modules
-  matching the Android kernel version, you cannot simply do <kbd>apt-get
-  install linux-headers</kbd>, because the Debian / Ubuntu package archive do
-  not offer packages for your Android kernel version. For this reason, the
-  DKMS kernel module compile package does not run which in turn is required to
-  install some packages (e.g. the VirtualBox package that otherwise is usable
-  on Atom-x86 CPUs). If you are lucky, the ROM developer switched on the
-  /proc/config.gz kernel configuration file which can be used to grab working
-  linux-headers from a stock kernel. Refer to <q>devel/readme-dkms.txt</q> for
-  details.</p><p>To remove the kit from your Android device later on, start a
-  root shell and enter <kbd>/data/local/deb/uninstall</kbd>. After this, do
-  not forget to remove the <q>debian.img</q> file from your SD-Card, e.g. by
-  using a file manager app.</p><p>The kit does not use the <q>chroot</q>
-  command to make up a separate Debian environment (refer to <a
+  order to stay with ash scripts in the kit.</p><p>If you want to use Debian's
+  OpenVpn packet, you need a tun.ko kernel module. Most customized ROMs
+  include a working tun.ko module and I have collected a number of tun.ko
+  modules that will be loaded automatically by the <q>bootdeb</q> script if
+  your kernel version matches. Also, a symlink <q>/dev/net/tun</q> -&gt;
+  <q>/dev/tun</q> is created for compatibility. However, the <a
+  href="market://details?id=de.schaeuffelhut.android.openvpn">OpenVpn
+  Settings</a> app is more convenient if you only want to connect as road
+  warrior to an OpenVpn server. For me, the <q>OpenVpn Installer</q> app does
+  not do the right thing. For this reason, the kit includes a static OpenVpn
+  binary. In the <q>OpenVpn settings</q> app, change the OpenVpn file name
+  setting to <q>/data/local/deb/openvpn</q> for this. If you are a
+  security-junkie, check out and re-play the OpenWrt build instructions for
+  all binaries in the <q>devel/readme-openwrt.txt</q> file.</p><p>To create
+  you own kernel modules matching the Android kernel version, you cannot
+  simply do <kbd>apt-get install linux-headers</kbd>, because the Debian /
+  Ubuntu archives do not offer packages for your Android kernel version. For
+  this reason, the DKMS kernel module compiling system does not run which in
+  turn is required to install some packages (e.g. the VirtualBox package that
+  otherwise is usable on Atom-x86 CPUs). If you are lucky, the ROM developer
+  switched on the /proc/config.gz kernel configuration file which can be used
+  to grab working linux-headers from a stock kernel. Refer to
+  <q>devel/readme-dkms.txt</q> for details.</p><p>To remove the kit from your
+  Android device later on, start a root shell and enter
+  <kbd>/data/local/deb/uninstall</kbd>. After this, do not forget to remove
+  the <q>debian.img</q> file from your SD-Card, e.g. by using a file manager
+  app.</p><p>The kit does not use the <q>chroot</q> command to make up a
+  separate Debian environment (refer to <a
   href="http://linux.die.net/man/1/schroot">schroot(1)</a> for a similar
   technique). Instead, Debian subdirectories and files (such as <q>/lib</q> or
   <q>/etc/resolv.conf</q>) are added to the Android RAM-disk based file system
   with symlinks or bind-mounts. With this, e.g. you have access to newly
-  mounted devices such as USB drives and the SD card as well as you can use
-  Debian commands to compile packages that in turn can use a working
-  <q>chroot</q>. This works, because a typical Android device has a file
-  system (e.g. Libraries below <q>/system/lib</q>) that does not overlap the
-  Debian file system (e.g. Libraries below <q>/lib</q> and <q>/usr/lib</q>).
-  However, some files may overlap - which triggers a warning displayed if you
-  start the <q>deb</q> script. For example, the Android <q>/etc/hosts</q> file
-  is replaced by the Debian version while Debian is mounted. Which in turn may
+  mounted devices such as USB drives and the SD card. Also, can use Debian
+  commands to compile packages that in turn can use a working <q>chroot</q>.
+  This works, because a typical Android device has a file system (e.g.
+  Libraries below <q>/system/lib</q>) that does not overlap the Debian file
+  system (e.g. Libraries below <q>/lib</q> and <q>/usr/lib</q>). However, some
+  files may overlap - which triggers a warning displayed if you start the
+  <q>deb</q> script. For example, the Android <q>/etc/hosts</q> file is
+  replaced by the Debian version while Debian is mounted. Which in turn may
   influence the inner working of your Android software stack. This is
   especially true with custom ROMs, because these typically add some Linux
   stuff that the ROM developer may miss. All changes are reverted if you issue

@@ -38,8 +38,8 @@ public class DebianKitActivity extends Activity {
 		catch (IOException e) {
 		    //You'll need to add proper error handling here
 		}
-		TextView tv = (TextView)findViewById(R.id.text_view);
-		tv.setText(text);
+		/*TextView tv = (TextView)findViewById(R.id.text_view);
+		tv.setText(text);*/
 	}
 
     /** Called when the activity is first created. */
@@ -47,7 +47,7 @@ public class DebianKitActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        cpuButton = (Button)findViewById(R.id.button_cpu);
+        /*cpuButton = (Button)findViewById(R.id.button_cpu);
         mntButton = (Button)findViewById(R.id.button_mnt);
         debButton = (Button)findViewById(R.id.button_deb);
         memButton = (Button)findViewById(R.id.button_mem);
@@ -88,7 +88,7 @@ public class DebianKitActivity extends Activity {
             public void onClick(View v) {
               checkTest("/proc/devices");
             }
-        });
+        });*/
     }
 
     @Override

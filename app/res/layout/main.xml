@@ -1,79 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:id="@+id/TextView_cpu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_head"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:drawableLeft="@drawable/ic_unknown"
+        android:drawablePadding="2dp"
+        android:gravity="center_vertical"
+        android:text="@string/str_cpu"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/TextView_mnt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:gravity="center_vertical"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:text="@string/str_mnt"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/TextView_dev"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:gravity="center_vertical"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:text="@string/str_dev"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
 
-        <Button
-            android:id="@+id/button_cpu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_button_cpu" />
+    <TextView
+        android:id="@+id/TextView_mem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:text="@string/str_mem"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
 
-        <Button
-            android:id="@+id/button_mnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_button_mnt" />
+    <TextView
+        android:id="@+id/TextView_fsys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:text="@string/str_fsys"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
 
-        <Button
-            android:id="@+id/button_mem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_button_mem" />
-
-        <Button
-            android:id="@+id/button_fsys"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_button_fsys" />
-
-        <Button
-            android:id="@+id/button_dev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_button_dev" />
-
-        <Button
-            android:id="@+id/button_deb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_button_deb" />
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="true"
-        android:scrollbars="vertical" >
-
-        <TextView
-            android:id="@+id/text_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_white"
-            android:textColor="@color/color_black" />
-    </ScrollView>
+    <TextView
+        android:id="@+id/TextView_deb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:text="@string/str_deb"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
 
 </LinearLayout>
