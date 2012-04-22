@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
  
-public class AboutActivity extends Activity {
+public class RepoActivity extends Activity {
  
 	private WebView webView;
  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.about);
+		setContentView(R.layout.repo);
  
-		webView = (WebView)findViewById(R.id.web_about);
+		webView = (WebView)findViewById(R.id.web_repo);
 		webView.getSettings().setJavaScriptEnabled(true);
-		webView.loadUrl("file:///android_asset/debian-kit-en.html");
+		webView.loadUrl("http://sven-ola.dyndns.org/repo/");
  
 	}
  

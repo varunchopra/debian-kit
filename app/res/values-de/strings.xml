@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Debian Kit</string>
-    <string name="welcome_head">Debian-Kit App</string>
-    <string name="welcome_text">Prüfen der Voraussetzungen mit den Buttons. Im Menü den Befehl  \'Über…\' für RTFM.</string>
-    <string name="menu_quit">Beenden</string>
-    <string name="menu_about">Über…</string>
-    <string name="str_button_cpu">Cpu</string>
-    <string name="str_button_mnt">Mnt</string>
-    <string name="str_button_mem">Mem</string>
-    <string name="str_button_fsys">Fsys</string>
-    <string name="str_button_dev">Dev</string>
-    <string name="str_button_deb">Deb</string>
+    <string name="app_name">Debian-Kit</string>
+    
+    <string name="menu_help">Hilfe…</string><string name="menu_repo">Repo…</string><string name="menu_quit">Beenden</string>
+    <string name="str_cpu">Kompatible CPU-Architektur</string>
+    <string name="str_mem">Ausreichend RAM-Speicher</string>
+    <string name="str_fsys">Ext2&quot;&quot;/3&quot;&quot;/4 Dateisystem</string>
+    <string name="str_dev">Loop-Mounts möglich</string><string name="str_mod">Kernel-Module unterstützt</string><string name="str_mnt">Dateien in %s/local ausführbar</string>
+    <string name="str_deb">Debian-Kit bereits ausgepackt</string>
+    
+    
+    
 </resources>

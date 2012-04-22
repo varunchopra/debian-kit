@@ -2,16 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/help"
+        android:title="@string/menu_help"
+        android:icon="@drawable/ic_menu_info_details"
+        android:showAsAction="ifRoom" android:alphabeticShortcut="h"/>
+    <item
+        android:id="@+id/repo"
+        android:title="@string/menu_repo"
+        android:alphabeticShortcut="d"
+        android:showAsAction="ifRoom" android:icon="@drawable/ic_menu_download"/>
+    <item
         android:id="@+id/quit" 
         android:title="@string/menu_quit" 
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/about"
-        android:title="@string/menu_about"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:showAsAction="ifRoom">
-    </item>
-
+        android:icon="@drawable/ic_menu_close_clear_cancel"
+        android:showAsAction="ifRoom" android:alphabeticShortcut="q"/>
 </menu>

@@ -15,15 +15,24 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/TextView_mnt"
+        android:id="@+id/TextView_mem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
-        android:text="@string/str_mnt"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-    />
+        android:drawablePadding="2dp"
+        android:gravity="center_vertical"
+        android:text="@string/str_mem"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView_fsys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:drawablePadding="2dp"
+        android:gravity="center_vertical"
+        android:text="@string/str_fsys"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/TextView_dev"
@@ -37,24 +46,24 @@
     />
 
     <TextView
-        android:id="@+id/TextView_mem"
+        android:id="@+id/TextView_mod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
-        android:text="@string/str_mem"
+        android:text="@string/str_mod"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
 
     <TextView
-        android:id="@+id/TextView_fsys"
+        android:id="@+id/TextView_mnt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
-        android:text="@string/str_fsys"
+        android:text="@string/str_mnt"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
 

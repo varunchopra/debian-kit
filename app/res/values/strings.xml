@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Debian Kit</string>
-    <string name="welcome_head">Debian Kit App</string>
-    <string name="welcome_text">Click buttons to check prerequisites. Open menu and select \'About…\' to RTFM.</string>
-    <string name="menu_quit">Quit</string>
-    <string name="menu_about">About…</string>
-    <color name="color_white">#ffffff</color>
-    <color name="color_black">#000000</color>
-    <string name="str_button_cpu">Cpu</string>
-    <string name="str_button_mnt">Mnt</string>
-    <string name="str_button_mem">Mem</string>
-    <string name="str_button_fsys">Fsys</string>
-    <string name="str_button_dev">Dev</string>
-    <string name="str_button_deb">Deb</string>
-    <string name="str_cpu">Compabile CPU architecture</string>
-    <string name="str_mnt">Root filesystem is a RAM disk </string>
-    <string name="str_mem">Enough RAM to run Debian</string>
-    <string name="str_fsys">Ext2\/3\/4 filesystem supported</string>
-    <string name="str_dev">Kernel supports loop disks</string>
-    <string name="str_deb">Debian Kit already unpacked</string>
+    
+    <string name="menu_help">Help…</string><string name="menu_repo">Repo…</string>
+    <string name="menu_quit">Quit</string><string name="str_cpu">Compabile CPU architecture</string>
+    <string name="str_mem">Sufficient RAM memory</string>
+    <string name="str_fsys">Ext2&quot;&quot;/3&quot;&quot;/4 filesystem supported</string>
+    <string name="str_dev">Loop mounts supported</string>
+    <string name="str_mod">Kernel modules supported</string><string name="str_mnt">Files in %s/local executable</string><string name="str_deb">Debian Kit already unpacked</string>
+    
+    
+    
+    
 </resources>
