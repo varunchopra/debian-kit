@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="AboutActivity"></activity>
-        <activity android:name="RepoActivity"></activity>
+        <activity android:name=".ReadmeActivity"></activity>
+        <activity android:name=".DownloadActivity"></activity>
     </application>
 
 </manifest>

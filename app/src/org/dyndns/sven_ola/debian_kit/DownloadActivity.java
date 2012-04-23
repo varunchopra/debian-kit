@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
  
-public class RepoActivity extends Activity {
+public class DownloadActivity extends Activity {
  
 	private WebView webView;
  

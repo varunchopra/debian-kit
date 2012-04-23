@@ -250,15 +250,15 @@ public class DebianKitActivity extends Activity
 		return true;
 	}
 	
-	private void onAbout()
+	private void onReadme()
 	{
-		Intent intent = new Intent(this, AboutActivity.class);
+		Intent intent = new Intent(this, ReadmeActivity.class);
 		startActivity(intent);
 	}
 
-	private void onRepo()
+	private void onDownload()
 	{
-		Intent intent = new Intent(this, RepoActivity.class);
+		Intent intent = new Intent(this, DownloadActivity.class);
 		startActivity(intent);
 	}
 
@@ -270,12 +270,12 @@ public class DebianKitActivity extends Activity
 			finish();
 			return true;
 
-			case R.id.repo:
-			onRepo();
+			case R.id.download:
+			onDownload();
 			return true;
 
-			case R.id.help:
-			onAbout();
+			case R.id.readme:
+			onReadme();
 			return true;
 		}
 		return false;

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
  
-public class AboutActivity extends Activity {
+public class ReadmeActivity extends Activity {
  
 	private WebView webView;
  
