@@ -20,11 +20,37 @@ import android.widget.TextView;
 
 public class DebianKitActivity extends Activity
 {
+	private static String execShell(String[] args)
+	{
+		String s_ret = "";
+		try
+		{
+			ProcessBuilder cmd = new ProcessBuilder(args);
+
+ 			Process process = cmd.start();
+ 			InputStream in = process.getInputStream();
+ 			byte[] re = new byte[1024];
+ 			while(in.read(re) != -1)
+ 			{
+ 				s_ret = s_ret + new String(re);
+ 			}
+ 			in.close();
+		}
+		catch(IOException ex)
+		{
+ 			ex.printStackTrace();
+		}
+		return s_ret;
+	}
+
 	private class Verdict
 	{
-		public int tv;	// Resource ID of TextView that displays verdict
-		public int ic;	// Resource ID of verdict
-		public Verdict(int tv_resid) {
+		public int tv;		// Resource ID of TextView that displays verdict
+		public int ic;		// Resource ID of verdict
+		public String s;	// Notes / details on verdict 
+
+		public Verdict(int tv_resid)
+		{
 	        tv = tv_resid;
 	        ic = -1;
 	    }
@@ -36,6 +62,7 @@ public class DebianKitActivity extends Activity
 	Verdict v_dev = new Verdict(R.id.TextView_dev);
 	Verdict v_mod = new Verdict(R.id.TextView_mod);
 	Verdict v_mnt = new Verdict(R.id.TextView_mnt);
+	Verdict v_sux = new Verdict(R.id.TextView_sux);
 	Verdict v_deb = new Verdict(R.id.TextView_deb);
 
 	private class CourtTask extends AsyncTask<Void, Verdict, Void>
@@ -187,35 +214,40 @@ public class DebianKitActivity extends Activity
 			}
 			publishProgress(v_mnt);
 
+			// Check if executable su with mode 6755 is available
+			v_sux.ic = R.drawable.ic_failed;
+			file = new File("/system/bin/sh");
+			if (file.exists())
+			{
+				int i;
+				String[] args = {file.getAbsolutePath(), "-c", "echo $PATH"};
+				String[] path = execShell(args).split(File.pathSeparator);
+				for(i = 0; i < path.length; i++)
+				{
+					file = new File(path[i]+File.separator+"su");
+					if (file.exists())
+					{
+						String[] args2 = {"/system/bin/ls", "-l", file.getAbsolutePath()};
+						String mode = execShell(args2);
+						if (mode.startsWith(""))
+						{
+							v_sux.ic = R.drawable.ic_passed;
+						}
+					}
+				}
+			}
+			publishProgress(v_sux);
+
 			// Check if /data/local/deb/bootdeb is available
 			v_deb.ic = R.drawable.ic_failed;
 			file = new File(String.format("%s/local/deb/bootdeb", Environment.getDataDirectory().getAbsolutePath()));
 			if (file.exists())
 			{
 				v_deb.ic = R.drawable.ic_maybe;
-				ProcessBuilder cmd;
-				try
-				{
-					String result = "";
-					String[] args = {"/system/bin/ls", "-l", file.getAbsolutePath()};
-					cmd = new ProcessBuilder(args);
-
-		 			Process process = cmd.start();
-		 			InputStream in = process.getInputStream();
-		 			byte[] re = new byte[1024];
-		 			while(in.read(re) != -1)
-		 			{
-		 				result = result + new String(re);
-		 			}
-		 			in.close();
-		 			if (result.startsWith("-rwx"))
-		 			{
-		 				v_deb.ic = R.drawable.ic_passed;
-		 			}
-				}
-				catch(IOException ex)
-				{
-		 			ex.printStackTrace();
+				String[] args = {"/system/bin/ls", "-l", file.getAbsolutePath()};
+				if (execShell(args).startsWith("-rwx"))
+	 			{
+					v_deb.ic = R.drawable.ic_passed;
 				}
 			}
 			publishProgress(v_deb);

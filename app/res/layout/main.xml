@@ -69,6 +69,17 @@
     />
 
     <TextView
+        android:id="@+id/TextView_sux"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_unknown"
+        android:text="@string/str_sux"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
+
+    <TextView
         android:id="@+id/TextView_deb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
