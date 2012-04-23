@@ -1,7 +1,9 @@
 package org.dyndns.sven_ola.debian_kit;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,17 +22,16 @@ import android.widget.TextView;
 
 public class DebianKitActivity extends Activity
 {
-	private static String execShell(String[] args)
+	private static String execShell(boolean oneline, String[] args)
 	{
 		String s_ret = "";
 		try
 		{
 			ProcessBuilder cmd = new ProcessBuilder(args);
-
  			Process process = cmd.start();
  			InputStream in = process.getInputStream();
  			byte[] re = new byte[1024];
- 			while(in.read(re) != -1)
+ 			while(in.read(re) != -1 && (!oneline || 0 == s_ret.length()))
  			{
  				s_ret = s_ret + new String(re);
  			}
@@ -39,6 +40,10 @@ public class DebianKitActivity extends Activity
 		catch(IOException ex)
 		{
  			ex.printStackTrace();
+		}
+		if (oneline) {
+			int i = s_ret.indexOf('\n');
+			if (0 <= i) return s_ret.substring(0, i);
 		}
 		return s_ret;
 	}
@@ -219,19 +224,36 @@ public class DebianKitActivity extends Activity
 			file = new File("/system/bin/sh");
 			if (file.exists())
 			{
+				String[] path = execShell(true, new String[] {file.getAbsolutePath(), "-c", "echo $PATH"}).split(File.pathSeparator);
 				int i;
-				String[] args = {file.getAbsolutePath(), "-c", "echo $PATH"};
-				String[] path = execShell(args).split(File.pathSeparator);
 				for(i = 0; i < path.length; i++)
 				{
 					file = new File(path[i]+File.separator+"su");
 					if (file.exists())
 					{
-						String[] args2 = {"/system/bin/ls", "-l", file.getAbsolutePath()};
-						String mode = execShell(args2);
-						if (mode.startsWith(""))
+						String s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
+						if (s.startsWith("-rws"))
 						{
 							v_sux.ic = R.drawable.ic_passed;
+						}
+						InputStream in = null;
+						try
+						{
+							// Check if this is the Android standard-su, which does not allow uid(app)->root
+							in = new BufferedInputStream(new FileInputStream(file));
+							byte[] re = new byte[(int)file.length()];
+				 			if (in.read(re) != -1)
+				 			{
+								if (0 <= new String(re).indexOf("su: uid %d not allowed to su"))
+								{
+									v_sux.ic = R.drawable.ic_failed;
+								}
+				 			}
+							in.close();
+						}
+						catch(IOException ex)
+						{
+				 			ex.printStackTrace();
 						}
 					}
 				}
@@ -244,8 +266,7 @@ public class DebianKitActivity extends Activity
 			if (file.exists())
 			{
 				v_deb.ic = R.drawable.ic_maybe;
-				String[] args = {"/system/bin/ls", "-l", file.getAbsolutePath()};
-				if (execShell(args).startsWith("-rwx"))
+				if (execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()}).startsWith("-rwx"))
 	 			{
 					v_deb.ic = R.drawable.ic_passed;
 				}
