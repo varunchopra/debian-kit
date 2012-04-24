@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class DebianKitActivity extends Activity
@@ -75,22 +76,26 @@ public class DebianKitActivity extends Activity
 		protected Void doInBackground(Void... voids) {
 			// Check if CPU_ABI is arm or x86
 			v_cpu.ic = R.drawable.ic_maybe;
+			v_cpu.s = getString(R.string.str_cpu_maybe);
 			if (0 < android.os.Build.CPU_ABI.length())
 			{
 				if (android.os.Build.CPU_ABI.startsWith("x86") ||
 					android.os.Build.CPU_ABI.startsWith("armeabi"))
 				{
 					v_cpu.ic = R.drawable.ic_passed;
+					v_cpu.s = String.format(getString(R.string.str_cpu_passed), android.os.Build.CPU_ABI);
 				}
 				else
 				{
 					v_cpu.ic = R.drawable.ic_failed;
+					v_cpu.s = String.format(getString(R.string.str_cpu_failed), android.os.Build.CPU_ABI);
 				}
 			}
 			publishProgress(v_cpu);
 
 			// Check if absolute RAM above certain threshold
 			v_mem.ic = R.drawable.ic_unknown;
+			v_mem.s = getString(R.string.str_mem_unknown);
 			File file = new File("/proc/meminfo");
 			try
 			{
@@ -104,14 +109,17 @@ public class DebianKitActivity extends Activity
 					if (tm < 90000)
 					{
 						v_mem.ic = R.drawable.ic_failed;
+						v_mem.s = String.format(getString(R.string.str_mem_failed), Math.round(tm / 1024));
 					}
 					else if (tm < 120000)
 					{
 						v_mem.ic = R.drawable.ic_maybe;
+						v_mem.s = String.format(getString(R.string.str_mem_maybe), Math.round(tm / 1024));
 					}
 					else
 					{
 						v_mem.ic = R.drawable.ic_passed;
+						v_mem.s = String.format(getString(R.string.str_mem_passed), Math.round(tm / 1024));
 					}
 				}
 			}
@@ -123,6 +131,7 @@ public class DebianKitActivity extends Activity
 
 			// Check if ext2/3/4 file systems supported
 			v_ext.ic = R.drawable.ic_unknown;
+			v_ext.s = getString(R.string.str_ext_unknown);
 			file = new File("/proc/filesystems");
 			try
 			{
@@ -130,14 +139,16 @@ public class DebianKitActivity extends Activity
 				BufferedReader br = new BufferedReader(new FileReader(file));
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_ext.ic)
 				{
-					if (line.matches("\\s+ext[234]$"))
+					if (line.matches("\\t+ext[234]$"))
 					{
 						v_ext.ic = R.drawable.ic_passed;
+						v_ext.s = String.format(getString(R.string.str_ext_passed), line.substring(line.lastIndexOf('\t') + 1));
 					}
 				}
 				if (R.drawable.ic_passed != v_ext.ic)
 				{
 					v_ext.ic = R.drawable.ic_failed;
+					v_ext.s = getString(R.string.str_ext_failed);
 				}
 			}
 			catch(IOException ex)
@@ -148,6 +159,7 @@ public class DebianKitActivity extends Activity
 
 			// Check if loop-mounts are supported
 			v_dev.ic = R.drawable.ic_unknown;
+			v_dev.s = getString(R.string.str_dev_unknown);
 			file = new File("/proc/devices");
 			try
 			{
@@ -158,11 +170,13 @@ public class DebianKitActivity extends Activity
 					if (line.matches("^\\s+7\\s+loop$"))
 					{
 						v_dev.ic = R.drawable.ic_passed;
+						v_dev.s = getString(R.string.str_dev_passed);
 					}
 				}
 				if (R.drawable.ic_passed != v_dev.ic)
 				{
 					v_dev.ic = R.drawable.ic_failed;
+					v_dev.s = getString(R.string.str_dev_failed);
 				}
 			}
 			catch(IOException ex)
@@ -173,10 +187,12 @@ public class DebianKitActivity extends Activity
 
 			// Check if kernel modules are supported
 			v_mod.ic = R.drawable.ic_failed;
+			v_mod.s = getString(R.string.str_mod_failed);
 			file = new File("/proc/modules");
 			if (file.exists())
 			{
 				v_mod.ic = R.drawable.ic_passed;
+				v_mod.s = getString(R.string.str_mod_passed);
 			}
 			publishProgress(v_mod);
 
@@ -280,7 +296,7 @@ public class DebianKitActivity extends Activity
 			for (i = 0; i < verdicts.length; i++)
 			{
 				TextView tv = (TextView)findViewById(verdicts[i].tv);
-				tv.setCompoundDrawablesWithIntrinsicBounds(verdicts[i].ic, 0, 0, 0);
+				tv.setCompoundDrawablesWithIntrinsicBounds(verdicts[i].ic, 0, android.R.drawable.arrow_down_float, 0);
 			}
 		}
 	}
@@ -333,4 +349,58 @@ public class DebianKitActivity extends Activity
 		}
 		return false;
 	}
+
+	private void onClick(TextView tv, Verdict v, int id)
+	{
+		TextView vSub = (TextView)findViewById(id);
+		vSub.setText(v.s);
+		vSub.setVisibility(View.GONE == vSub.getVisibility() ? View.VISIBLE : View.GONE);
+		tv.setCompoundDrawablesWithIntrinsicBounds(
+				v.ic, 0, 
+				View.GONE == vSub.getVisibility() ? 
+						android.R.drawable.arrow_down_float : 
+						android.R.drawable.arrow_up_float, 
+				0);
+	}
+
+	public void onClick_cpu(View v)
+	{
+		onClick((TextView)v, v_cpu, R.id.TextView_cpu_details);
+	}
+
+	public void onClick_mem(View v)
+	{
+		onClick((TextView)v, v_mem, R.id.TextView_mem_details);
+	}
+
+	public void onClick_ext(View v)
+	{
+		onClick((TextView)v, v_ext, R.id.TextView_ext_details);
+	}
+
+	public void onClick_dev(View v)
+	{
+		onClick((TextView)v, v_dev, R.id.TextView_dev_details);
+	}
+
+	public void onClick_mod(View v)
+	{
+		onClick((TextView)v, v_mod, R.id.TextView_mod_details);
+	}
+
+	public void onClick_mnt(View v)
+	{
+		onClick((TextView)v, v_mnt, R.id.TextView_mnt_details);
+	}
+
+	public void onClick_sux(View v)
+	{
+		onClick((TextView)v, v_sux, R.id.TextView_sux_details);
+	}
+
+	public void onClick_deb(View v)
+	{
+		onClick((TextView)v, v_deb, R.id.TextView_deb_details);
+	}
+
 }

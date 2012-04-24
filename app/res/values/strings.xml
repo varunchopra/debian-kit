@@ -6,12 +6,30 @@
     <string name="menu_download">Download…</string>
     <string name="menu_quit">Quit</string>
     <string name="str_cpu">Compabile CPU architecture</string>
+    <string name="str_cpu_maybe">Cannot detect CPU_ABI. If you know, that your device has an ARM or x86 CPU, Debian Kit may run nevertheless.</string>
+    <string name="str_cpu_passed">CPU_ABI %s is supported. Debian Kit should run fine with this.</string>
+    <string name="str_cpu_failed">CPU_ABI %s is (currently) not supported. Debian Kit will not run.</string>
     <string name="str_mem">Sufficient RAM memory</string>
+    <string name="str_mem_unknown">Error while reading /proc/meminfo.</string>
+    <string name="str_mem_passed">Debian Kit should run fine with %s Gb of RAM.</string>
+    <string name="str_mem_maybe">Your Device only has %s Gb of RAM. You should install via an ADB console, because the Android laucher will be killed during installation.</string>
+    <string name="str_mem_failed">Your Device only has %s Gb of RAM. Debian Kit will not run with this small amount of RAM.</string>
     <string name="str_ext">Ext2&quot;&quot;/3&quot;&quot;/4 filesystem supported</string>
+    <string name="str_ext_unknown">Error while reading /proc/filesystems.</string>
+    <string name="str_ext_passed">The kernel supports the %s file system. Debian Kit should run fine with this.</string>
+    <string name="str_ext_failed">The kernel does not support the ext2, ext3, or ext4 file systems. Without these filesystems, Debian Kit will not run. It may be possible to install/load a kernel module to add the necessary filesystem support.</string>
     <string name="str_dev">Loop mounts supported</string>
+    <string name="str_dev_unknown">Error while reading /proc/devices.</string>
+    <string name="str_dev_passed">The kernel supports loop disks. Debian Kit should run fine with this.</string>
+    <string name="str_dev_failed">The kernel does not support loop disks. Without loop disks, Debian Kit may be installed to an extra partition on an external SD card. It may also be possible to install/load a kernel module to add loop disk support.</string>
     <string name="str_mod">Kernel modules supported</string>
+    <string name="str_mod_passed">Kernel modules are supported. Debian Kit should run fine with this.</string>
+    <string name="str_mod_failed">Kernel modules are not supported. Debian Kit should run with this, but it is not possible to add drivers to the kernel. If your kernel does not support loop disks or ext file systems, this may be a showstopper.</string>
     <string name="str_mnt">Files in %s/local executable</string>
     <string name="str_sux">Valid \'su\' command found</string>
     <string name="str_deb">Debian Kit already unpacked</string>
+    
+    
+    
 
 </resources>

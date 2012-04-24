@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent" >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <TextView
@@ -13,7 +16,15 @@
         android:drawablePadding="2dp"
         android:gravity="center_vertical"
         android:text="@string/str_cpu"
+        android:onClick="onClick_cpu"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView_cpu_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_mem"
@@ -23,7 +34,15 @@
         android:drawablePadding="2dp"
         android:gravity="center_vertical"
         android:text="@string/str_mem"
+        android:onClick="onClick_mem"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView_mem_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_ext"
@@ -33,7 +52,15 @@
         android:drawablePadding="2dp"
         android:gravity="center_vertical"
         android:text="@string/str_ext"
+        android:onClick="onClick_ext"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView_ext_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_dev"
@@ -43,8 +70,16 @@
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
         android:text="@string/str_dev"
+        android:onClick="onClick_dev"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
+
+    <TextView
+        android:id="@+id/TextView_dev_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_mod"
@@ -54,8 +89,16 @@
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
         android:text="@string/str_mod"
+        android:onClick="onClick_mod"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
+
+    <TextView
+        android:id="@+id/TextView_mod_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_mnt"
@@ -65,8 +108,16 @@
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
         android:text="@string/str_mnt"
+        android:onClick="onClick_mnt"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
+
+    <TextView
+        android:id="@+id/TextView_mnt_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_sux"
@@ -76,8 +127,16 @@
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
         android:text="@string/str_sux"
+        android:onClick="onClick_sux"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
+
+    <TextView
+        android:id="@+id/TextView_sux_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TextView_deb"
@@ -87,7 +146,16 @@
         android:drawablePadding="2dp"
         android:drawableLeft="@drawable/ic_unknown"
         android:text="@string/str_deb"
+        android:onClick="onClick_deb"                
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
     />
 
+    <TextView
+        android:id="@+id/TextView_deb_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 </LinearLayout>
+</ScrollView>
