@@ -41,6 +41,7 @@ public class DebianKitActivity extends Activity
 		catch(IOException ex)
 		{
  			ex.printStackTrace();
+ 			return null;
 		}
 		if (oneline) {
 			int i = s_ret.indexOf('\n');
@@ -198,6 +199,7 @@ public class DebianKitActivity extends Activity
 
 			// Check if /data is not mounted with noexec
 			v_mnt.ic = R.drawable.ic_unknown;
+			v_mnt.s = getString(R.string.str_mnt_unknown);
 			file = new File("/proc/mounts");
 			try
 			{
@@ -216,17 +218,20 @@ public class DebianKitActivity extends Activity
 							if (opts[i].contentEquals("noexec"))
 							{
 								v_mnt.ic = R.drawable.ic_failed;
+								v_mnt.s = String.format(getString(R.string.str_mnt_failed), Environment.getDataDirectory().getAbsolutePath());
 							}
 						}
 						if (R.drawable.ic_failed != v_mnt.ic)
 						{
 							v_mnt.ic = R.drawable.ic_passed;
+							v_mnt.s = String.format(getString(R.string.str_mnt_passed), Environment.getDataDirectory().getAbsolutePath());
 						}
 					}
 				}
 				if (R.drawable.ic_passed != v_mnt.ic && R.drawable.ic_failed != v_mnt.ic)
 				{
 					v_mnt.ic = R.drawable.ic_maybe;
+					v_mnt.s = String.format(getString(R.string.str_mnt_maybe), Environment.getDataDirectory().getAbsolutePath());
 				}
 			}
 			catch(IOException ex)
@@ -237,54 +242,89 @@ public class DebianKitActivity extends Activity
 
 			// Check if executable su with mode 6755 is available
 			v_sux.ic = R.drawable.ic_failed;
+			v_sux.s = getString(R.string.str_sux_failed);
 			file = new File("/system/bin/sh");
 			if (file.exists())
 			{
-				String[] path = execShell(true, new String[] {file.getAbsolutePath(), "-c", "echo $PATH"}).split(File.pathSeparator);
-				int i;
-				for(i = 0; i < path.length; i++)
+				String s = execShell(true, new String[] {file.getAbsolutePath(), "-c", "echo $PATH"});
+				if (null != s)
 				{
-					file = new File(path[i]+File.separator+"su");
-					if (file.exists())
+					String[] path = s.split(File.pathSeparator);
+					int i;
+					for(i = 0; i < path.length; i++)
 					{
-						String s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
-						if (s.startsWith("-rws"))
+						file = new File(path[i]+File.separator+"su");
+						if (file.exists())
 						{
-							v_sux.ic = R.drawable.ic_passed;
-						}
-						InputStream in = null;
-						try
-						{
-							// Check if this is the Android standard-su, which does not allow uid(app)->root
-							in = new BufferedInputStream(new FileInputStream(file));
-							byte[] re = new byte[(int)file.length()];
-				 			if (in.read(re) != -1)
-				 			{
-								if (0 <= new String(re).indexOf("su: uid %d not allowed to su"))
+							s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
+							if (null != s)
+							{
+								if (s.startsWith("-rws"))
 								{
-									v_sux.ic = R.drawable.ic_failed;
+									v_sux.ic = R.drawable.ic_passed;
+									v_sux.s = getString(R.string.str_sux_passed);
 								}
-				 			}
-							in.close();
-						}
-						catch(IOException ex)
-						{
-				 			ex.printStackTrace();
+								InputStream in = null;
+								try
+								{
+									// Check if this is the Android standard-su, which does not allow uid(app)->root
+									in = new BufferedInputStream(new FileInputStream(file));
+									byte[] re = new byte[(int)file.length()];
+						 			if (in.read(re) != -1)
+						 			{
+										if (0 <= new String(re).indexOf("su: uid %d not allowed to su"))
+										{
+											v_sux.ic = R.drawable.ic_failed;
+											v_sux.s = getString(R.string.str_sux_failed);
+										}
+						 			}
+									in.close();
+								}
+								catch(IOException ex)
+								{
+						 			ex.printStackTrace();
+								}
+							}
+							else
+							{
+								v_sux.ic = R.drawable.ic_maybe;
+								v_sux.s = getString(R.string.str_sux_maybe_ls_exec);
+							}
 						}
 					}
 				}
+				else
+				{
+					v_sux.ic = R.drawable.ic_maybe;
+					v_sux.s = getString(R.string.str_sux_maybe_sh_exec);
+				}
+			}
+			else
+			{
+				v_sux.ic = R.drawable.ic_maybe;
+				v_sux.s = getString(R.string.str_sux_maybe_sh);
 			}
 			publishProgress(v_sux);
 
 			// Check if /data/local/deb/bootdeb is available
-			v_deb.ic = R.drawable.ic_failed;
 			file = new File(String.format("%s/local/deb/bootdeb", Environment.getDataDirectory().getAbsolutePath()));
+			v_deb.ic = R.drawable.ic_failed;
+			v_deb.s = String.format(getString(R.string.str_deb_failed), file.getAbsolutePath());
 			if (file.exists())
 			{
-				v_deb.ic = R.drawable.ic_maybe;
-				if (execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()}).startsWith("-rwx"))
-	 			{
-					v_deb.ic = R.drawable.ic_passed;
+				String s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
+				if (null != s)
+				{
+					if (s.startsWith("-rwx"))
+		 			{
+						v_deb.ic = R.drawable.ic_passed;
+						v_deb.s = String.format(getString(R.string.str_deb_passed), file.getAbsolutePath());
+					}
+				}
+				else
+				{
+					v_deb.ic = R.drawable.ic_maybe;
+					v_deb.s = getString(R.string.str_deb_maybe);
 				}
 			}
 			publishProgress(v_deb);

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Debian Kit</string>
-    
     <string name="menu_readme">Readme…</string>
     <string name="menu_download">Download…</string>
     <string name="menu_quit">Quit</string>
@@ -26,10 +25,18 @@
     <string name="str_mod_passed">Kernel modules are supported. Debian Kit should run fine with this.</string>
     <string name="str_mod_failed">Kernel modules are not supported. Debian Kit should run with this, but it is not possible to add drivers to the kernel. If your kernel does not support loop disks or ext file systems, this may be a showstopper.</string>
     <string name="str_mnt">Files in %s/local executable</string>
+    <string name="str_mnt_unknown">Error while reading /proc/mounts.</string>
+    <string name="str_mnt_passed">Android data directory (%s) not mounted with \'noexec\'. Debian Kit can be unpacked and executed to the standard directory.</string>
+    <string name="str_mnt_failed">Android data directory (%s) mounted with \'noexec\'. Debian Kit canot be unpacked and executed below this directory. Maybe it is possible to unpack to another location (e.g. RAM disk?).</string>
+    <string name="str_mnt_maybe">Android data directory (%s) not found in /proc/mounts. This is unusual and may prevent you from using the Debian Kit.</string>
     <string name="str_sux">Valid \'su\' command found</string>
+    <string name="str_sux_passed">Detected a functioning \'su\' command. Debian Kit should run fine with this.</string>
+    <string name="str_sux_failed">No functioning \'su\' command detected. This usually means that your device is not rooted and you therefore cannot use Debian-Kit.</string>
+    <string name="str_sux_maybe_sh">No /system/bin/sh available. This is unusual and may prevent you from using the Debian Kit.</string>
+    <string name="str_sux_maybe_sh_exec">Error while executing /system/bin/sh. This is unusual and may prevent you from using the Debian Kit.</string>
+    <string name="str_sux_maybe_ls_exec">Error while executing /system/bin/ls. This is unusual and may prevent you from using the Debian Kit.</string>
     <string name="str_deb">Debian Kit already unpacked</string>
-    
-    
-    
-
+    <string name="str_deb_passed">The Debian Kit main script file (%s) was found. You may simply use Debian Kit now.</string>
+    <string name="str_deb_failed">The Debian Kit main script file (%s) was not found or is not executable. Select \'Download…\' from the menu and proceed as described under \'Readme…\'.</string>
+    <string name="str_deb_maybe">Error while executing /system/bin/ls. This is unusual and may prevent you from using the Debian Kit.</string>
 </resources>

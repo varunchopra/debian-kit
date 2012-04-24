@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Debian-Kit</string>
-    
     <string name="menu_readme">Lies mich…</string>
     <string name="menu_download">Download…</string>
     <string name="menu_quit">Beenden</string>
@@ -26,7 +25,18 @@
     <string name="str_mod_passed">Kernel-Module werden unterstützt. Das Debian-Kit sollte damit gut laufen.</string>
     <string name="str_mod_failed">Kernel-Module werden nicht unterstützt. Das Debian-Kit sollte damit gut laufen, aber es ist nicht möglich zusätzliche Treiber zu aktivieren. Wenn der Kernel keine Unterstützung für Loop-Festplattendateien oder das Ext-Dateisystem hat, kann das Debian-Kit auf diesem Gerät nicht ausgeführt werden.</string>
     <string name="str_mnt">Dateien in %s/local ausführbar</string>
+    <string name="str_mnt_unknown">Fehler beim Auslesen von /proc/mounts.</string>
+    <string name="str_mnt_passed">Das Android-Datenverzeichnis (%s) ist nicht mit \'noexec\' eingehängt. Das Debian-Kit kann daher in das Standardverzeichnis ausgepackt und ausgeführt werden.</string>
+    <string name="str_mnt_failed">Das Android-Datenverzeichnis (%s) ist mit \'noexec\' eingehängt. Das Debian-Kit kann daher nicht in das Standardverzeichnis ausgepackt und ausgeführt werden. Es ist vielleicht möglich, das Debian-Kit in ein anderes Verzeichnis auszupacken (z.B. eine RAM-Disk?).</string>
+    <string name="str_mnt_maybe">Das Android-Datenverzeichnis (%s) konnte nicht in /proc/mounts gefunden werden. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
     <string name="str_sux">Gültiger \'su\'-Befehl vorhanden</string>
+    <string name="str_sux_passed">Ein funktionierender \'su\'-Befehl wurde gefunden. Das Debian-Kit sollte damit gut laufen.</string>
+    <string name="str_sux_failed">Es wurde kein funktionierender \'su\'-Befehl gefunden. Dies bedeutet meist, dass das Gerät nicht gerooted ist und damit das Debian-Kit auch nicht verwendet werden kann.</string>
+    <string name="str_sux_maybe_sh">Kein /system/bin/sh gefunden. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
+    <string name="str_sux_maybe_sh_exec">Fehler beim Ausführen von /system/bin/sh. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
+    <string name="str_sux_maybe_ls_exec">Fehler beim Ausführen von /system/bin/ls. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
     <string name="str_deb">Debian-Kit bereits ausgepackt</string>
-    
+    <string name="str_deb_passed">Die Haupt-Skriptdatei (%s) des Debian Kits ist vorhanden. Damit kann das Debian-Kit jetzt verwendet werden.</string>
+    <string name="str_deb_failed">Die Haupt-Skriptdatei (%s) des Debian Kits wurde nicht gefunden oder ist nicht ausführbar. Wähle \'Download…\' im Menü und fahre fort wie unter \'Lies mich…\' beschrieben.</string>
+    <string name="str_deb_maybe">Fehler beim Ausführen von /system/bin/ls. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
 </resources>
