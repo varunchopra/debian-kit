@@ -10,9 +10,9 @@
     <string name="str_cpu_failed">Die CPU_ABI %s wird (noch) nicht unterstützt. Das Debian-Kit kann nicht ausgeführt werden.</string>
     <string name="str_mem">Ausreichend RAM-Speicher</string>
     <string name="str_mem_unknown">Fehler beim Auslesen von /proc/meminfo.</string>
-    <string name="str_mem_passed">Mit %s Gb RAM sollte das Debian-Kit gut laufen.</string>
-    <string name="str_mem_maybe">Das Gerät hat nur %s Gb RAM. Die Installation sollte in einer ADB-Konsole durchgeführt werden, weil der Android-Launcher während der Installation zwangsweise beendet werden könnte.</string>
-    <string name="str_mem_failed">Das Gerät hat nur %s Gb RAM. Das Debian-Kit kann mit so wenig RAM nicht ausgeführt werden.</string>
+    <string name="str_mem_passed">Mit %s Mb verwendbarem RAM sollte das Debian-Kit gut laufen.</string>
+    <string name="str_mem_maybe">Das Gerät hat nur %s Mb verwendbares RAM. Die Installation sollte in einer ADB-Konsole durchgeführt werden, weil der Android-Launcher während der Installation zwangsweise beendet werden könnte.</string>
+    <string name="str_mem_failed">Das Gerät hat nur %s Mb verwendbares RAM. Das Debian-Kit kann mit so wenig RAM nicht ausgeführt werden.</string>
     <string name="str_ext">Ext2&quot;&quot;/3&quot;&quot;/4 Dateisystem</string>
     <string name="str_ext_unknown">Fehler beim Auslesen von /proc/filesystems.</string>
     <string name="str_ext_passed">Der Kernel unterstützt das %s Dateisystem. Das Debian-Kit sollte damit gut laufen.</string>

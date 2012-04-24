@@ -10,9 +10,9 @@
     <string name="str_cpu_failed">CPU_ABI %s is (currently) not supported. Debian Kit will not run.</string>
     <string name="str_mem">Sufficient RAM memory</string>
     <string name="str_mem_unknown">Error while reading /proc/meminfo.</string>
-    <string name="str_mem_passed">Debian Kit should run fine with %s Gb of RAM.</string>
-    <string name="str_mem_maybe">Your Device only has %s Gb of RAM. You should install via an ADB console, because the Android laucher will be killed during installation.</string>
-    <string name="str_mem_failed">Your Device only has %s Gb of RAM. Debian Kit will not run with this small amount of RAM.</string>
+    <string name="str_mem_passed">Debian Kit should run fine with %s Mb of usable RAM.</string>
+    <string name="str_mem_maybe">Your Device only has %s Mb of usable RAM. You should install via an ADB console, because the Android laucher will be killed during installation.</string>
+    <string name="str_mem_failed">Your Device only has %s Mb of usable RAM. Debian Kit will not run with this small amount of RAM.</string>
     <string name="str_ext">Ext2&quot;&quot;/3&quot;&quot;/4 filesystem supported</string>
     <string name="str_ext_unknown">Error while reading /proc/filesystems.</string>
     <string name="str_ext_passed">The kernel supports the %s file system. Debian Kit should run fine with this.</string>
