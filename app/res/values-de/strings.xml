@@ -32,8 +32,7 @@
     <string name="str_sux">Gültiger \'su\'-Befehl vorhanden</string>
     <string name="str_sux_passed">Ein funktionierender \'su\'-Befehl wurde gefunden. Das Debian-Kit sollte damit gut laufen.</string>
     <string name="str_sux_failed">Es wurde kein funktionierender \'su\'-Befehl gefunden. Dies bedeutet meist, dass das Gerät nicht gerooted ist und damit das Debian-Kit auch nicht verwendet werden kann.</string>
-    <string name="str_sux_maybe_sh">Kein /system/bin/sh gefunden. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
-    <string name="str_sux_maybe_sh_exec">Fehler beim Ausführen von /system/bin/sh. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
+    <string name="str_sux_maybe_path">Keine Umgebungsvariable PATH. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
     <string name="str_sux_maybe_ls_exec">Fehler beim Ausführen von /system/bin/ls. Dies ist ungewöhlich und kann bedeuten, dass das Debian-Kit nicht verwendbar ist.</string>
     <string name="str_deb">Debian-Kit bereits ausgepackt</string>
     <string name="str_deb_passed">Die Haupt-Skriptdatei (%s) des Debian Kits ist vorhanden. Damit kann das Debian-Kit jetzt verwendet werden.</string>

@@ -100,7 +100,7 @@ public class DebianKitActivity extends Activity
 			File file = new File("/proc/meminfo");
 			try
 			{
-				BufferedReader br = new BufferedReader(new FileReader(file));
+				BufferedReader br = new BufferedReader(new FileReader(file), 4096);
 				// Example: MemTotal: 2050880 kB
 				Pattern p = Pattern.compile("^MemTotal:\\s+(\\d+)\\s+kB$");
 				Matcher m = p.matcher(br.readLine());
@@ -137,7 +137,7 @@ public class DebianKitActivity extends Activity
 			try
 			{
 				String line;
-				BufferedReader br = new BufferedReader(new FileReader(file));
+				BufferedReader br = new BufferedReader(new FileReader(file), 4096);
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_ext.ic)
 				{
 					if (line.matches("\\t+ext[234]$"))
@@ -165,7 +165,7 @@ public class DebianKitActivity extends Activity
 			try
 			{
 				String line;
-				BufferedReader br = new BufferedReader(new FileReader(file));
+				BufferedReader br = new BufferedReader(new FileReader(file), 4096);
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_dev.ic)
 				{
 					if (line.matches("^\\s+7\\s+loop$"))
@@ -205,7 +205,7 @@ public class DebianKitActivity extends Activity
 			{
 				String line;
 				Pattern p = Pattern.compile(String.format("^\\S+\\s+%s\\s+\\S+\\s+(\\S+)", Environment.getDataDirectory().getAbsolutePath()));
-				BufferedReader br = new BufferedReader(new FileReader(file));
+				BufferedReader br = new BufferedReader(new FileReader(file), 8192);
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_mnt.ic && R.drawable.ic_failed != v_mnt.ic)
 				{
 					Matcher m = p.matcher(line);
@@ -244,65 +244,57 @@ public class DebianKitActivity extends Activity
 			v_sux.ic = R.drawable.ic_failed;
 			v_sux.s = getString(R.string.str_sux_failed);
 			file = new File("/system/bin/sh");
-			if (file.exists())
+			String s = System.getenv("PATH");
+			if (null != s)
 			{
-				String s = execShell(true, new String[] {file.getAbsolutePath(), "-c", "echo $PATH"});
-				if (null != s)
+				String[] path = s.split(File.pathSeparator);
+				int i;
+				for(i = 0; i < path.length; i++)
 				{
-					String[] path = s.split(File.pathSeparator);
-					int i;
-					for(i = 0; i < path.length; i++)
+					file = new File(path[i]+File.separator+"su");
+					if (file.exists())
 					{
-						file = new File(path[i]+File.separator+"su");
-						if (file.exists())
+						s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
+						if (null != s)
 						{
-							s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
-							if (null != s)
+							if (s.startsWith("-rws"))
 							{
-								if (s.startsWith("-rws"))
-								{
-									v_sux.ic = R.drawable.ic_passed;
-									v_sux.s = getString(R.string.str_sux_passed);
-								}
-								InputStream in = null;
-								try
-								{
-									// Check if this is the Android standard-su, which does not allow uid(app)->root
-									in = new BufferedInputStream(new FileInputStream(file));
-									byte[] re = new byte[(int)file.length()];
-						 			if (in.read(re) != -1)
-						 			{
-										if (0 <= new String(re).indexOf("su: uid %d not allowed to su"))
-										{
-											v_sux.ic = R.drawable.ic_failed;
-											v_sux.s = getString(R.string.str_sux_failed);
-										}
-						 			}
-									in.close();
-								}
-								catch(IOException ex)
-								{
-						 			ex.printStackTrace();
-								}
+								v_sux.ic = R.drawable.ic_passed;
+								v_sux.s = getString(R.string.str_sux_passed);
 							}
-							else
+							InputStream in = null;
+							try
 							{
-								v_sux.ic = R.drawable.ic_maybe;
-								v_sux.s = getString(R.string.str_sux_maybe_ls_exec);
+								// Check if this is the Android standard-su, which does not allow uid(app)->root
+								in = new BufferedInputStream(new FileInputStream(file), 16384);
+								byte[] re = new byte[(int)file.length()];
+					 			if (in.read(re) != -1)
+					 			{
+									if (0 <= new String(re).indexOf("su: uid %d not allowed to su"))
+									{
+										v_sux.ic = R.drawable.ic_failed;
+										v_sux.s = getString(R.string.str_sux_failed);
+									}
+					 			}
+								in.close();
+							}
+							catch(IOException ex)
+							{
+					 			ex.printStackTrace();
 							}
 						}
+						else
+						{
+							v_sux.ic = R.drawable.ic_maybe;
+							v_sux.s = getString(R.string.str_sux_maybe_ls_exec);
+						}
 					}
-				}
-				else
-				{
-					v_sux.ic = R.drawable.ic_maybe;
-					v_sux.s = getString(R.string.str_sux_maybe_sh_exec);
 				}
 			}
 			else
 			{
 				v_sux.ic = R.drawable.ic_maybe;
-				v_sux.s = getString(R.string.str_sux_maybe_sh);
+				v_sux.s = getString(R.string.str_sux_maybe_path);
 			}
 			publishProgress(v_sux);
 
@@ -312,7 +304,7 @@ public class DebianKitActivity extends Activity
 			v_deb.s = String.format(getString(R.string.str_deb_failed), file.getAbsolutePath());
 			if (file.exists())
 			{
-				String s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
+				s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
 				if (null != s)
 				{
 					if (s.startsWith("-rwx"))
