@@ -37,5 +37,6 @@
     <string name="str_deb">Debian Kit already unpacked</string>
     <string name="str_deb_passed">The Debian Kit main script file (%s) was found. You may simply use Debian Kit now.</string>
     <string name="str_deb_failed">The Debian Kit main script file (%s) was not found or is not executable. Select \'Download…\' from the menu and proceed as described under \'Readme…\'.</string>
-    <string name="str_deb_maybe">Error while executing /system/bin/ls. This is unusual and may prevent you from using the Debian Kit.</string>
+    <string name="str_deb_failed_nox">The Debian Kit main script file (%s) is not executable.</string><string name="str_deb_maybe_ls">Error while executing /system/bin/ls. This is unusual and may prevent you from using the Debian Kit.</string>
+    
 </resources>

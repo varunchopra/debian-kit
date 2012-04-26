@@ -29,19 +29,19 @@ public class DebianKitActivity extends Activity
 		try
 		{
 			ProcessBuilder cmd = new ProcessBuilder(args);
- 			Process process = cmd.start();
- 			InputStream in = process.getInputStream();
- 			byte[] re = new byte[1024];
- 			while(in.read(re) != -1 && (!oneline || 0 == s_ret.length()))
- 			{
- 				s_ret = s_ret + new String(re);
- 			}
- 			in.close();
+			Process process = cmd.start();
+			InputStream in = process.getInputStream();
+			byte[] re = new byte[1024];
+			while(in.read(re) != -1 && (!oneline || 0 == s_ret.length()))
+			{
+				s_ret = s_ret + new String(re);
+			}
+			in.close();
 		}
 		catch(IOException ex)
 		{
- 			ex.printStackTrace();
- 			return null;
+			ex.printStackTrace();
+			return null;
 		}
 		if (oneline) {
 			int i = s_ret.indexOf('\n');
@@ -58,9 +58,9 @@ public class DebianKitActivity extends Activity
 
 		public Verdict(int tv_resid)
 		{
-	        tv = tv_resid;
-	        ic = -1;
-	    }
+			tv = tv_resid;
+			ic = -1;
+		}
 	}
 	
 	Verdict v_cpu = new Verdict(R.id.TextView_cpu);
@@ -126,7 +126,7 @@ public class DebianKitActivity extends Activity
 			}
 			catch(IOException ex)
 			{
-	 			ex.printStackTrace();
+				ex.printStackTrace();
 			}
 			publishProgress(v_mem);
 
@@ -154,7 +154,7 @@ public class DebianKitActivity extends Activity
 			}
 			catch(IOException ex)
 			{
-	 			ex.printStackTrace();
+				ex.printStackTrace();
 			}
 			publishProgress(v_ext);
 
@@ -182,7 +182,7 @@ public class DebianKitActivity extends Activity
 			}
 			catch(IOException ex)
 			{
-	 			ex.printStackTrace();
+				ex.printStackTrace();
 			}
 			publishProgress(v_dev);
 
@@ -236,7 +236,7 @@ public class DebianKitActivity extends Activity
 			}
 			catch(IOException ex)
 			{
-	 			ex.printStackTrace();
+				ex.printStackTrace();
 			}
 			publishProgress(v_mnt);
 
@@ -268,19 +268,19 @@ public class DebianKitActivity extends Activity
 								// Check if this is the Android standard-su, which does not allow uid(app)->root
 								in = new BufferedInputStream(new FileInputStream(file), 16384);
 								byte[] re = new byte[(int)file.length()];
-					 			if (in.read(re) != -1)
-					 			{
+								if (in.read(re) != -1)
+								{
 									if (0 <= new String(re).indexOf("su: uid %d not allowed to su"))
 									{
 										v_sux.ic = R.drawable.ic_failed;
 										v_sux.s = getString(R.string.str_sux_failed);
 									}
-					 			}
+								}
 								in.close();
 							}
 							catch(IOException ex)
 							{
-					 			ex.printStackTrace();
+								ex.printStackTrace();
 							}
 						}
 						else
@@ -308,15 +308,30 @@ public class DebianKitActivity extends Activity
 				if (null != s)
 				{
 					if (s.startsWith("-rwx"))
-		 			{
+					{
 						v_deb.ic = R.drawable.ic_passed;
 						v_deb.s = String.format(getString(R.string.str_deb_passed), file.getAbsolutePath());
 					}
+					else
+					{
+						v_deb.ic = R.drawable.ic_failed;
+						v_deb.s = String.format(getString(R.string.str_deb_failed_nox), file.getAbsolutePath());
+					}
+					/*
+					try
+					{
+						String app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+					}
+					catch (NameNotFoundException e)
+					{
+						Log.v(tag, e.getMessage());
+					}
+					*/
 				}
 				else
 				{
 					v_deb.ic = R.drawable.ic_maybe;
-					v_deb.s = getString(R.string.str_deb_maybe);
+					v_deb.s = getString(R.string.str_deb_maybe_ls);
 				}
 			}
 			publishProgress(v_deb);
