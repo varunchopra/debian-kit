@@ -46,6 +46,20 @@ get_which() {
 	return 0
 }
 
+make_loop_dev() {
+	# Creates 256 loop device nodes below /dev
+	# Note: Android uses same below /dev/block
+	local i=0
+	while [ $i -le 255 ];do 
+		if [ ! -b /dev/loop${i} ];then
+			test -e /dev/loop${i} && rm -f /dev/loop${i}
+			mknod /dev/loop${i} b 7 ${i} || return 1
+		fi
+		i=$(( $i + 1 ))
+	done
+	return 0
+}
+
 case ${DEB_DEBUG} in true);;*) DEB_DEBUG=false;;esac
 
 debug_mount() {

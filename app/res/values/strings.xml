@@ -33,7 +33,7 @@
     <string name="str_sux_passed">Detected a functioning \'su\' command. Debian Kit should run fine with this.</string>
     <string name="str_sux_failed">No functioning \'su\' command detected. This usually means that your device is not rooted and you therefore cannot use Debian-Kit.</string>
     <string name="str_sux_maybe_path">No PATH setting in environment. This is unusual and may prevent you from using the Debian Kit.</string>
-    <string name="str_sux_maybe_ls_exec">Error while executing /system/bin/ls. This is unusual and may prevent you from using the Debian Kit.</string>
+    <string name="str_sux_maybe_ls">Error while executing /system/bin/ls. This is unusual and may prevent you from using the Debian Kit.</string>
     <string name="str_deb">Debian Kit already unpacked</string>
     <string name="str_deb_passed">The Debian Kit main script file (%s) was found. You may simply use Debian Kit now.</string>
     <string name="str_deb_failed">The Debian Kit main script file (%s) was not found or is not executable. Select \'Download…\' from the menu and proceed as described under \'Readme…\'.</string>

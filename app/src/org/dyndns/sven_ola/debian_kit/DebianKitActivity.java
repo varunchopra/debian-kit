@@ -286,7 +286,7 @@ public class DebianKitActivity extends Activity
 						else
 						{
 							v_sux.ic = R.drawable.ic_maybe;
-							v_sux.s = getString(R.string.str_sux_maybe_ls_exec);
+							v_sux.s = getString(R.string.str_sux_maybe_ls);
 						}
 					}
 				}

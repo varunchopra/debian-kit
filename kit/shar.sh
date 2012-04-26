@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script for creating an Android compatible shell archive
-# Version 1.2, Copyright 2012 by Sven-Ola, License: GPLv3
+# Version 1.3, Copyright 2012 by Sven-Ola, License: GPLv3
 
 if ! make -s -C shellescape >&2;then
 	echo "To create a shell archive, you need 'make' and compiler on your PC." >&2

@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # Script that runs when *.shar shell archive is extraced
-# Version 1.2, Copyright 2012 by Sven-Ola, License: GPLv3
+# Version 1.3, Copyright 2012 by Sven-Ola, License: GPLv3
 
 case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
 

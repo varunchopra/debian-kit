@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # Script for starting Debian on Android (needs root)
-# Version 1.2, Copyright 2012 by Sven-Ola, License: GPLv3
+# Version 1.3, Copyright 2012 by Sven-Ola, License: GPLv3
 # Docs and downloads: http://sven-ola.dyndns.org/repo/
 
 DEV=/dev/debian
@@ -225,12 +225,7 @@ mount_merge() {
 		fi
 		# Note: even if this is not a loop-mount, we need
 		# these for a working Debian loop mount command.
-		for i in 0 1 2 3 4 5 6 7;do
-			if [ ! -b /dev/loop${i} ];then
-				rm -f /dev/loop${i}
-				mknod /dev/loop${i} b 7 ${i} || return 1
-			fi
-		done
+		make_loop_dev || return 1
 		if (${PIVOT_ALWAYS} && [ ! -d "${3}/oldroot" ]) || [ -n "$(sed '/^[^[:space:]]\+[[:space:]]\+\/[^[:space:]]\+/d;/^rootfs\b/d;/^[^[:space:]]\+[[:space:]]\+\/[[:space:]]\+tmpfs\b/d' /proc/mounts)" ];then
 			# Root not mounted to RAM disk, use pivot_root to change that
 			echo "Pivoting to ${2}"

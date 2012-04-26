@@ -1,8 +1,13 @@
-Version 1.3 (2012-04-17):
+Version 1.3 (2012-04-26):
 
-- Started a new version by peeking what others are doing
-- Created a new app "Debian Kit" and placed it on Google play
+- Created a new app "Debian Kit" and placed it on Google play. The
+  app checks for showstoppers and informs about updates. May get
+  more features if I find the time (e.g. Install, Start-Stop-X).
 - Created a new project on sourceforge named "Debian Kit"
+- Bugfix for HTC desire: this devices offers very low space
+  in /data/app, which causes uses to extensively use app-to-sd.
+  Since every to-sd'd app eats up a loop devices, we simply
+  need much more device nodes below /dev.
 
 Version 1.2 (2012-04-12):
 
