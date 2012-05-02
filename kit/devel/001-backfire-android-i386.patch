@@ -1,6 +1,6 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.armel/.config backfire.i386/.config
---- backfire.armel/.config	2012-04-06 14:30:48.000000000 +0200
-+++ backfire.i386/.config	2012-04-06 14:30:48.000000000 +0200
+--- backfire.armel/.config	2012-05-02 22:29:57.000000000 +0200
++++ backfire.i386/.config	2012-05-02 22:29:57.000000000 +0200
 @@ -1,5 +1,5 @@
  CONFIG_HAVE_DOT_CONFIG=y
 -CONFIG_TARGET_android=y

@@ -4,7 +4,7 @@
 # tested for the ssh daemon. For a better replacement check out
 # http://gyp.blogs.balabit.com/2011/01/using-upstart-in-a-chroot/
 #
-# Version 1.3, Copyright 2012 by Sven-Ola, License: GPLv3
+# Version 1.4, Copyright 2012 by Sven-Ola, License: GPLv3
 
 CONF=/etc/init
 PIDS=/var/run/upstart-

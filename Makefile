@@ -4,7 +4,7 @@
 # the app with major.minor.sub, sub is the market version
 # number incremented for each Google-play app-publishing.
 
-VERSION=1.3
+VERSION=1.4
 SHELL=/bin/bash
 
 all: doc version

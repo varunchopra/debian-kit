@@ -1,3 +1,10 @@
+Version 1.4 (2012-05-02):
+
+- Additional fix for included busybox: the older openwrt
+  version of losetup only shows loop0-9. Fix is for HTC
+  devices with too many app-to-sd-loops that will not umount
+  correctly whithout this.
+
 Version 1.3 (2012-04-26):
 
 - Created a new app "Debian Kit" and placed it on Google play. The

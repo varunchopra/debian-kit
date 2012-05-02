@@ -1,6 +1,6 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/.config backfire.armel/.config
 --- backfire.orig/.config	1970-01-01 01:00:00.000000000 +0100
-+++ backfire.armel/.config	2012-04-06 14:30:48.000000000 +0200
++++ backfire.armel/.config	2012-05-02 22:29:57.000000000 +0200
 @@ -0,0 +1,623 @@
 +CONFIG_HAVE_DOT_CONFIG=y
 +CONFIG_TARGET_android=y
@@ -684,6 +684,49 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 + 		open_list_and_close(devname, 0);
 + 	}
 + #if ENABLE_FEATURE_CLEAN_UP
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/busybox/patches/992-android-losetup-backport.patch backfire.armel/package/busybox/patches/992-android-losetup-backport.patch
+--- backfire.orig/package/busybox/patches/992-android-losetup-backport.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/busybox/patches/992-android-losetup-backport.patch	2012-05-02 22:24:13.000000000 +0200
+@@ -0,0 +1,39 @@
++diff -Nur busybox-1.15.3.orig/util-linux/losetup.c busybox-1.15.3/util-linux/losetup.c
++--- busybox-1.15.3.orig/util-linux/losetup.c	2009-12-12 02:45:09.000000000 +0100
+++++ busybox-1.15.3/util-linux/losetup.c	2012-05-02 22:19:22.000000000 +0200
++@@ -12,7 +12,7 @@
++ int losetup_main(int argc, char **argv) MAIN_EXTERNALLY_VISIBLE;
++ int losetup_main(int argc, char **argv)
++ {
++-	char dev[] = LOOP_NAME"0";
+++	int n;
++ 	unsigned opt;
++ 	char *opt_o;
++ 	char *s;
++@@ -58,9 +58,16 @@
++ 	}
++ 
++ 	/* -o, -f or no option */
+++	n = 0;
++ 	while (1) {
+++		char dev[LOOP_NAMESIZE];
+++
+++		sprintf(dev, LOOP_FORMAT, n);
++ 		s = query_loop(dev);
+++		n++;
++ 		if (!s) {
+++			if (n > 9 && errno && errno != ENXIO)
+++				return EXIT_SUCCESS;
++ 			if (opt == 0x4) {
++ 				puts(dev);
++ 				return EXIT_SUCCESS;
++@@ -71,9 +78,6 @@
++ 			if (ENABLE_FEATURE_CLEAN_UP)
++ 				free(s);
++ 		}
++-
++-		if (++dev[sizeof(dev) - 2] > '9')
++-			break;
++ 	}
++ 	return EXIT_SUCCESS;
++ }
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/e2fsprogs-static/Makefile backfire.armel/package/e2fsprogs-static/Makefile
 --- backfire.orig/package/e2fsprogs-static/Makefile	1970-01-01 01:00:00.000000000 +0100
 +++ backfire.armel/package/e2fsprogs-static/Makefile	2012-03-02 15:01:27.000000000 +0100
