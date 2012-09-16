@@ -1,9 +1,12 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/.config backfire.armel/.config
 --- backfire.orig/.config	1970-01-01 01:00:00.000000000 +0100
-+++ backfire.armel/.config	2012-05-02 22:29:57.000000000 +0200
-@@ -0,0 +1,623 @@
++++ backfire.armel/.config	2012-09-16 16:10:32.000000000 +0200
+@@ -0,0 +1,626 @@
 +CONFIG_HAVE_DOT_CONFIG=y
 +CONFIG_TARGET_android=y
++CONFIG_DEVEL=y
++CONFIG_TOOLCHAINOPTS=y
++CONFIG_UCLIBC_VERSION_0_9_30_3=y
 +CONFIG_PACKAGE_e2fsprogs-static=m
 +CONFIG_PACKAGE_tune2fs-static=m
 +CONFIG_PACKAGE_openvpn-static=m
@@ -609,7 +612,7 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 +# CONFIG_BUSYBOX_CONFIG_ASH_MAIL is not set
 +# CONFIG_BUSYBOX_CONFIG_ASH_OPTIMIZE_FOR_SIZE is not set
 +# CONFIG_BUSYBOX_CONFIG_ASH_RANDOM_SUPPORT is not set
-+# CONFIG_BUSYBOX_CONFIG_ASH_EXPAND_PRMT is not set
++CONFIG_BUSYBOX_CONFIG_ASH_EXPAND_PRMT=y
 +# CONFIG_BUSYBOX_CONFIG_LASH is not set
 +# CONFIG_BUSYBOX_CONFIG_MSH is not set
 +CONFIG_BUSYBOX_CONFIG_SH_MATH_SUPPORT=y
@@ -727,6 +730,23 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 + 	}
 + 	return EXIT_SUCCESS;
 + }
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/busybox/patches/993-android-precmd-alias.patch backfire.armel/package/busybox/patches/993-android-precmd-alias.patch
+--- backfire.orig/package/busybox/patches/993-android-precmd-alias.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/package/busybox/patches/993-android-precmd-alias.patch	2012-09-16 16:07:48.000000000 +0200
+@@ -0,0 +1,13 @@
++diff -Nur busybox-1.15.3.orig/shell/ash.c busybox-1.15.3/shell/ash.c
++--- busybox-1.15.3.orig/shell/ash.c	2012-09-16 15:02:35.000000000 +0200
+++++ busybox-1.15.3/shell/ash.c	2012-09-16 16:07:15.000000000 +0200
++@@ -13215,6 +13215,9 @@
++ 	INIT_G_var();
++ #if ENABLE_ASH_ALIAS
++ 	INIT_G_alias();
+++	// Android mksh: PS1 features a 'precmd' that typically
+++	// is empty which typically triggers "file not found."
+++	setalias("precmd", "");
++ #endif
++ 	INIT_G_cmdtable();
++ 
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/package/e2fsprogs-static/Makefile backfire.armel/package/e2fsprogs-static/Makefile
 --- backfire.orig/package/e2fsprogs-static/Makefile	1970-01-01 01:00:00.000000000 +0100
 +++ backfire.armel/package/e2fsprogs-static/Makefile	2012-03-02 15:01:27.000000000 +0100
@@ -1484,9 +1504,9 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 +endef
 +
 +$(eval $(call BuildTarget))
-diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch backfire.armel/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch
---- backfire.orig/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch	1970-01-01 01:00:00.000000000 +0100
-+++ backfire.armel/toolchain/uClibc/patches-0.9.30.1/990-android-properties-dns.patch	2012-04-06 13:49:33.000000000 +0200
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/toolchain/uClibc/patches-0.9.30.3/990-android-properties-dns.patch backfire.armel/toolchain/uClibc/patches-0.9.30.3/990-android-properties-dns.patch
+--- backfire.orig/toolchain/uClibc/patches-0.9.30.3/990-android-properties-dns.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/toolchain/uClibc/patches-0.9.30.3/990-android-properties-dns.patch	2012-04-06 13:49:33.000000000 +0200
 @@ -0,0 +1,572 @@
 +diff -Nur '--exclude=.*' '--exclude=*~' '--exclude=*.o' '--exclude=conf' '--exclude=.ex.zconf.c' '--exclude=mconf' '--exclude=zconf.hash.c' '--exclude=zconf.tab.c' '--exclude=config' '--exclude=nohup.out' uClibc-0.9.30.1.orig/libc/inet/Makefile.in uClibc-0.9.30.1/libc/inet/Makefile.in
 +--- uClibc-0.9.30.1.orig/libc/inet/Makefile.in	2012-04-05 21:19:34.720192288 +0200
@@ -2060,3 +2080,63 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 ++    }
 ++    return 0;
 ++}
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn backfire.orig/toolchain/uClibc/patches-0.9.30.3/991-auto-use-stat64.patch backfire.armel/toolchain/uClibc/patches-0.9.30.3/991-auto-use-stat64.patch
+--- backfire.orig/toolchain/uClibc/patches-0.9.30.3/991-auto-use-stat64.patch	1970-01-01 01:00:00.000000000 +0100
++++ backfire.armel/toolchain/uClibc/patches-0.9.30.3/991-auto-use-stat64.patch	2012-09-16 12:54:02.000000000 +0200
+@@ -0,0 +1,56 @@
++From ae0e6225db6dacb4d4de81245fba8671526dfe90 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 04 Feb 2012 04:06:55 +0000
++Subject: lstat/stat/fstat: Use 64bit version of syscall if available
++
++This is needed for stat'ing loop devices > 255
++since otherwise kernel returns EOVERFLOW becasue
++it needs st_rdev/st_dev to be larger than 16bits but
++in kernel it uses __old_kernel_stat for stat
++syscall which has st_rdev/st_dev as unsigned short
++
++Add a testcase
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++(limited to 'libc/sysdeps/linux/common/fstat.c')
++
++diff --git a/libc/sysdeps/linux/common/fstat.c b/libc/sysdeps/linux/common/fstat.c
++index acc639b..4726a68 100644
++--- a/libc/sysdeps/linux/common/fstat.c
+++++ b/libc/sysdeps/linux/common/fstat.c
++@@ -12,18 +12,28 @@
++ #include <sys/stat.h>
++ #include "xstatconv.h"
++ 
++-#define __NR___syscall_fstat __NR_fstat
++-static __inline__ _syscall2(int, __syscall_fstat, int, fd, struct kernel_stat *, buf)
++-
++ int fstat(int fd, struct stat *buf)
++ {
++ 	int result;
+++#ifdef __NR_fstat64
+++	/* normal stat call has limited values for various stat elements
+++	 * e.g. uid device major/minor etc.
+++	 * so we use 64 variant if available
+++	 * in order to get newer versions of stat elements
+++	 */
+++	struct kernel_stat64 kbuf;
+++	result = INLINE_SYSCALL(fstat64, 2, fd, &kbuf);
+++	if (result == 0) {
+++		__xstat32_conv(&kbuf, buf);
+++	}
+++#else
++ 	struct kernel_stat kbuf;
++ 
++-	result = __syscall_fstat(fd, &kbuf);
+++	result = INLINE_SYSCALL(fstat, 2, fd, &kbuf);
++ 	if (result == 0) {
++ 		__xstat_conv(&kbuf, buf);
++ 	}
+++#endif
++ 	return result;
++ }
++ libc_hidden_def(fstat)
++--
++cgit v0.9.0.1-2-gef13

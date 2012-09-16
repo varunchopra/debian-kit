@@ -226,7 +226,7 @@ while getopts "d:m:s:i:t:L:D:M:uUCh" opt;do
 		ACTION=update
 	;;U)
 		ACTION=uninstall
-	;;U)
+	;;C)
 		ACTION=clean
 	;;*)
 		usage 1
