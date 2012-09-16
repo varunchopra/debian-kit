@@ -35,9 +35,9 @@ USE_BIND=1
 # 2: bind-mount all, unpivot_me does not work at all - you need to reset/reboot to get the original root back
 PIVOT_BIND=1
 
-# Use 'export CUSTOM_ROM=true' if the following symlinks are
-# used by your ROM: /etc -> /system/etc, /lib -> /system/lib
-case ${CUSTOM_ROM} in true);;*) CUSTOM_ROM=false;;esac
+# Use 'export CUSTOM_ROM=false' if the following symlinks are
+# unused by your ROM: /etc -> /system/etc, /lib -> /system/lib
+case ${CUSTOM_ROM} in false);;*) CUSTOM_ROM=true;;esac
 
 # Use 'export PIVOT_ALWAYS=true' for testing pivot mode
 case ${PIVOT_ALWAYS} in true);;*) PIVOT_ALWAYS=false;;esac

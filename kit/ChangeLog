@@ -1,3 +1,12 @@
+Version 1.5 (2012-09-16):
+
+- ICS: fixed ""Value too large for defined data type" for "ls ."
+- ICS: added empty alias for "precmd" (for PS1 setting in mksh)
+- enabled PS1 prompt parsing with shell substs
+- upgraded uclibc, required for "val too large" fix (use stat64)
+- Changed default for "CUSTOM_ROM", more and more ROMs need this.
+  Which in turn adds /etc and /lib to the "merge dir" list.
+
 Version 1.4 (2012-05-02):
 
 - Additional fix for included busybox: the older openwrt
