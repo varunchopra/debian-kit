@@ -75,6 +75,8 @@ public class DebianKitActivity extends Activity
 	private class CourtTask extends AsyncTask<Void, Verdict, Void>
 	{
 		protected Void doInBackground(Void... voids) {
+			String s;
+
 			// Check if CPU_ABI is arm or x86
 			v_cpu.ic = R.drawable.ic_maybe;
 			v_cpu.s = getString(R.string.str_cpu_maybe);
@@ -97,9 +99,9 @@ public class DebianKitActivity extends Activity
 			// Check if absolute RAM above certain threshold
 			v_mem.ic = R.drawable.ic_unknown;
 			v_mem.s = getString(R.string.str_mem_unknown);
-			File file = new File("/proc/meminfo");
 			try
 			{
+				File file = new File("/proc/meminfo");
 				BufferedReader br = new BufferedReader(new FileReader(file), 4096);
 				// Example: MemTotal: 2050880 kB
 				Pattern p = Pattern.compile("^MemTotal:\\s+(\\d+)\\s+kB$");
@@ -133,10 +135,10 @@ public class DebianKitActivity extends Activity
 			// Check if ext2/3/4 file systems supported
 			v_ext.ic = R.drawable.ic_unknown;
 			v_ext.s = getString(R.string.str_ext_unknown);
-			file = new File("/proc/filesystems");
 			try
 			{
 				String line;
+				File file = new File("/proc/filesystems");
 				BufferedReader br = new BufferedReader(new FileReader(file), 4096);
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_ext.ic)
 				{
@@ -161,10 +163,10 @@ public class DebianKitActivity extends Activity
 			// Check if loop-mounts are supported
 			v_dev.ic = R.drawable.ic_unknown;
 			v_dev.s = getString(R.string.str_dev_unknown);
-			file = new File("/proc/devices");
 			try
 			{
 				String line;
+				File file = new File("/proc/devices");
 				BufferedReader br = new BufferedReader(new FileReader(file), 4096);
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_dev.ic)
 				{
@@ -189,21 +191,23 @@ public class DebianKitActivity extends Activity
 			// Check if kernel modules are supported
 			v_mod.ic = R.drawable.ic_failed;
 			v_mod.s = getString(R.string.str_mod_failed);
-			file = new File("/proc/modules");
-			if (file.exists())
 			{
-				v_mod.ic = R.drawable.ic_passed;
-				v_mod.s = getString(R.string.str_mod_passed);
+				File file = new File("/proc/modules");
+				if (file.exists())
+				{
+					v_mod.ic = R.drawable.ic_passed;
+					v_mod.s = getString(R.string.str_mod_passed);
+				}
 			}
 			publishProgress(v_mod);
 
 			// Check if /data is not mounted with noexec
 			v_mnt.ic = R.drawable.ic_unknown;
 			v_mnt.s = getString(R.string.str_mnt_unknown);
-			file = new File("/proc/mounts");
 			try
 			{
 				String line;
+				File file = new File("/proc/mounts");
 				Pattern p = Pattern.compile(String.format("^\\S+\\s+%s\\s+\\S+\\s+(\\S+)", Environment.getDataDirectory().getAbsolutePath()));
 				BufferedReader br = new BufferedReader(new FileReader(file), 8192);
 				while (null != (line = br.readLine()) && R.drawable.ic_passed != v_mnt.ic && R.drawable.ic_failed != v_mnt.ic)
@@ -243,15 +247,14 @@ public class DebianKitActivity extends Activity
 			// Check if executable su with mode 6755 is available
 			v_sux.ic = R.drawable.ic_failed;
 			v_sux.s = getString(R.string.str_sux_failed);
-			file = new File("/system/bin/sh");
-			String s = System.getenv("PATH");
+			s = System.getenv("PATH");
 			if (null != s)
 			{
 				String[] path = s.split(File.pathSeparator);
 				int i;
 				for(i = 0; i < path.length; i++)
 				{
-					file = new File(path[i]+File.separator+"su");
+					File file = new File(path[i]+File.separator+"su");
 					if (file.exists())
 					{
 						s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
@@ -299,39 +302,42 @@ public class DebianKitActivity extends Activity
 			publishProgress(v_sux);
 
 			// Check if /data/local/deb/bootdeb is available
-			file = new File(String.format("%s/local/deb/bootdeb", Environment.getDataDirectory().getAbsolutePath()));
+			s = String.format("%s/local/deb/bootdeb", Environment.getDataDirectory().getAbsolutePath());
 			v_deb.ic = R.drawable.ic_failed;
-			v_deb.s = String.format(getString(R.string.str_deb_failed), file.getAbsolutePath());
-			if (file.exists())
+			v_deb.s = String.format(getString(R.string.str_deb_failed), s);
 			{
-				s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
-				if (null != s)
+				File file = new File(s);
+				if (file.exists())
 				{
-					if (s.startsWith("-rwx"))
+					s = execShell(true, new String[] {"/system/bin/ls", "-l", file.getAbsolutePath()});
+					if (null != s)
 					{
-						v_deb.ic = R.drawable.ic_passed;
-						v_deb.s = String.format(getString(R.string.str_deb_passed), file.getAbsolutePath());
+						if (s.startsWith("-rwx"))
+						{
+							v_deb.ic = R.drawable.ic_passed;
+							v_deb.s = String.format(getString(R.string.str_deb_passed), file.getAbsolutePath());
+						}
+						else
+						{
+							v_deb.ic = R.drawable.ic_failed;
+							v_deb.s = String.format(getString(R.string.str_deb_failed_nox), file.getAbsolutePath());
+						}
+						/*
+						try
+						{
+							String app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+						}
+						catch (NameNotFoundException e)
+						{
+							Log.v(tag, e.getMessage());
+						}
+						*/
 					}
 					else
 					{
-						v_deb.ic = R.drawable.ic_failed;
-						v_deb.s = String.format(getString(R.string.str_deb_failed_nox), file.getAbsolutePath());
+						v_deb.ic = R.drawable.ic_maybe;
+						v_deb.s = getString(R.string.str_deb_maybe_ls);
 					}
-					/*
-					try
-					{
-						String app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-					}
-					catch (NameNotFoundException e)
-					{
-						Log.v(tag, e.getMessage());
-					}
-					*/
-				}
-				else
-				{
-					v_deb.ic = R.drawable.ic_maybe;
-					v_deb.s = getString(R.string.str_deb_maybe_ls);
 				}
 			}
 			publishProgress(v_deb);
