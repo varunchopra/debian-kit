@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # Script for bootstrapping Debian on Android (needs root)
-# Version 1.4, Copyright 2012 by Sven-Ola, License: GPLv3
+# Version 1.5, Copyright 2013 by Sven-Ola, License: GPLv3
 # Docs and downloads: http://sven-ola.dyndns.org/repo/
 
 case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
