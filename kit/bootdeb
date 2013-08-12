@@ -172,8 +172,13 @@ merge_root_work() {
 	for d in "${1}"/*;do
 		local a=${2%/}/${d##*/}
 		if [ ! "${d}" -ef "${a}" ] && [ ! -e "${2%/}/.${d##*/}.debian-android" ];then
-			case ${d##*/} in dev|mnt|proc|sys|lost+found)
-				# Do nothing
+			local i
+			for i in $(cut -d' ' -f2 /proc/mounts);do
+				# Do not merge Android mount points (/dev, /proc, /sys, and evt. /tmp)
+				case ${i} in ${a})d=;;esac
+			done
+			case ${d##*/} in ''|mnt|lost+found)
+				# Do nothing on mount points and similar
 			;;*)
 				if [ -e "${a}" ];then
 					local ad="${2%/}/.${d##*/}.debian-android"
