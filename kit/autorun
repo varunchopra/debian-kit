@@ -48,7 +48,7 @@ To install now, enter a digit and a char:
 2: 2047 Mb,  large setup e.g. office, browser
 s: Debian Squeeze (2011, oldstable)
 w: Debian Wheezy (2014, default, stable)
-j: Debian Jessie (2014, testing)
+j: Debian Jessie (2014, testing with armhf)
 p: Ubuntu Precise (2012, LTS version)
 t: Ubuntu Trusty (2014, LTS version)
 
@@ -56,10 +56,11 @@ Press [enter] without any input to abort.
 
 EOF
 
+ARCH=
 DISTRO=
 LOOPSIZE=
 while [ -z "${DISTRO}" ] || [ -z "${LOOPSIZE}" ];do
-	echo -n "Enter option (e.g. '0s' for 512 Mb Squeeze): "
+	echo -n "Enter option (e.g. '0w' for 512 Mb Wheezy): "
 	read n
 
 	case ${n} in ""|q|Q) exit 0;;esac
@@ -69,6 +70,7 @@ while [ -z "${DISTRO}" ] || [ -z "${LOOPSIZE}" ];do
 	;;*s)
 		DISTRO=squeeze
 	;;*j)
+		ARCH="-a armhf"
 		DISTRO=jessie
 	;;*p)
 		DISTRO=precise
@@ -93,7 +95,7 @@ while [ -z "${DISTRO}" ] || [ -z "${LOOPSIZE}" ];do
 	fi
 done
 
-if ash -- ${DIR}/mk-debian -d ${DISTRO} ${LOOPSIZE};then
+if ash -- ${DIR}/mk-debian -d ${DISTRO} ${ARCH} ${LOOPSIZE};then
 	ash -- ${DIR}/bootdeb stage2 && ash -- ${DIR}/cleanup
 	echo >&2
 	echo "Your next steps: enter '$(if [ -x ${ANDROID_ROOT:-/system}/bin/deb ];then echo deb;else echo ${DIR}/bootdeb;fi)' to start, 'apt-get update' to fetch package lists, and 'apt-get install andromize' to add a small packet that further adapts Debian to the Android environment." >&2

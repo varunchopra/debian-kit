@@ -156,6 +156,7 @@ Usage:
   ${0##*/} [Options]
 
 Options:
+  -a <arch>	overwrite architecture, e.g. armhf
   -d <distro>	specify squeeze/wheezy/jessie/precise/trusty
   -m <path>	specify mount point for disk/device
   -s <megabyte>	specify size for new loop disk file
@@ -170,6 +171,7 @@ Options:
   -h		display usage text and settings
 
 Settings:
+  -a ${ARCH:-<none>}
   -d ${DISTRO:-<none>}
   -m ${MNT}
   -s ${LOOPSIZE} Mb
@@ -202,8 +204,10 @@ EOF
 
 ##### Main #####
 
-while getopts "d:m:s:i:t:L:D:M:uUCh" opt;do
-	case ${opt} in d)
+while getopts "a:d:m:s:i:t:L:D:M:uUCh" opt;do
+	case ${opt} in a)
+		ARCH=${OPTARG}
+	;;d)
 		DISTRO=${OPTARG}
 	;;m)
 		MNT=${OPTARG}
@@ -475,7 +479,7 @@ echo "Using DNS=${DNS} for /etc/resolv.conf..."
 echo "nameserver ${DNS}" > ${MNT}/etc/resolv.conf
 (
 	cd ${MNT}
-	unpack_deb ${DIR}/debootstrap_1.0.58_all.deb
+	unpack_deb ${DIR}/debootstrap_1.0.59_all.deb
 )
 
 if [ ! -x ${MNT}/bin/busybox ];then
@@ -497,7 +501,7 @@ for i in ${MNT}/usr/sbin/debootstrap ${MNT}/usr/share/debootstrap/functions;do
 done
 
 SUCCESS=no
-if PATH=/usr/sbin:/usr/bin:/sbin:/bin chroot ${MNT} debootstrap --no-check-gpg --verbose --arch ${CPU} --foreign ${DISTRO} /new-root ${DISTRO_URL};then
+if PATH=/usr/sbin:/usr/bin:/sbin:/bin chroot ${MNT} debootstrap --no-check-gpg --verbose --arch ${ARCH:-${CPU}} --foreign ${DISTRO} /new-root ${DISTRO_URL};then
 	test -d ${MNT}/new-root && SUCCESS=yes
 fi
 

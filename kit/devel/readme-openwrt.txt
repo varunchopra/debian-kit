@@ -2,12 +2,13 @@ How to compile binaries for Android phones
 
 0) Install softs, e.g. apt-get install subversion build-essential
 
-1) Grab openwrt/backfire. Download the current trunk with
-   svn co svn://svn.openwrt.org/openwrt/branches/backfire
+1) Grab openwrt/attitude. Download the current trunk with
+   svn co svn://svn.openwrt.org/openwrt/branches/attitude_adjustment attitude.armel
 
-2) Apply patch: cd backfire && patch -p1 < .../backfire-android.patch
+2) Apply patch: cd attitude.armel && patch -p1 < ../attitude-android.patch
 
-2a) For x86/i386, also apply patch -p1 < .../backfire-android-x86.patch
+2a) For x86/i386, cp attitude.armel to attitude.i386 and apply additional patch:
+    cd attitude.i386 && patch -p1 < ../attitude-android-x86.patch
 
 3) Do "make menuconfig" and save.
 

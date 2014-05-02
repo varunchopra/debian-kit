@@ -2,6 +2,9 @@ Version 1.6 (2014-05-02):
 
 - Removed Ubuntu-Lucid, added Ubuntu-Trusty
 - Added Debian-Wheezy and Debian-Jessie
+- New mk-debian switch: -a to overwrite ARCH
+- Switched from OpenWrt/Backfire to Attitude
+- Added xzcat as compression method for *.deb
 
 Version 1.5 (2012-09-16):
 
