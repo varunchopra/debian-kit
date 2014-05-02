@@ -1,6 +1,6 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.armel/.config attitude.i386/.config
---- attitude.armel/.config	2014-05-02 10:10:29.000000000 +0200
-+++ attitude.i386/.config	2014-05-02 10:13:23.000000000 +0200
+--- attitude.armel/.config	2014-05-02 18:04:25.000000000 +0200
++++ attitude.i386/.config	2014-05-02 18:04:25.000000000 +0200
 @@ -1,5 +1,5 @@
  CONFIG_HAVE_DOT_CONFIG=y
 -CONFIG_TARGET_android=y
@@ -9,8 +9,8 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
  CONFIG_TOOLCHAINOPTS=y
  CONFIG_PACKAGE_e2fsprogs-static=m
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.armel/package/openvpn-static/Makefile attitude.i386/package/openvpn-static/Makefile
---- attitude.armel/package/openvpn-static/Makefile	2014-05-02 09:47:21.000000000 +0200
-+++ attitude.i386/package/openvpn-static/Makefile	2014-05-02 10:13:23.000000000 +0200
+--- attitude.armel/package/openvpn-static/Makefile	2014-05-02 15:11:14.000000000 +0200
++++ attitude.i386/package/openvpn-static/Makefile	2014-05-02 15:12:04.000000000 +0200
 @@ -40,8 +40,8 @@
  	--disable-socks \
  	--enable-password-save \
