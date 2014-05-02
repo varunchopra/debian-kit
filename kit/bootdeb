@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # Script for starting Debian on Android (needs root)
-# Version 1.5, Copyright 2013 by Sven-Ola, License: GPLv3
+# Version 1.6, Copyright 2014 by Sven-Ola, License: GPLv3
 # Docs and downloads: http://sven-ola.dyndns.org/repo/
 
 DEV=/dev/debian

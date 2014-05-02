@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # Script for bootstrapping Debian on Android (needs root)
-# Version 1.5, Copyright 2013 by Sven-Ola, License: GPLv3
+# Version 1.6, Copyright 2014 by Sven-Ola, License: GPLv3
 # Docs and downloads: http://sven-ola.dyndns.org/repo/
 
 case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
@@ -23,7 +23,7 @@ LOOPSIZE=1024
 DNS=$(${ANDROID_ROOT:-/system}/bin/getprop net.dns1 2>&-)
 FSYS=$(sed -n '/\bext[234]$/p' /proc/filesystems|sort|sed -n '$s/[[:space:]]\+//p')
 LABEL=
-DISTRO=squeeze
+DISTRO=jessie
 MIRROR_DEBIAN="http://ftp.de.debian.org/debian"
 case ${CPU} in armel|armhf|powerpc)
 	MIRROR_UBUNTU="http://ports.ubuntu.com/ubuntu-ports"
@@ -156,7 +156,7 @@ Usage:
   ${0##*/} [Options]
 
 Options:
-  -d <distro>	specify squeeze/lucid/precise
+  -d <distro>	specify squeeze/wheezy/jessie/precise/trusty
   -m <path>	specify mount point for disk/device
   -s <megabyte>	specify size for new loop disk file
   -i <file|dev>	specify loop disk file name or device
@@ -178,8 +178,8 @@ Settings:
   -t ${FSYS:-<none>}
   -L ${LABEL:-<none>}
   -D ${DNS:-<none>}
-  -M(squeeze) ${MIRROR_DEBIAN}
-  -M(lucid/precise) ${MIRROR_UBUNTU}
+  -M(squeeze/wheezy/jessie) ${MIRROR_DEBIAN}
+  -M(precise/trusty) ${MIRROR_UBUNTU}
   Action: ${ACTION}
 
 Notes:
@@ -299,7 +299,7 @@ case ${IMG} in "")
 	fi
 ;;esac
 
-for i in ${DIR}/debootstrap_1.0.38_all.deb ${DIR}/bootdeb ${DIR}/${CPU}/pkgdetails;do
+for i in ${DIR}/debootstrap_1.0.59_all.deb ${DIR}/bootdeb ${DIR}/${CPU}/pkgdetails;do
 	if [ ! -f ${i} ];then
 		echo "${i} file not found." >&2
 		exit 1
@@ -309,12 +309,12 @@ done
 DISTRO_SEC=	# Default: no DISTRO-Sections
 DISTRO_UPD=	# Default: no extra security mirror
 
-case ${DISTRO} in squeeze)
+case ${DISTRO} in squeeze|wheezy|jessie)
 	DISTRO_URL=${MIRROR_DEBIAN}
 	DISTRO_COM="main non-free contrib"
 	DISTRO_SEC="updates"
 	DISTRO_UPD="http://security.debian.org ${DISTRO}/updates"
-;;lucid|precise)
+;;precise|trusty)
 	DISTRO_URL=${MIRROR_UBUNTU}
 	DISTRO_COM="main restricted universe"
 	DISTRO_SEC="updates security backports"
@@ -475,7 +475,7 @@ echo "Using DNS=${DNS} for /etc/resolv.conf..."
 echo "nameserver ${DNS}" > ${MNT}/etc/resolv.conf
 (
 	cd ${MNT}
-	unpack_deb ${DIR}/debootstrap_1.0.38_all.deb
+	unpack_deb ${DIR}/debootstrap_1.0.58_all.deb
 )
 
 if [ ! -x ${MNT}/bin/busybox ];then

@@ -1,3 +1,8 @@
+Version 1.6 (2014-05-02):
+
+- Removed Ubuntu-Lucid, added Ubuntu-Trusty
+- Added Debian-Wheezy and Debian-Jessie
+
 Version 1.5 (2012-09-16):
 
 - ICS: fixed ""Value too large for defined data type" for "ls ."

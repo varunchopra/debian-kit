@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # Script that runs when *.shar shell archive is extraced
-# Version 1.5, Copyright 2013 by Sven-Ola, License: GPLv3
+# Version 1.6, Copyright 2014 by Sven-Ola, License: GPLv3
 
 case ${0%/*} in ${0}) DIR=${PWD};;*) case ${0} in /*) DIR=${0%/*};;*) DIR=${PWD}/${0%/*};DIR=${DIR%%/.};;esac;;esac
 
@@ -46,9 +46,11 @@ To install now, enter a digit and a char:
 0: 512 Mb, minimal setup e.g. OpenSSL server
 1: 1024 Mb, medium setup e.g. LXDE desktop
 2: 2047 Mb,  large setup e.g. office, browser
-s: Debian Squeeze (2011, default, stable)
-l: Ubuntu Lucid (2010, tested LTS version)
-p: Ubuntu Precise (2012, untested LTS version)
+s: Debian Squeeze (2011, oldstable)
+w: Debian Wheezy (2014, default, stable)
+j: Debian Jessie (2014, testing)
+p: Ubuntu Precise (2012, LTS version)
+t: Ubuntu Trusty (2014, LTS version)
 
 Press [enter] without any input to abort.
 
@@ -63,11 +65,15 @@ while [ -z "${DISTRO}" ] || [ -z "${LOOPSIZE}" ];do
 	case ${n} in ""|q|Q) exit 0;;esac
 
 	case ${n} in *s)
+		DISTRO=wheezy
+	;;*s)
 		DISTRO=squeeze
-	;;*l)
-		DISTRO=lucid
+	;;*j)
+		DISTRO=jessie
 	;;*p)
 		DISTRO=precise
+	;;*t)
+		DISTRO=trusty
 	;;*)
 		DISTRO=
 	;;esac

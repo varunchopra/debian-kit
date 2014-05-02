@@ -4,7 +4,7 @@
 # the app with major.minor.sub, sub is the market version
 # number incremented for each Google-play app-publishing.
 
-VERSION=1.5
+VERSION=1.6
 SHELL=/bin/bash
 
 all: doc version
@@ -23,3 +23,6 @@ version:
 	grep -q '^# Version $(subst .,\.,$(VERSION)),' kit/shar.sh
 	grep -q '^# Version $(subst .,\.,$(VERSION)),' kit/uninstall
 	grep -q 'android:versionName="$(subst .,\.,$(VERSION))\.' app/AndroidManifest.xml
+
+clean:
+	rm -v $$(find -name "*~")
