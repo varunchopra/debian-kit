@@ -1,7 +1,7 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.orig/.config attitude.armel/.config
 --- attitude.orig/.config	1970-01-01 01:00:00.000000000 +0100
-+++ attitude.armel/.config	2014-05-07 09:51:28.000000000 +0200
-@@ -0,0 +1,12 @@
++++ attitude.armel/.config	2014-05-07 12:51:04.000000000 +0200
+@@ -0,0 +1,50 @@
 +CONFIG_HAVE_DOT_CONFIG=y
 +CONFIG_TARGET_android=y
 +CONFIG_DEVEL=y
@@ -13,7 +13,45 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 +CONFIG_PACKAGE_pkgdetails-static=m
 +CONFIG_BUSYBOX_CONFIG_FEATURE_PREFER_APPLETS=y
 +CONFIG_BUSYBOX_CONFIG_STATIC=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_XZ=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_LZMA=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_SEAMLESS_BZ2=y
 +CONFIG_BUSYBOX_CONFIG_AR=y
++CONFIG_BUSYBOX_CONFIG_UNLZMA=y
++CONFIG_BUSYBOX_CONFIG_UNXZ=y
++CONFIG_BUSYBOX_CONFIG_STAT=y
++# CONFIG_BUSYBOX_CONFIG_START_STOP_DAEMON is not set
++# CONFIG_BUSYBOX_CONFIG_HALT is not set
++# CONFIG_BUSYBOX_CONFIG_INIT is not set
++# CONFIG_BUSYBOX_CONFIG_FEATURE_SHADOWPASSWDS is not set
++# CONFIG_BUSYBOX_CONFIG_PASSWD is not set
++CONFIG_BUSYBOX_CONFIG_FDISK=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_FDISK_WRITABLE=y
++# CONFIG_BUSYBOX_CONFIG_HWCLOCK is not set
++CONFIG_BUSYBOX_CONFIG_LOSETUP=y
++# CONFIG_BUSYBOX_CONFIG_SWITCH_ROOT is not set
++# CONFIG_BUSYBOX_CONFIG_CROND is not set
++# CONFIG_BUSYBOX_CONFIG_CRONTAB is not set
++# CONFIG_BUSYBOX_CONFIG_WATCHDOG is not set
++# CONFIG_BUSYBOX_CONFIG_NC is not set
++# CONFIG_BUSYBOX_CONFIG_PING is not set
++# CONFIG_BUSYBOX_CONFIG_ARPING is not set
++# CONFIG_BUSYBOX_CONFIG_BRCTL is not set
++CONFIG_BUSYBOX_CONFIG_HOSTNAME=y
++# CONFIG_BUSYBOX_CONFIG_NETMSG is not set
++# CONFIG_BUSYBOX_CONFIG_NETSTAT is not set
++# CONFIG_BUSYBOX_CONFIG_NSLOOKUP is not set
++# CONFIG_BUSYBOX_CONFIG_NTPD is not set
++# CONFIG_BUSYBOX_CONFIG_TELNET is not set
++# CONFIG_BUSYBOX_CONFIG_TELNETD is not set
++# CONFIG_BUSYBOX_CONFIG_TRACEROUTE is not set
++# CONFIG_BUSYBOX_CONFIG_UDHCPC is not set
++# CONFIG_BUSYBOX_CONFIG_VCONFIG is not set
++CONFIG_BUSYBOX_CONFIG_FUSER=y
++CONFIG_BUSYBOX_CONFIG_RENICE=y
++# CONFIG_BUSYBOX_CONFIG_SYSLOGD is not set
++# CONFIG_BUSYBOX_CONFIG_KLOGD is not set
++# CONFIG_BUSYBOX_CONFIG_LOGGER is not set
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.orig/package/busybox/patches/991-android-shell-and-blockdev.patch attitude.armel/package/busybox/patches/991-android-shell-and-blockdev.patch
 --- attitude.orig/package/busybox/patches/991-android-shell-and-blockdev.patch	1970-01-01 01:00:00.000000000 +0100
 +++ attitude.armel/package/busybox/patches/991-android-shell-and-blockdev.patch	2014-05-07 07:27:15.000000000 +0200
