@@ -23,7 +23,7 @@ LOOPSIZE=1024
 DNS=$(${ANDROID_ROOT:-/system}/bin/getprop net.dns1 2>&-)
 FSYS=$(sed -n '/\bext[234]$/p' /proc/filesystems|sort|sed -n '$s/[[:space:]]\+//p')
 LABEL=
-DISTRO=jessie
+DISTRO=wheezy
 MIRROR_DEBIAN="http://ftp.de.debian.org/debian"
 case ${CPU} in armel|armhf|powerpc)
 	MIRROR_UBUNTU="http://ports.ubuntu.com/ubuntu-ports"
@@ -137,8 +137,16 @@ EOF
 unpack_deb()
 {
 	ar x ${1} data.tar.gz
-	tar -xzf data.tar.gz
-	rm -f data.tar.gz
+	if [ -f data.tar.gz ];then
+		# older debootstrap.deb
+		zcat data.tar.gz | tar -x
+		rm -f data.tar.gz
+	else
+		# current debootstrap.deb
+		ar x ${1} data.tar.xz
+		xzcat data.tar.xz | tar -x
+		rm -f data.tar.gz
+	fi
 }
 
 usage() {
@@ -486,7 +494,7 @@ if [ ! -x ${MNT}/bin/busybox ];then
 	cp ${DIR}/${CPU}/busybox ${MNT}/bin
 fi
 
-for i in sh ar zcat gunzip bunzip2 md5sum sha1sum;do
+for i in sh ar zcat bzcat xzcat gunzip bunzip2 unxz md5sum sha1sum sha256sum sha512sum;do
 	ln -sf busybox ${MNT}/bin/${i}
 done
 

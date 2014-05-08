@@ -1,7 +1,7 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.orig/.config attitude.armel/.config
 --- attitude.orig/.config	1970-01-01 01:00:00.000000000 +0100
-+++ attitude.armel/.config	2014-05-07 12:51:04.000000000 +0200
-@@ -0,0 +1,50 @@
++++ attitude.armel/.config	2014-05-08 14:18:17.000000000 +0200
+@@ -0,0 +1,55 @@
 +CONFIG_HAVE_DOT_CONFIG=y
 +CONFIG_TARGET_android=y
 +CONFIG_DEVEL=y
@@ -19,7 +19,11 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 +CONFIG_BUSYBOX_CONFIG_AR=y
 +CONFIG_BUSYBOX_CONFIG_UNLZMA=y
 +CONFIG_BUSYBOX_CONFIG_UNXZ=y
++CONFIG_BUSYBOX_CONFIG_SHA1SUM=y
++CONFIG_BUSYBOX_CONFIG_SHA256SUM=y
++CONFIG_BUSYBOX_CONFIG_SHA512SUM=y
 +CONFIG_BUSYBOX_CONFIG_STAT=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_STAT_FORMAT=y
 +# CONFIG_BUSYBOX_CONFIG_START_STOP_DAEMON is not set
 +# CONFIG_BUSYBOX_CONFIG_HALT is not set
 +# CONFIG_BUSYBOX_CONFIG_INIT is not set
@@ -49,6 +53,7 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
 +# CONFIG_BUSYBOX_CONFIG_VCONFIG is not set
 +CONFIG_BUSYBOX_CONFIG_FUSER=y
 +CONFIG_BUSYBOX_CONFIG_RENICE=y
++CONFIG_BUSYBOX_CONFIG_FEATURE_SH_STANDALONE=y
 +# CONFIG_BUSYBOX_CONFIG_SYSLOGD is not set
 +# CONFIG_BUSYBOX_CONFIG_KLOGD is not set
 +# CONFIG_BUSYBOX_CONFIG_LOGGER is not set

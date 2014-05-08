@@ -1,6 +1,6 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.armel/.config attitude.i386/.config
---- attitude.armel/.config	2014-05-08 11:32:25.000000000 +0200
-+++ attitude.i386/.config	2014-05-08 11:32:49.000000000 +0200
+--- attitude.armel/.config	2014-05-08 14:18:17.000000000 +0200
++++ attitude.i386/.config	2014-05-08 14:18:18.000000000 +0200
 @@ -1,5 +1,5 @@
  CONFIG_HAVE_DOT_CONFIG=y
 -CONFIG_TARGET_android=y
