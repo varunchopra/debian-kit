@@ -1,6 +1,6 @@
 diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.armel/.config attitude.i386/.config
---- attitude.armel/.config	2014-05-07 12:51:04.000000000 +0200
-+++ attitude.i386/.config	2014-05-07 12:51:05.000000000 +0200
+--- attitude.armel/.config	2014-05-08 11:32:25.000000000 +0200
++++ attitude.i386/.config	2014-05-08 11:32:49.000000000 +0200
 @@ -1,5 +1,5 @@
  CONFIG_HAVE_DOT_CONFIG=y
 -CONFIG_TARGET_android=y
@@ -22,3 +22,34 @@ diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --
  
  TARGET_CFLAGS += -static
  
+diff -Nur --exclude='.*~' --exclude='*~' --exclude='*.old' --exclude='.*.old' --exclude=bin --exclude=build_dir --exclude=dl --exclude=nohup.out --exclude=scripts --exclude=staging_dir --exclude=tmp --exclude=.svn attitude.armel/toolchain/uClibc/patches-0.9.33.2/181-pthread_cleanup_fix_fix.patch attitude.i386/toolchain/uClibc/patches-0.9.33.2/181-pthread_cleanup_fix_fix.patch
+--- attitude.armel/toolchain/uClibc/patches-0.9.33.2/181-pthread_cleanup_fix_fix.patch	1970-01-01 01:00:00.000000000 +0100
++++ attitude.i386/toolchain/uClibc/patches-0.9.33.2/181-pthread_cleanup_fix_fix.patch	2014-05-08 11:27:00.000000000 +0200
+@@ -0,0 +1,27 @@
++diff -Nur uClibc-0.9.33.2.orig/libpthread/nptl/sysdeps/unix/sysv/linux/jmp-unwind.c uClibc-0.9.33.2/libpthread/nptl/sysdeps/unix/sysv/linux/jmp-unwind.c
++--- uClibc-0.9.33.2.orig/libpthread/nptl/sysdeps/unix/sysv/linux/jmp-unwind.c	2012-05-15 09:20:09.000000000 +0200
+++++ uClibc-0.9.33.2/libpthread/nptl/sysdeps/unix/sysv/linux/jmp-unwind.c	2014-05-08 11:22:07.000000000 +0200
++@@ -24,6 +24,14 @@
++ extern void __pthread_cleanup_upto (__jmp_buf env, char *targetframe);
++ #pragma weak __pthread_cleanup_upto
++ 
+++#ifndef SHARED
+++/* 
+++ * Prevents the compiler from optimizing out the __pthread_cleanup_upto != NULL
+++ * test when building static x86 binaries. If compiler thinks it's != NULL, but
+++ * weak link evals to 0x0 during runtime, then upon exit the CPU jumps to 0x00
+++ */
+++void *p = __pthread_cleanup_upto;
+++#endif
++ 
++ void _longjmp_unwind (jmp_buf env, int val);
++ void
++@@ -34,7 +42,7 @@
++     PTHFCT_CALL (ptr___pthread_cleanup_upto, (env->__jmpbuf,
++ 					      CURRENT_STACK_FRAME));
++ #else
++-  if (__pthread_cleanup_upto != NULL)
+++  if (p != NULL)
++     __pthread_cleanup_upto (env->__jmpbuf, CURRENT_STACK_FRAME);
++ #endif
++ }
