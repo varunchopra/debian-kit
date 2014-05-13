@@ -251,7 +251,7 @@ mount_merge() {
 			echo "Searching links on ${MNT}..."
 			for i in $(stat -c %N $(find "${MNT}" -type l));do
 				case ${i#* -> } in *.debian-android*|${ANDROID_ROOT:-/system}/*)
-					if rm "${i% -> *}";then
+					if eval rm "${i% -> *}";then
 						echo "removed ${i% -> *}"
 					fi
 				;;esac
