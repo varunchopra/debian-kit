@@ -6,6 +6,7 @@ Version 1.6 (2014-05-02):
 - Switched from OpenWrt/Backfire to Attitude
 - Added xzcat as compression method for *.deb
 - Note: missed in doc = dpkg-reconfigure tzdata
+- Note: missed some groups, e.g. sdcard_r 1028
 
 Version 1.5 (2012-09-16):
 
