@@ -15,29 +15,44 @@ ${DIR}/${CPU}/busybox ash -c "test /proc/$$/exe -ef ${DIR}/${CPU}/busybox" || ex
 eval IMG=$(sed -n 's/^[[:space:]]*IMG[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
 eval MNT=$(sed -n 's/^[[:space:]]*MNT[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
 
+# Sourced functions in "functions" file
 source ${DIR}/functions
 
 eval IMG=$(sed -n 's/^[[:space:]]*IMG[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
 
+
+# Message to print in case of exit
 exit_autorun() {
 	echo "$* No autorun. You may run ${DIR}/mk-debian manually." >&2
 	exit 1
 }
 
-case ${IMG} in uuid:*)
-	exit_autorun "IMG=${IMG} points to partition."
-;;esac
 
+case ${IMG} in
+	uuid:*)
+		exit_autorun "IMG=${IMG} points to partition."
+		;;
+esac
+
+
+# Check partition image is not present
 test -e ${IMG} && {
 	exit_autorun "IMG=${IMG} already present."
 }
 
-case ${IMG} in ""|/dev/*|/proc/*|/run/*|/sys/*)
-	exit_autorun "IMG=${IMG} fails plausibility check."
-;;esac
 
+case ${IMG} in
+	""|/dev/*|/proc/*|/run/*|/sys/*)
+		exit_autorun "IMG=${IMG} fails plausibility check."
+		;;
+esac
+
+
+# Get free space in partition
 FREE=$(get_free "${IMG%/*}")
 
+
+# User interface
 cat >&2 << EOF
 About to install to ${IMG}. ${FREE:+You have ${FREE} Mb left on ${IMG%/*}. }If you want another image location, run the ${DIR}/mk-debian script manually.
 
@@ -45,17 +60,21 @@ To install now, enter a digit and a char:
 
 0: 512 Mb, minimal setup e.g. OpenSSL server
 1: 1024 Mb, medium setup e.g. LXDE desktop
-2: 2047 Mb,  large setup e.g. office, browser
-s: Debian Squeeze (2011, oldstable)
+2: 2047 Mb, large setup e.g. office, browser
+3: 4096 Mb, very large setup
+4: 8192 Mb, device with large internal disk
 w: Debian Wheezy (2014, default, stable)
 j: Debian Jessie (2014, testing with armhf)
-p: Ubuntu Precise (2012, LTS version)
+e: Debian Jessie (2014)
 t: Ubuntu Trusty (2014, LTS version)
+x: Ubuntu Xenial (2016, LTS version)
 
 Press [enter] without any input to abort.
 
 EOF
 
+
+# Preconfigured setup
 ARCH=
 DISTRO=
 LOOPSIZE=
@@ -63,38 +82,62 @@ while [ -z "${DISTRO}" ] || [ -z "${LOOPSIZE}" ];do
 	echo -n "Enter option (e.g. '0w' for 512 Mb Wheezy): "
 	read n
 
-	case ${n} in ""|q|Q) exit 0;;esac
+	case ${n} in
+		""|q|Q)
+			exit 0
+			;;
+	esac
 
-	case ${n} in *s)
-		DISTRO=wheezy
-	;;*s)
-		DISTRO=squeeze
-	;;*j)
-		ARCH="-a armhf"
-		DISTRO=jessie
-	;;*p)
-		DISTRO=precise
-	;;*t)
-		DISTRO=trusty
-	;;*)
-		DISTRO=
-	;;esac
+	case ${n} in
+		*w)
+			DISTRO=wheezy
+			;;
+		*j)
+			ARCH="-a armhf"
+			DISTRO=jessie
+			;;
+		*e)
+			DISTRO=jessie
+			;;
+		*t)
+			DISTRO=trusty
+			;;
+		*x)
+			DISTRO=xenial
+			;;
+		*)
+			DISTRO=
+			;;
+	esac
 
-	case ${n} in 0*)
-		LOOPSIZE=512
-	;;1*)
-		LOOPSIZE=1024
-	;;2*)
-		LOOPSIZE=2047
-	;;*)
-		LOOPSIZE=
-	;;esac
+	case ${n} in
+		0*)
+			LOOPSIZE=512
+			;;
+		1*)
+			LOOPSIZE=1024
+			;;
+		2*)
+			LOOPSIZE=2047
+			;;
+		3*)
+			LOOPSIZE=4096
+			;;
+		4*)
+			LOOPSIZE=8192
+			;;
+		*)
+			LOOPSIZE=
+			;;
+	esac
 
 	if [ -z "${DISTRO}" ] || [ -z "${LOOPSIZE}" ];then
 		echo "Enter TWO characters!" >&2
 	fi
 done
 
+
+# Launch mk-debian and, if succeed, bootdeb
 if ash -- ${DIR}/mk-debian -d ${DISTRO} ${ARCH} ${LOOPSIZE};then
 	ash -- ${DIR}/bootdeb stage2 && ash -- ${DIR}/cleanup
 	echo >&2

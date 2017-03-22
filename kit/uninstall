@@ -15,28 +15,47 @@ ${DIR}/${CPU}/busybox ash -c "test /proc/$$/exe -ef ${DIR}/${CPU}/busybox" || ex
 eval IMG=$(sed -n 's/^[[:space:]]*IMG[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
 eval MNT=$(sed -n 's/^[[:space:]]*MNT[[:space:]]*=//p' ${DIR}/bootdeb|sed -n '$p')
 
+# Source usefull functions
 source ${DIR}/functions
 
-case $(id -u) in 0);;*)
-	echo "You need to run this script as root." >&2
-	exit 1
-;;esac
 
-case $(echo /.*.debian-android) in "/.*.debian-android");;*)
-	echo "You currently have a Debian file system mounted. Start 'deb u' to unmount first." >&2
-	exit 1
-;;esac
-
-case ${MNT} in "")
-	echo "MNT= not set in ${DIR}/bootdeb." >&2
-	exit 1
-;;*)
-	if [ ! -d ${MNT%/*} ];then
-		echo "Directory for MNT=${MNT} does not exist." >&2
+# Check if script is run as root
+case $(id -u) in
+	0)
+		;;
+	*)
+		echo "You need to run this script as root." >&2
 		exit 1
-	fi
-;;esac
+		;;
+esac
 
+
+# ???
+case $(echo /.*.debian-android) in
+	"/.*.debian-android")
+		;;
+	*)
+		echo "You currently have a Debian file system mounted. Start 'deb u' to unmount first." >&2
+		exit 1
+		;;
+esac
+
+
+# Check mount point in bootdeb
+case ${MNT} in
+	"")
+		echo "MNT= not set in ${DIR}/bootdeb." >&2
+		exit 1
+		;;
+	*)
+		if [ ! -d ${MNT%/*} ];then
+			echo "Directory for MNT=${MNT} does not exist." >&2
+			exit 1
+		fi
+		;;
+esac
+
+# Remove mount point, /data/local/deb/, /system/bin/deb/, /system/bin/busybox, /system/bin/ash
 f="${MNT} ${DIR}"
 if [ -h ${ANDROID_ROOT:-/system}/bin/deb ] || [ -e ${ANDROID_ROOT:-/system}/bin/deb ];then
 		f="${f} ${ANDROID_ROOT:-/system}/bin/deb"
@@ -55,10 +74,12 @@ EOF
 echo -n "Proceed (y/N)? " >&2
 read n
 
-case ${n} in y|Y)
-	debug_mount -o remount,rw ${ANDROID_ROOT:-/system}
-	rm -f -r ${f}
-	debug_mount -o remount,ro ${ANDROID_ROOT:-/system}
-;;esac
+case ${n} in
+	y|Y)
+		debug_mount -o remount,rw ${ANDROID_ROOT:-/system}
+		rm -f -r ${f}
+		debug_mount -o remount,ro ${ANDROID_ROOT:-/system}
+		;;
+esac
 
 echo Done.

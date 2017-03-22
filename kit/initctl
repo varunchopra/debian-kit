@@ -10,6 +10,7 @@ CONF=/etc/init
 PIDS=/var/run/upstart-
 START_STOP_DAEMON=/sbin/start-stop-daemon
 
+
 ##### Functions #####
 
 parse_config() {
@@ -19,7 +20,7 @@ parse_config() {
 	fi
 	if [ ! -f "${CONF}/${1}.conf" ];then
 		echo "Unknown job: ${1}" >&2
-		exit 1 
+		exit 1
 	fi
 	IFS=
 	eval $(sed -n '
@@ -49,6 +50,8 @@ s/#.*//
 	unset IFS
 }
 
+
+# Get usage instruction
 usage() {
 	cat<<EOF
 Usage:
@@ -65,70 +68,107 @@ post_start() { return 0;}
 pre_stop() { return 0;}
 post_stop() { return 0;}
 
+
 ##### Main #####
 
+# Get instruction usage
 while getopts "h" opt;do
-	case ${opt} in h)
-		usage 0
-	;;*)
-		usage 1
-	;;esac
+	case ${opt} in
+		h)
+			usage 0
+			;;
+		*)
+			usage 1
+			;;
+	esac
 done
 
+
+# 
 shift $(( ${OPTIND} - 1 ))
 
-cmd=${0##*/}
-case ${cmd} in initctl)
-	cmd=${1}
-	case ${cmd} in "")
-		usage 1
-	;;esac
-	shift
-;;esac
 
-case ${cmd} in start)
-	parse_config "${1}"
-	echo "Starting ${description}..."
-	case ${exec} in "")
-		echo "No exec in ${CONF}/${1}.conf" >&2
-		exit 1
-	;;esac
-	case ${pre_start} in "")
-		pre_start
-	;;*)
-		eval ${pre_start}
-	;;esac
-	${START_STOP_DAEMON} --start --pidfile ${PIDS}${1}.pid --make-pidfile --background --exec ${exec%% *} -- ${exec#* }
-	case ${post_start} in "")
-		post_start
-	;;*)
-		eval ${post_start}
-	;;esac
-;;stop)
-	parse_config "${1}"
-	echo "Stopping ${description}..."
-	case ${exec} in "")
-		echo "No exec in ${CONF}/${1}.conf" >&2
-		exit 1
-	;;esac
-	case ${pre_stop} in "")
-		pre_stop
-	;;*)
-		eval ${pre_stop}
-	;;esac
-	name=${exec%% *}
-	${START_STOP_DAEMON} --stop --name ${name##*/} --pidfile ${PIDS}${1}.pid --retry 5
-	case ${post_stop} in "")
-		post_stop
-	;;*)
-		eval ${post_stop}
-	;;esac
-;;restart)
-	${0%/*}/initctl stop ${1}
-	${0%/*}/initctl start ${1}
-;;*)
-	echo "Unknown command: ${cmd}" >&2
-	usage 1
+cmd=${0##*/}
+
+
+# Return usage instruction in case of bad argument
+case ${cmd} in
+	initctl)
+		cmd=${1}
+		case ${cmd} in
+			"")
+				usage 1
+				;;
+		esac
+		shift
+		;;
 esac
+
+
+case ${cmd} in
+	start)
+		parse_config "${1}"
+		echo "Starting ${description}..."
+		case ${exec} in
+			"")
+				echo "No exec in ${CONF}/${1}.conf" >&2
+				exit 1
+				;;
+		esac
+		case ${pre_start} in
+			"")
+				pre_start
+				;;
+			*)
+				eval ${pre_start}
+				;;
+		esac
+		${START_STOP_DAEMON} --start --pidfile ${PIDS}${1}.pid --make-pidfile --background --exec ${exec%% *} -- ${exec#* }
+		case ${post_start} in
+			"")
+				post_start
+				;;
+			*)
+				eval ${post_start}
+				;;
+		esac
+		;;
+	stop)
+		parse_config "${1}"
+		echo "Stopping ${description}..."
+		case ${exec} in
+			"")
+				echo "No exec in ${CONF}/${1}.conf" >&2
+				exit 1
+				;;
+		esac
+		case ${pre_stop} in
+			"")
+				pre_stop
+				;;
+			*)
+				eval ${pre_stop}
+				;;
+		esac
+		name=${exec%% *}
+		${START_STOP_DAEMON} --stop --name ${name##*/} --pidfile ${PIDS}${1}.pid --retry 5
+		case ${post_stop} in
+			"")
+				post_stop
+				;;
+			*)
+				eval ${post_stop}
+				;;
+		esac
+		;;
+	restart)
+		${0%/*}/initctl stop ${1}
+		${0%/*}/initctl start ${1}
+		;;
+	*)
+		echo "Unknown command: ${cmd}" >&2
+		usage 1
+esac
+
 
 exit 0

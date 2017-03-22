@@ -43,14 +43,18 @@ n=
 while [ -z "${n}" ];do
 	echo -n "Enter 'yes' to remove them (${SIZE_ALL} -> $(( ${SIZE_ALL} - ${SIZE_YES} )) kB), 'ovpn' to remove extra kit-openvpn also (-> $(( ${SIZE_ALL} - ${SIZE_YES} - ${SIZE_OVPN} )) kB), 'no' or 'q' to abort: " >&2
 	read n
-	case ${n} in yes)
-		rm -r ${LIST}
-	;;ovpn)
-		rm -r ${LIST}
-		rm -f ${DIR}/openvpn ${DIR}/${CPU}/openvpn ${DIR}/${CPU}/route ${DIR}/${CPU}/ifconfig
-	;;no|q)
-		exit 0
-	;;esac
+	case ${n} in
+		yes)
+			rm -r ${LIST}
+			;;
+		ovpn)
+			rm -r ${LIST}
+			rm -f ${DIR}/openvpn ${DIR}/${CPU}/openvpn ${DIR}/${CPU}/route ${DIR}/${CPU}/ifconfig
+			;;
+		no|q)
+			exit 0
+			;;
+	esac
 done
 
 exit 0

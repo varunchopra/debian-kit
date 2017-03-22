@@ -1,32 +1,36 @@
 # Some functions to be sourced into scripts
 
+# Print device that is mounted to $1
+# $2=2: Print file system id
+# $2=3: Print mount options
 get_mount() {
-	# Print device that is mounted to $1
-	# $2=2: Print file system id
-	# $2=3: Print mount options
 	sed -n "s ^\([^[:space:]]\+\)[[:space:]]\+${1// /\\\\\\\\040}[[:space:]]\+\([^[:space:]]\+\)[[:space:]]\+\([^[:space:]]\+\).* \\${2:-1} p" /proc/mounts|sed -n '$p'
 }
 
+
+# Print rw/ro for device that is mounted to $1
 get_mount_rw() {
-	# Print rw/ro for device that is mounted to $1
 	get_mount "${1}" 3|sed 's/,.*//'
 }
 
+
+# Print free Mb on device $1
 get_free() {
-	# Print free Mb on device $1
 	echo $(( $(stat -fc '%a / (0x100000 / %s)' "${1}") ))
 }
 
+
+# Print symlink target
 get_link() {
-	# Print symlink target
 	if [ -h "${1}" ];then
 		local l=$(stat -c %N "${1}")
 		echo ${l#* -> }
 	fi
 }
 
+
+# Print device for UUID (ext2/3/4 only)
 get_uuid() {
-	# Print device for UUID (ext2/3/4 only)
 	local d
 	local p=/dev/block
 	test -d ${p}/vold && p=${p}/vold
@@ -40,17 +44,23 @@ get_uuid() {
 	return 1
 }
 
+
+# Note: which>&- does not work for some reason
 get_which() {
-	# Note: which>&- does not work for some reason
-	case $(which "${1}") in "")return 1;;esac
+	case $(which "${1}") in
+		"")
+			return 1
+			;;
+	esac
 	return 0
 }
 
+
+# Creates 256 loop device nodes below /dev
+# Note: Android uses same below /dev/block
 make_loop_dev() {
-	# Creates 256 loop device nodes below /dev
-	# Note: Android uses same below /dev/block
 	local i=0
-	while [ $i -le 255 ];do 
+	while [ $i -le 255 ];do
 		if [ ! -b /dev/loop${i} ];then
 			test -e /dev/loop${i} && rm -f /dev/loop${i}
 			mknod /dev/loop${i} b 7 ${i} || return 1
@@ -60,15 +70,26 @@ make_loop_dev() {
 	return 0
 }
 
-case ${DEB_DEBUG} in true);;*) DEB_DEBUG=false;;esac
 
+# Set debug mode
+case ${DEB_DEBUG} in
+	true)
+		;;
+	*)
+		DEB_DEBUG=false
+		;;
+esac
+
+
+# Mount with debugging info
 debug_mount() {
 	${DEB_DEBUG} && echo mount "$@"
 	mount "$@"
 }
 
+
+#Unmount with debugging info
 debug_umount() {
 	${DEB_DEBUG} && echo umount "$@"
 	umount "$@"
 }
-
